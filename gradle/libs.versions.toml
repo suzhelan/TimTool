@@ -1,0 +1,54 @@
+[versions]
+# plugins
+agp = "8.7.2"
+kotlin = "2.0.21"
+
+# kotlin
+coreKtx = "1.15.0"
+coroutine = "1.9.0"
+activityKtx = "1.9.3"
+fragmentKtx = "1.8.5"
+lifecycleViewmodelKtx = "2.8.7"
+lifecycleLivedataKtx = "2.8.7"
+
+#必备
+appcompat = "1.7.0"
+material = "1.12.0"
+#常用库
+okhttp = "5.0.0-alpha.14"
+retrofit2 = "2.11.0"
+fastkv = "2.6.0"
+fastjson2 = "2.0.53"
+glide = "4.16.0"
+base-recyclerview-helper = "4.1.6"
+
+[libraries]
+
+# kotlin
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+
+#必备
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+#常用库
+fastkv = { group = 'io.github.billywei01', name = 'fastkv', version.ref = "fastkv" }
+fastjson2 = { module = "com.alibaba.fastjson2:fastjson2", version.ref = "fastjson2" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+base-recyclerview-helper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "base-recyclerview-helper" }
+
+#xposed api
+xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
+ezx-helper = { module = "com.github.kyuubiran:EzXHelper", version = "2.2.0" }
+dexkit = { module = "org.luckypray:dexkit", version = "2.0.2" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
