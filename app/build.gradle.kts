@@ -17,7 +17,7 @@ android {
         versionName = "1.0"
 
         ndk {
-            //只支持arm64 v8a的lib so库
+            //只支持arm64 v8a的lib so库,因为qq只支持arm64 v8a
             abiFilters.add("arm64-v8a")
         }
 
