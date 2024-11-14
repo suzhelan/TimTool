@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -14,6 +15,11 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        ndk {
+            //只支持arm64 v8a的lib so库
+            abiFilters.add("arm64-v8a")
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,6 +56,9 @@ dependencies {
     compileOnly(libs.xposed.api)
     implementation(libs.ezx.helper)
     implementation(libs.dexkit)
+
+    //注解扫描器
+    ksp(project(":annotation-scanner"))
 
     //常用
     implementation(libs.okhttp3)

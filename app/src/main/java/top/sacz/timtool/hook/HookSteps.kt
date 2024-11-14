@@ -32,6 +32,8 @@ class HookSteps {
 
     fun initHooks() {
         //环境初始化 开始进行hook项目的初始化
-        XposedBridge.log("[Tim小助手]初始化完成")
+        if (HookEnv.getInstance().isMainProcess) {
+            XposedBridge.log("[Tim小助手]环境初始化完成")
+        }
     }
 }
