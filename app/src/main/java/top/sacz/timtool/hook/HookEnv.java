@@ -109,4 +109,7 @@ public class HookEnv {
         return this;
     }
 
+    public boolean isMainProcess() {
+        return processName.equals(currentHostAppPackageName);
+    }
 }

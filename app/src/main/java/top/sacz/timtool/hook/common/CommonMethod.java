@@ -27,10 +27,14 @@ public class CommonMethod {
                     try {
                         return clz.getDeclaredMethod("onCreate");
                     } catch (Throwable e) {
+                        Class<?> superclass = clz.getSuperclass();
+                        if (superclass == null) {
+                            return null;
+                        }
                         try {
-                            return clz.getSuperclass().getDeclaredMethod("attachBaseContext", Context.class);
+                            return superclass.getDeclaredMethod("attachBaseContext", Context.class);
                         } catch (Throwable m) {
-                            return clz.getSuperclass().getDeclaredMethod("onCreate");
+                            return superclass.getDeclaredMethod("onCreate");
                         }
                     }
                 }

@@ -18,29 +18,43 @@ private const val TARGET_PACKAGE = "com.tencent.tim"
 private const val TAG = "[Tim助手]"
 
 class InjectHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
+    val hookSteps = HookSteps()
+
+    /**
+     * 标准注入入口
+     */
     override fun handleLoadPackage(lpparam: LoadPackageParam) {
         if (lpparam.packageName == TARGET_PACKAGE && lpparam.isFirstApplication) {
             // Init EzXHelper
             EzXHelper.initHandleLoadPackage(lpparam)
             EzXHelper.setLogTag(TAG)
             EzXHelper.setToastTag(TAG)
-            // Init hooks
+            // Init hook
+            hookSteps.initHandleLoadPackage(lpparam)
             initHook(lpparam)
         }
     }
 
+    /**
+     * 模块加载路径
+     */
     override fun initZygote(startupParam: IXposedHookZygoteInit.StartupParam) {
         EzXHelper.initZygote(startupParam)
-        HookEnv.getInstance().moduleApkPath = startupParam.modulePath
+        hookSteps.initZygote(startupParam)
     }
 
+    /**
+     * hook app context onCreate 方法 可以过掉大部分加固
+     */
     private fun initHook(loadPackageParam: LoadPackageParam) {
-        val createContextMethod = CommonMethod.getContextCreateMethod(loadPackageParam)
-        XposedBridge.hookMethod(createContextMethod, object : XC_MethodHook() {
+        val onCreateContextMethod = CommonMethod.getContextCreateMethod(loadPackageParam)
+        XposedBridge.hookMethod(onCreateContextMethod, object : XC_MethodHook() {
             override fun afterHookedMethod(param: MethodHookParam) {
-                val context: Context = param.thisObject as ContextWrapper
-                val hookSteps = HookSteps()
+                val application = param.thisObject as ContextWrapper
+                val context = application.baseContext
+                //init env
                 hookSteps.initContext(context)
+                hookSteps.initHooks()
             }
         })
     }
