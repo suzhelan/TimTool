@@ -9,6 +9,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import top.sacz.xphelper.exception.ReflectException;
+
 public class ClassUtils {
     private static final Object[][] baseTypes = {{"int", int.class}, {"boolean", boolean.class}, {"byte", byte.class}, {"long", long.class}, {"char", char.class}, {"double", double.class}, {"float", float.class}, {"short", short.class}, {"void", void.class}};
     private static ClassLoader classLoader;//宿主应用类加载器

@@ -1,4 +1,4 @@
-package top.sacz.xphelper.reflect;
+package top.sacz.xphelper.exception;
 
 public class ReflectException extends RuntimeException {
     private Exception otherExceptions;

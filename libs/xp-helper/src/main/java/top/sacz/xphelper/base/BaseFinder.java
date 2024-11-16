@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import top.sacz.xphelper.reflect.ReflectException;
+import top.sacz.xphelper.exception.ReflectException;
 
 public abstract class BaseFinder<T extends Member> {
     private static final Map<String, List<Field>> FIELD_CACHE = new HashMap<>();
@@ -81,14 +81,17 @@ public abstract class BaseFinder<T extends Member> {
         }
     }
 
-    public List<T> getResult() {
-        return result;
-    }
-
     public abstract BaseFinder<T> find();
 
     public abstract String buildSign();
 
+
+    public List<T> getResult() {
+        if (!isFind) {
+            find();
+        }
+        return result;
+    }
 
     public T first() {
         if (!isFind) {
