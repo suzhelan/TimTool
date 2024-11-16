@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.annotation;
+package top.sacz.timtool.hook.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

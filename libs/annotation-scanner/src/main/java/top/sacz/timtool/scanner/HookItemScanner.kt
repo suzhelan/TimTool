@@ -16,8 +16,10 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.ksp.toClassName
 import com.squareup.kotlinpoet.ksp.writeTo
-import top.sacz.timtool.hook.annotation.HookItem
 
+/**
+ * ksp根据注解动态生成代码
+ */
 class HookItemProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor {
         return HookItemScanner(environment.codeGenerator, environment.logger)
@@ -25,12 +27,14 @@ class HookItemProvider : SymbolProcessorProvider {
 }
 
 class HookItemScanner(
-    val codeGenerator: CodeGenerator,
+    private val codeGenerator: CodeGenerator,
     val logger: KSPLogger
 ) : SymbolProcessor {
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        val symbols = resolver.getSymbolsWithAnnotation(HookItem::class.java.name)
+        //获取被注解标记的类列表
+        val symbols =
+            resolver.getSymbolsWithAnnotation("top.sacz.timtool.hook.core.annotation.HookItem")
             .filterIsInstance<KSClassDeclaration>()
             .toList()
         if (symbols.isEmpty()) return emptyList()
@@ -38,6 +42,7 @@ class HookItemScanner(
         val returnType = ClassName("kotlin", "Array")
         //泛型
         val genericsType = ClassName("top.sacz.timtool.hook.base", "BaseHookItem")
+        //方法构建
         val methodBuilder = FunSpec.builder("getAllHookItems")
         methodBuilder.returns(returnType.parameterizedBy(genericsType))
         methodBuilder.addCode(
