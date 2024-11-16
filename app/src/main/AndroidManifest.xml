@@ -24,7 +24,7 @@
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Tim模块 QStory同作者 开源免费请勿进行商业行为 仅供学习" />
+            android:value="Tim模块 QStory续作 开源免费请勿进行商业行为 仅供学习" />
         <meta-data
             android:name="xposedminversion"
             android:value="93" />

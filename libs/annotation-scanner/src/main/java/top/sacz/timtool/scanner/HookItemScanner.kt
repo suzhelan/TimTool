@@ -40,11 +40,11 @@ class HookItemScanner(
         if (symbols.isEmpty()) return emptyList()
         //返回类型
         val returnType = ClassName("kotlin", "Array")
-        //泛型
+        //基😮类
         val genericsType = ClassName("top.sacz.timtool.hook.base", "BaseHookItem")
         //方法构建
         val methodBuilder = FunSpec.builder("getAllHookItems")
-        methodBuilder.returns(returnType.parameterizedBy(genericsType))
+        methodBuilder.returns(returnType.parameterizedBy(genericsType))//泛型返回
         methodBuilder.addCode(
             CodeBlock.Builder().apply {
                 add("return arrayOf(")
