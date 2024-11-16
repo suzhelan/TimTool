@@ -60,7 +60,7 @@ dependencies {
 
     //注解扫描器
     ksp(project(":annotation-scanner"))
-
+    implementation(project(":xp-helper"))
     //常用
     implementation(libs.okhttp3)
     implementation(libs.glide)

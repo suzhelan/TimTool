@@ -35,6 +35,7 @@ public class HookEnv {
      * 全局的Context
      */
     private Context hostAppContext;
+    private ClassLoader hostClassLoader;
 
     private HookEnv() {
     }
@@ -44,6 +45,15 @@ public class HookEnv {
      */
     public static HookEnv getInstance() {
         return INSTANCE;
+    }
+
+    public ClassLoader getHostClassLoader() {
+        return hostClassLoader;
+    }
+
+    public HookEnv setHostClassLoader(ClassLoader hostClassLoader) {
+        this.hostClassLoader = hostClassLoader;
+        return this;
     }
 
     public String getHostApkPath() {
