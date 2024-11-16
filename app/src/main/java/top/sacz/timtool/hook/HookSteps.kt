@@ -5,6 +5,8 @@ import com.github.kyuubiran.ezxhelper.EzXHelper
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XC_LoadPackage
+import top.sacz.timtool.hook.core.factory.HookItemFactory
+import top.sacz.xphelper.XpHelper
 
 class HookSteps {
 
@@ -26,7 +28,9 @@ class HookSteps {
             .setHostApkPath(context.applicationInfo.sourceDir)
             .setVersionCode(packageInfo.versionCode)
             .setVersionName(packageInfo.versionName)
+            .setHostClassLoader(context.classLoader)
         EzXHelper.classLoader = context.classLoader
+        XpHelper.initContext(context)
     }
 
 
@@ -34,6 +38,8 @@ class HookSteps {
         //环境初始化 开始进行hook项目的初始化
         if (HookEnv.getInstance().isMainProcess) {
             XposedBridge.log("[Tim小助手]环境初始化完成")
+            HookItemFactory.getItem(QQSettingInject::class.java)
+                .loadHook(HookEnv.getInstance().hostClassLoader)
         }
     }
 }

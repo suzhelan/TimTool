@@ -1,7 +1,5 @@
 package top.sacz.timtool.hook.core.factory;
 
-import java.text.Collator;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +13,10 @@ public class HookItemFactory {
     static {
         BaseHookItem[] items = HookItemEntryListKt.getAllHookItems();
         //进行一个中文排序
-        List.of(items).sort((o1, o2) -> {
+        /*List.of(items).sort((o1, o2) -> {
             Comparator<Object> compare = Collator.getInstance(java.util.Locale.CHINA);
             return compare.compare(o1.getItemName(), o2.getItemName());
-        });
+        });*/
         //添加到map中
         for (BaseHookItem item : items) {
             ITEM_MAP.put(item.getClass(), item);

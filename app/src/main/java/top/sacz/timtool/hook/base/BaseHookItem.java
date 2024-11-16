@@ -37,6 +37,7 @@ public abstract class BaseHookItem {
         this.isLoad = isLoad;
     }
 
+    public abstract void loadHook(ClassLoader loader) throws Exception;
     /**
      * 标准hook方法执行前
      */
