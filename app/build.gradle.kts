@@ -60,6 +60,8 @@ dependencies {
 
     //注解扫描器
     ksp(project(":annotation-scanner"))
+
+    //自己写的小工具 包含一些常用功能 反射工具 注入act res等
     implementation(project(":xp-helper"))
     //常用
     implementation(libs.okhttp3)

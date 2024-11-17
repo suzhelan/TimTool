@@ -29,7 +29,7 @@ import top.sacz.xphelper.reflect.MethodUtils;
  *
  * @author suzhelan
  */
-@HookItem
+@HookItem("注入QQ设置界面")
 public class QQSettingInject extends BaseHookItem {
 
     /**
@@ -40,7 +40,6 @@ public class QQSettingInject extends BaseHookItem {
                 .returnType(List.class)
                 .params(Context.class)
                 .first();
-
         hookAfter(onCreate, param -> {
             Context context = (Context) param.args[0];
             XpHelper.injectResourcesToContext(context);

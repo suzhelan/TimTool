@@ -9,9 +9,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.SOURCE)
 public @interface HookItem {
-    /**
-     * API接口 则直接标注接口名称接口
-     * 功能需要填写 辅助功能/聊天/防撤回
-     */
     String value();
+
+    boolean hasUI() default true;
 }

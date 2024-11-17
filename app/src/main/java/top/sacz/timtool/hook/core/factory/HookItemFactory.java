@@ -5,18 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import top.sacz.timtool.hook.base.BaseHookItem;
-import top.sacz.timtool.hook.gen.HookItemEntryListKt;
+import top.sacz.timtool.hook.gen.HookItemEntryList;
 
 public class HookItemFactory {
     private static final Map<Class<? extends BaseHookItem>, BaseHookItem> ITEM_MAP = new HashMap<>();
 
     static {
-        BaseHookItem[] items = HookItemEntryListKt.getAllHookItems();
-        //进行一个中文排序
-        /*List.of(items).sort((o1, o2) -> {
-            Comparator<Object> compare = Collator.getInstance(java.util.Locale.CHINA);
-            return compare.compare(o1.getItemName(), o2.getItemName());
-        });*/
+        List<BaseHookItem> items = HookItemEntryList.getAllHookItems();
         //添加到map中
         for (BaseHookItem item : items) {
             ITEM_MAP.put(item.getClass(), item);
