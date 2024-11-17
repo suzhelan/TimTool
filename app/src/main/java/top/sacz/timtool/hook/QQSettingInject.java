@@ -13,7 +13,6 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.robv.android.xposed.XposedBridge;
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.base.BaseHookItem;
 import top.sacz.timtool.hook.core.annotation.HookItem;
@@ -35,7 +34,7 @@ public class QQSettingInject extends BaseHookItem {
     /**
      * 直接照搬qs
      */
-    private void hook_QQ_8970_Setting() throws Exception {
+    private void hookQQ8970Setting() throws Exception {
         Method onCreate = MethodUtils.create("com.tencent.mobileqq.setting.main.MainSettingConfigProvider")
                 .returnType(List.class)
                 .params(Context.class)
@@ -93,7 +92,6 @@ public class QQSettingInject extends BaseHookItem {
                      * itemClass可能是com.tencent.mobileqq.setting.processor.b 而不是我们想要的 所以需要判断过滤第一次和catch过滤第二次
                      * 通常此catch由ConstructorUtils找不到构造方法抛出异常以实现第二次过滤
                      */
-                    XposedBridge.log(e);
                 }
             }
 
@@ -103,7 +101,7 @@ public class QQSettingInject extends BaseHookItem {
 
     @Override
     public void loadHook(ClassLoader loader) throws Exception {
-        hook_QQ_8970_Setting();
+        hookQQ8970Setting();
     }
 
 
