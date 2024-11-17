@@ -69,14 +69,14 @@ public abstract class BaseFinder<T extends Member> {
     protected void findComplete() {
         this.isFind = true;
         for (T member : result) {
-            if (member instanceof Field field) {
-                field.setAccessible(true);
+            if (member instanceof Field) {
+                ((Field) member).setAccessible(true);
             }
-            if (member instanceof Method method) {
-                method.setAccessible(true);
+            if (member instanceof Method) {
+                ((Method) member).setAccessible(true);
             }
-            if (member instanceof Constructor<?> constructor) {
-                constructor.setAccessible(true);
+            if (member instanceof Constructor<?>) {
+                ((Constructor<?>) member).setAccessible(true);
             }
         }
     }

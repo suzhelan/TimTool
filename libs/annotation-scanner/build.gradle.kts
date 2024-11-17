@@ -1,3 +1,5 @@
+import top.sacz.buildplugin.BuildConfig
+
 plugins {
     kotlin("jvm")
 }
@@ -8,10 +10,6 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(BuildConfig.kotlin.toInt())
 }
 
-tasks.withType<JavaCompile> {
-    sourceCompatibility = "17"
-    targetCompatibility = "17"
-}

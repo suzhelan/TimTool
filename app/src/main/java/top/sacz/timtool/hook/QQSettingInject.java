@@ -32,7 +32,7 @@ public class QQSettingInject extends BaseHookItem {
     /**
      * 直接照搬qs
      */
-    private void hookQQ8970Setting() throws Exception {
+    private void hookQQ8970Setting() {
         Method onCreate = MethodUtils.create("com.tencent.mobileqq.setting.main.MainSettingConfigProvider")
                 .returnType(List.class)
                 .params(Context.class)
@@ -43,7 +43,7 @@ public class QQSettingInject extends BaseHookItem {
 
             //获取方法的返回结果 item组包装器List-结构和当前类的DemoItemGroupWraper类似
             Object result = param.getResult();
-            List<Object> itemGroupWraperList = (List<Object>) result;
+            List itemGroupWraperList = (List) result;
             //获取返回的集合泛类型
             Class<?> itemGroupWraperClass = itemGroupWraperList.get(0).getClass();
             //循环包装器组集合 目的是获取里面的元素
@@ -98,7 +98,7 @@ public class QQSettingInject extends BaseHookItem {
     }
 
     @Override
-    public void loadHook(ClassLoader loader) throws Exception {
+    public void loadHook(ClassLoader loader) {
         hookQQ8970Setting();
     }
 

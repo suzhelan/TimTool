@@ -1,3 +1,5 @@
+import top.sacz.buildplugin.BuildConfig
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,13 +8,13 @@ plugins {
 
 android {
     namespace = "top.sacz.timtool"
-    compileSdk = 35
+    compileSdk = BuildConfig.compileSdk
 
     defaultConfig {
         applicationId = "top.sacz.timtool"
-        minSdk = 26
+        minSdk = BuildConfig.minSdk
         //noinspection OldTargetApi
-        targetSdk = 34
+        targetSdk = BuildConfig.targetSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -35,8 +37,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = BuildConfig.javaVersion
+        targetCompatibility = BuildConfig.javaVersion
     }
 
     androidResources {
@@ -47,7 +49,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = BuildConfig.kotlin
     }
 
     buildFeatures {
