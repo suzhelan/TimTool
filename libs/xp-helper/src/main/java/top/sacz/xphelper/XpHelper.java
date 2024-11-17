@@ -23,7 +23,7 @@ public class XpHelper {
         ClassUtils.intiClassLoader(classLoader);
     }
 
-    public static void initModulePath(IXposedHookZygoteInit.StartupParam startupParam) {
+    public static void initZygote(IXposedHookZygoteInit.StartupParam startupParam) {
         moduleApkPath = startupParam.modulePath;
     }
 

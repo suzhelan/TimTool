@@ -18,8 +18,8 @@ class HookSteps {
     }
 
     fun initZygote(startupParam: IXposedHookZygoteInit.StartupParam) {
-        HookEnv.getInstance()
-            .setModuleApkPath(startupParam.modulePath)
+        XpHelper.initZygote(startupParam)
+        HookEnv.getInstance().setModuleApkPath(startupParam.modulePath)
     }
 
     fun initContext(context: Context) {

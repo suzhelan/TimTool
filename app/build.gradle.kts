@@ -39,6 +39,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    androidResources {
+        additionalParameters += arrayOf(
+            "--allow-reserved-package-id",
+            "--package-id", "0x48"
+        )
+    }
+
     kotlinOptions {
         jvmTarget = "17"
     }

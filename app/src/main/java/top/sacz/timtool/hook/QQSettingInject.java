@@ -1,7 +1,6 @@
 package top.sacz.timtool.hook;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,7 +15,6 @@ import java.util.List;
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.base.BaseHookItem;
 import top.sacz.timtool.hook.core.annotation.HookItem;
-import top.sacz.timtool.ui.activity.MainActivity;
 import top.sacz.xphelper.XpHelper;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.reflect.ConstructorUtils;
@@ -123,7 +121,6 @@ public class QQSettingInject extends BaseHookItem {
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) {
-            Toast.makeText(qSettingActivity, "进入设置页", Toast.LENGTH_SHORT).show();
             boolean isEnterModuleActivity = false;
             Throwable throwable = new Throwable();
             StackTraceElement[] stackTraceElements = throwable.getStackTrace();
@@ -142,9 +139,8 @@ public class QQSettingInject extends BaseHookItem {
                     break;
                 }
             }
-            Toast.makeText(qSettingActivity, "进入设置页", Toast.LENGTH_SHORT).show();
             if (isEnterModuleActivity) {
-                qSettingActivity.startActivity(new Intent(qSettingActivity, MainActivity.class));
+                Toast.makeText(qSettingActivity, "进入设置页", Toast.LENGTH_SHORT).show();
             }
             return null;
         }
