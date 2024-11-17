@@ -42,7 +42,7 @@ android {
     androidResources {
         additionalParameters += arrayOf(
             "--allow-reserved-package-id",
-            "--package-id", "0x48"
+            "--package-id", "0x19"
         )
     }
 
