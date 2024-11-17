@@ -104,14 +104,6 @@ class KvHelper(id: String = "default") {
         return JSON.parseObject(data, type)
     }
 
-    fun <T> getObject(key: String, def: T): T {
-        val data = kv.getString(key)
-        if (data.isNullOrEmpty()) {
-            return def
-        }
-        val type = object : TypeReference<T>() {}
-        return JSON.parseObject(data, type)
-    }
 
     fun <T> getObject(key: String, type: TypeReference<T>): T? {
         val data = kv.getString(key)

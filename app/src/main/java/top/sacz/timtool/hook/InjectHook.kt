@@ -1,7 +1,6 @@
 package top.sacz.timtool.hook
 
 import android.content.ContextWrapper
-import com.github.kyuubiran.ezxhelper.EzXHelper
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.XC_MethodHook
@@ -24,10 +23,6 @@ class InjectHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
      */
     override fun handleLoadPackage(lpparam: LoadPackageParam) {
         if (lpparam.packageName == TARGET_PACKAGE && lpparam.isFirstApplication) {
-            // Init EzXHelper
-            EzXHelper.initHandleLoadPackage(lpparam)
-            EzXHelper.setLogTag(TAG)
-            EzXHelper.setToastTag(TAG)
             // Init hook
             hookSteps.initHandleLoadPackage(lpparam)
             initHook(lpparam)
@@ -38,7 +33,6 @@ class InjectHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
      * 模块加载路径
      */
     override fun initZygote(startupParam: IXposedHookZygoteInit.StartupParam) {
-        EzXHelper.initZygote(startupParam)
         hookSteps.initZygote(startupParam)
     }
 

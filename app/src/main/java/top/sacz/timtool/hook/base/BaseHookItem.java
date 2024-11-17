@@ -4,6 +4,7 @@ import java.lang.reflect.Member;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
+import top.sacz.timtool.hook.HookEnv;
 import top.sacz.timtool.hook.core.factory.ExceptionFactory;
 
 /**
@@ -33,11 +34,20 @@ public abstract class BaseHookItem {
         return isLoad;
     }
 
-    public void setIsLoad(boolean isLoad) {
-        this.isLoad = isLoad;
+    public final void startLoad() {
+        if (isLoad) {
+            return;
+        }
+        try {
+            isLoad = true;
+            loadHook(HookEnv.getInstance().getHostClassLoader());
+        } catch (Exception e) {
+            ExceptionFactory.add(this, e);
+        }
     }
 
     public abstract void loadHook(ClassLoader loader) throws Exception;
+
     /**
      * 标准hook方法执行前
      */

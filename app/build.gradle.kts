@@ -55,7 +55,6 @@ dependencies {
 
     //xposed
     compileOnly(libs.xposed.api)
-    implementation(libs.ezx.helper)
     implementation(libs.dexkit)
 
     //注解扫描器

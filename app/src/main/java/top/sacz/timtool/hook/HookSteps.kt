@@ -1,7 +1,6 @@
 package top.sacz.timtool.hook
 
 import android.content.Context
-import com.github.kyuubiran.ezxhelper.EzXHelper
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XC_LoadPackage
@@ -29,7 +28,6 @@ class HookSteps {
             .setVersionCode(packageInfo.versionCode)
             .setVersionName(packageInfo.versionName)
             .setHostClassLoader(context.classLoader)
-        EzXHelper.classLoader = context.classLoader
         XpHelper.initContext(context)
     }
 

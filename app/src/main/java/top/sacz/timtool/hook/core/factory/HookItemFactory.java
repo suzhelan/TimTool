@@ -1,10 +1,12 @@
 package top.sacz.timtool.hook.core.factory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import top.sacz.timtool.hook.base.BaseHookItem;
+import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem;
 import top.sacz.timtool.hook.gen.HookItemEntryList;
 
 public class HookItemFactory {
@@ -18,7 +20,26 @@ public class HookItemFactory {
         }
     }
 
-    public static List<BaseHookItem> getAllItems() {
+    public static BaseSwitchFunctionHookItem findHookItemByItemName(String itemName) {
+        for (BaseHookItem item : ITEM_MAP.values()) {
+            if (item.getItemName().equals(itemName)) {
+                return (BaseSwitchFunctionHookItem) item;
+            }
+        }
+        return null;
+    }
+
+    public static List<BaseSwitchFunctionHookItem> getAllSwitchFunctionItemList() {
+        ArrayList<BaseSwitchFunctionHookItem> result = new ArrayList<>();
+        for (BaseHookItem item : ITEM_MAP.values()) {
+            if (item instanceof BaseSwitchFunctionHookItem) {
+                result.add((BaseSwitchFunctionHookItem) item);
+            }
+        }
+        return result;
+    }
+
+    public static List<BaseHookItem> getAllItemList() {
         return List.copyOf(ITEM_MAP.values());
     }
 
