@@ -1,5 +1,6 @@
 package top.sacz.timtool.util
 
+import android.content.Context
 import com.alibaba.fastjson2.JSON
 import com.alibaba.fastjson2.TypeReference
 import io.fastkv.FastKV
@@ -12,6 +13,11 @@ class KvHelper(id: String = "default") {
     private var kv = FastKV.Builder(storePath, id)
         .build()
 
+    init {
+        if (storePath.isEmpty()) {
+            throw RuntimeException("storePath is empty(请使用KvHelper.initialize(String path)初始化")
+        }
+    }
 
     companion object {
         private var storePath = ""
@@ -19,6 +25,11 @@ class KvHelper(id: String = "default") {
         @JvmStatic
         fun initialize(path: String) {
             storePath = path
+        }
+
+        @JvmStatic
+        fun initialize(context: Context) {
+            storePath = context.filesDir.absolutePath + "/KvConfig"
         }
     }
 
