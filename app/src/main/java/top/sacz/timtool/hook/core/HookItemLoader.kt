@@ -37,4 +37,13 @@ class HookItemLoader {
             }
         }
     }
+
+    fun saveConfig() {
+        val config = HashMap<String, Boolean>()
+        val allHookItems = HookItemFactory.getAllSwitchFunctionItemList()
+        allHookItems.forEach { hookItem ->
+            config[hookItem.itemName] = hookItem.isEnabled
+        }
+        KvHelper().put("item_config", config)
+    }
 }

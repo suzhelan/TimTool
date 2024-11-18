@@ -22,9 +22,7 @@ fastkv = "2.6.0"
 fastjson2 = "2.0.53"
 glide = "4.16.0"
 base-recyclerview-helper = "4.1.6"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
+
 
 [libraries]
 
