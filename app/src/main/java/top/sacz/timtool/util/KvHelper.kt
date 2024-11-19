@@ -22,6 +22,9 @@ class KvHelper(id: String = "default") {
     companion object {
         private var storePath = ""
 
+        /**
+         * 初始化 传入文件夹路径
+         */
         @JvmStatic
         fun initialize(path: String) {
             storePath = path
