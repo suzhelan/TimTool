@@ -1,4 +1,4 @@
-package top.sacz.timtool.ui.activity
+package top.sacz.timtool.app.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

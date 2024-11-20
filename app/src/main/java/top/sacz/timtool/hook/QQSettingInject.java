@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.kongzue.dialogx.dialogs.MessageDialog;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -140,7 +142,9 @@ public class QQSettingInject extends BaseHookItem {
                 }
             }
             if (isEnterModuleActivity) {
+                XpHelper.injectResourcesToContext(qSettingActivity);
                 Toast.makeText(qSettingActivity, "进入设置页", Toast.LENGTH_SHORT).show();
+                MessageDialog.show("标题", "正文内容", "确定");
             }
             return null;
         }

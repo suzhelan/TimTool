@@ -31,6 +31,7 @@ class HookSteps {
             .setVersionName(packageInfo.versionName)
             .setHostClassLoader(context.classLoader)
         XpHelper.initContext(context)
+        XpHelper.injectResourcesToContext(context)
         val dataDir =
             Environment.getExternalStorageDirectory().absolutePath + "/Android/data/" + HookEnv.getInstance().currentHostAppPackageName + "/Tim小助手"
         KvHelper.initialize(dataDir)

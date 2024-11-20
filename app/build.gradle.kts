@@ -55,6 +55,7 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
 }
 
 dependencies {
@@ -77,4 +78,7 @@ dependencies {
     implementation(libs.fastkv)
     implementation(libs.fastjson2)
     implementation(libs.base.recyclerview.helper)
+
+    implementation(libs.dialogx)
+    implementation(libs.dialogx.material.style)
 }
