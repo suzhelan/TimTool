@@ -2,6 +2,7 @@ package top.sacz.timtool.hook
 
 import android.content.Context
 import android.os.Environment
+import com.kongzue.dialogx.DialogX
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XC_LoadPackage
@@ -35,8 +36,12 @@ class HookSteps {
         val dataDir =
             Environment.getExternalStorageDirectory().absolutePath + "/Android/data/" + HookEnv.getInstance().currentHostAppPackageName + "/Tim小助手"
         KvHelper.initialize(dataDir)
+        initDialogX(context)
     }
 
+    private fun initDialogX(context: Context) {
+        DialogX.init(context)
+    }
 
     fun initHooks() {
         //环境初始化 开始进行hook项目的初始化

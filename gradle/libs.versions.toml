@@ -22,7 +22,8 @@ fastkv = "2.6.0"
 fastjson2 = "2.0.53"
 glide = "4.16.0"
 base-recyclerview-helper = "4.1.6"
-dialogx = "0.0.49"
+
+dialogx = "0.0.50.beta23"
 
 [libraries]
 
@@ -44,12 +45,14 @@ okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okht
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 base-recyclerview-helper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "base-recyclerview-helper" }
-dialogx = { module = "com.kongzue.dialogx:DialogX", version.ref = "dialogx" }
-dialogx-material-style = { module = "com.kongzue.dialogx.style:DialogXMaterialYouStyle", version.ref = "dialogx" }
+
+suzhelan-dialogx = { module = "com.github.suzhelan.DialogX:DialogX", version.ref = "dialogx" }#使用言子楪世改过的dialogx,可以在宿主使用
+suzhelan-dialogxiosstyle = { module = "com.github.suzhelan.DialogX:DialogXIOSStyle", version.ref = "dialogx" }
+suzhelan-dialogxkongzuestyle = { module = "com.github.suzhelan.DialogX:DialogXKongzueStyle", version.ref = "dialogx" }
+suzhelan-dialogxmiuistyle = { module = "com.github.suzhelan.DialogX:DialogXMIUIStyle", version.ref = "dialogx" }
 
 #xposed api
 xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
-ezx-helper = { module = "com.github.kyuubiran:EzXHelper", version = "2.2.0" }
 dexkit = { module = "org.luckypray:dexkit", version = "2.0.2" }
 
 #注解扫描器

@@ -79,6 +79,8 @@ dependencies {
     implementation(libs.fastjson2)
     implementation(libs.base.recyclerview.helper)
 
-    implementation(libs.dialogx)
-    implementation(libs.dialogx.material.style)
+    implementation(libs.suzhelan.dialogx)
+
+//    implementation(libs.dialogx.material.style)
+//    implementation(project(":dialogx"))
 }

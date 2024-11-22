@@ -31,3 +31,4 @@ project(":annotation-scanner").projectDir = file("./libs/annotation-scanner")
 
 include(":xp-helper")
 project(":xp-helper").projectDir = file("./libs/xp-helper")
+
