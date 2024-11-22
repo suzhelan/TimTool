@@ -34,6 +34,7 @@ public class QQSettingInject extends BaseHookItem {
     /**
      * 直接照搬qs
      */
+    @SuppressWarnings("unchecked")
     private void hookQQ8970Setting() {
         Method onCreate = MethodUtils.create("com.tencent.mobileqq.setting.main.MainSettingConfigProvider")
                 .returnType(List.class)
@@ -45,7 +46,7 @@ public class QQSettingInject extends BaseHookItem {
 
             //获取方法的返回结果 item组包装器List-结构和当前类的DemoItemGroupWraper类似
             Object result = param.getResult();
-            List itemGroupWraperList = (List) result;
+            List<Object> itemGroupWraperList = (List<Object>) result;
             //获取返回的集合泛类型
             Class<?> itemGroupWraperClass = itemGroupWraperList.get(0).getClass();
             //循环包装器组集合 目的是获取里面的元素
@@ -109,7 +110,7 @@ public class QQSettingInject extends BaseHookItem {
      * 创建脚本入口项
      */
 
-    private class OnClickListener implements InvocationHandler {
+    private static class OnClickListener implements InvocationHandler {
 
         private final Context qSettingActivity;
 
