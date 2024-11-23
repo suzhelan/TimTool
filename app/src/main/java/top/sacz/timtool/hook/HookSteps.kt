@@ -3,6 +3,7 @@ package top.sacz.timtool.hook
 import android.content.Context
 import android.os.Environment
 import com.kongzue.dialogx.DialogX
+import com.kongzue.dialogxmaterialyou.style.MaterialYouStyle
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XC_LoadPackage
@@ -41,6 +42,7 @@ class HookSteps {
 
     private fun initDialogX(context: Context) {
         DialogX.init(context)
+        DialogX.globalStyle = MaterialYouStyle()
     }
 
     fun initHooks() {

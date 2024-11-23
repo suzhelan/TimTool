@@ -80,7 +80,8 @@ dependencies {
     implementation(libs.base.recyclerview.helper)
 
     implementation(libs.suzhelan.dialogx)
+    implementation(libs.suzhelan.dialogx.materialstyle)
 
-//    implementation(libs.dialogx.material.style)
-//    implementation(project(":dialogx"))
+//    implementation(project(":DialogX"))
+//    implementation(project(":DialogXMaterialYou"))
 }

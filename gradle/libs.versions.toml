@@ -23,7 +23,7 @@ fastjson2 = "2.0.53"
 glide = "4.16.0"
 base-recyclerview-helper = "4.1.6"
 
-dialogx = "0.0.50.beta23"
+dialogx = "0.0.50.beta24"
 
 [libraries]
 
@@ -47,9 +47,10 @@ glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 base-recyclerview-helper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "base-recyclerview-helper" }
 
 suzhelan-dialogx = { module = "com.github.suzhelan.DialogX:DialogX", version.ref = "dialogx" }#使用言子楪世改过的dialogx,可以在宿主使用
-suzhelan-dialogxiosstyle = { module = "com.github.suzhelan.DialogX:DialogXIOSStyle", version.ref = "dialogx" }
-suzhelan-dialogxkongzuestyle = { module = "com.github.suzhelan.DialogX:DialogXKongzueStyle", version.ref = "dialogx" }
-suzhelan-dialogxmiuistyle = { module = "com.github.suzhelan.DialogX:DialogXMIUIStyle", version.ref = "dialogx" }
+suzhelan-dialogx-iosstyle = { module = "com.github.suzhelan.DialogX:DialogXIOSStyle", version.ref = "dialogx" }
+suzhelan-dialogx-kongzuestyle = { module = "com.github.suzhelan.DialogX:DialogXKongzueStyle", version.ref = "dialogx" }
+suzhelan-dialogx-miuistyle = { module = "com.github.suzhelan.DialogX:DialogXMIUIStyle", version.ref = "dialogx" }
+suzhelan-dialogx-materialstyle = { module = "com.github.suzhelan.DialogX:DialogXMaterialYou", version.ref = "dialogx" }
 
 #xposed api
 xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
