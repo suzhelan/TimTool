@@ -8,7 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".app.FixApplication"
-        android:theme="@style/Theme.Tim助手"
+        android:theme="@style/Theme.TimTool"
         tools:targetApi="31">
         <activity
             android:name=".app.activity.MainActivity"

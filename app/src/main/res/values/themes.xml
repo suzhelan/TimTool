@@ -1,8 +1,8 @@
 <resources>
 
-    <style name="Base.Theme.Tim助手" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.TimTool" parent="Theme.Material3.DayNight.NoActionBar">
 
     </style>
 
-    <style name="Theme.Tim助手" parent="Base.Theme.Tim助手" />
+    <style name="Theme.TimTool" parent="Base.Theme.TimTool" />
 </resources>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tim小助手</string>
+    <string name="setting_message">配置更改</string>
 </resources>

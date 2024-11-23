@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.kongzue.dialogx.dialogs.BottomMenu;
-import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
+import com.kongzue.dialogx.dialogs.MessageDialog;
+import com.kongzue.dialogx.interfaces.OnBindView;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
@@ -146,15 +146,14 @@ public class QQSettingInject extends BaseHookItem {
             if (isEnterModuleActivity) {
                 XpHelper.injectResourcesToContext(qSettingActivity);
                 Toast.makeText(qSettingActivity, "进入设置页", Toast.LENGTH_SHORT).show();
-
-                BottomMenu.show("新标签页中打开", "稍后阅读", "复制链接网址")
-                        .setMessage("这里是标题")
-                        .setOnMenuItemClickListener(new OnMenuItemClickListener<BottomMenu>() {
+                MessageDialog.build()
+                        .setTitle(R.string.app_name)
+                        .setCustomView(new OnBindView<>(R.layout.layout_setting) {
                             @Override
-                            public boolean onClick(BottomMenu dialog, CharSequence text, int index) {
-                                return false;
+                            public void onBind(MessageDialog dialog, View v) {
+                                //View childView = v.findViewById(resId)...
                             }
-                        });
+                        }).show();
             }
             return null;
         }

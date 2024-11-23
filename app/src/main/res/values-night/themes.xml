@@ -1,5 +1,5 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.Tim助手" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.TimTool" parent="Theme.Material3.DayNight.NoActionBar">
     </style>
 </resources>
