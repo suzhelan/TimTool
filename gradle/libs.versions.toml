@@ -23,7 +23,7 @@ fastjson2 = "2.0.53"
 glide = "4.16.0"
 base-recyclerview-helper = "4.1.6"
 
-dialogx = "0.0.50.beta24"
+dialogx = "0.0.50.beta26"
 
 [libraries]
 
