@@ -90,4 +90,23 @@ public class FieldUtils extends BaseFinder<Field> {
         return tryGetFieldValue(field, object);
     }
 
+    public FieldUtils setFast(Object target, Object value) {
+        Field field = first();
+        try {
+            field.set(target, value);
+            return this;
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public FieldUtils setLast(Object target, Object value) {
+        Field field = last();
+        try {
+            field.set(target, value);
+            return this;
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

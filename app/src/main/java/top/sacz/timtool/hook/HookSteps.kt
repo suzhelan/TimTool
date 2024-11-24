@@ -43,6 +43,7 @@ class HookSteps {
     private fun initDialogX(context: Context) {
         DialogX.init(context)
         DialogX.globalStyle = MaterialYouStyle()
+        DialogX.dialogMaxWidth
     }
 
     fun initHooks() {

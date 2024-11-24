@@ -27,6 +27,9 @@ class HookItemLoader {
         }
     }
 
+    /**
+     * 加载并判断哪些需要加载
+     */
     fun loadHookItem() {
         val allHookItems = HookItemFactory.getAllItemList()
         allHookItems.forEach { hookItem ->

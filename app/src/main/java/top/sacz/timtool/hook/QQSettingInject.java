@@ -3,10 +3,6 @@ package top.sacz.timtool.hook;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.kongzue.dialogx.dialogs.MessageDialog;
-import com.kongzue.dialogx.interfaces.OnBindView;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
@@ -18,6 +14,7 @@ import java.util.List;
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.base.BaseHookItem;
 import top.sacz.timtool.hook.core.annotation.HookItem;
+import top.sacz.timtool.ui.dialog.SettingDialog;
 import top.sacz.xphelper.XpHelper;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.reflect.ConstructorUtils;
@@ -145,15 +142,7 @@ public class QQSettingInject extends BaseHookItem {
             }
             if (isEnterModuleActivity) {
                 XpHelper.injectResourcesToContext(qSettingActivity);
-                Toast.makeText(qSettingActivity, "进入设置页", Toast.LENGTH_SHORT).show();
-                MessageDialog.build()
-                        .setTitle(R.string.app_name)
-                        .setCustomView(new OnBindView<>(R.layout.layout_setting) {
-                            @Override
-                            public void onBind(MessageDialog dialog, View v) {
-                                //View childView = v.findViewById(resId)...
-                            }
-                        }).show();
+                new SettingDialog().show();
             }
             return null;
         }

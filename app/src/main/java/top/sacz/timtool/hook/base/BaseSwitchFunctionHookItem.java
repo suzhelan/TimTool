@@ -6,6 +6,10 @@ public abstract class BaseSwitchFunctionHookItem extends BaseHookItem {
 
     private boolean enabled = isLoadedByDefault();
 
+    public String getTip() {
+        return null;
+    }
+
     /**
      * 是否默认加载
      */

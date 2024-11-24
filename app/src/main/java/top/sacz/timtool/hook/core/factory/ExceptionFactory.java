@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import de.robv.android.xposed.XposedBridge;
+import top.sacz.timtool.BuildConfig;
 import top.sacz.timtool.hook.base.BaseHookItem;
 
 /**
@@ -46,6 +48,9 @@ public class ExceptionFactory {
         }
         exceptionsList.add(0, throwable);
         exceptionMap.put(item, exceptionsList);
+        if (BuildConfig.DEBUG) {
+            XposedBridge.log(throwable);
+        }
     }
 
     public static String getStackTrace(BaseHookItem hookItem) {
