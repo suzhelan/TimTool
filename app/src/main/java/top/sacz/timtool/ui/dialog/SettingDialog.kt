@@ -6,7 +6,6 @@ import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.interfaces.OnBindView
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.core.factory.HookItemFactory
-import top.sacz.timtool.hook.util.LogUtils
 import top.sacz.timtool.ui.adapter.ItemListAdapter
 
 class SettingDialog {
@@ -27,7 +26,6 @@ class SettingDialog {
         val itemViewList = rootView.findViewById<ListView>(R.id.lv_item_list)
         val adapter = ItemListAdapter()
         val itemList = HookItemFactory.getAllSwitchFunctionItemList()
-        LogUtils.addRunLog("itemList: $itemList")
         adapter.submitList(itemList)
         itemViewList.adapter = adapter
     }
