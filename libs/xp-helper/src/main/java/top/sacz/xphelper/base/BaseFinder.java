@@ -97,6 +97,11 @@ public abstract class BaseFinder<T extends Member> {
         if (!isFind) {
             find();
         }
+        if (result.isEmpty() && declaringClass != Object.class) {
+            //如果查找不到 向父类查找
+            declaringClass = declaringClass.getSuperclass();
+            return find().first();
+        }
         if (result.isEmpty()) {
             throw new ReflectException("can not find " + buildSign());
         }

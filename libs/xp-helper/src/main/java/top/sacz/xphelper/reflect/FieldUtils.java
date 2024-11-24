@@ -90,7 +90,7 @@ public class FieldUtils extends BaseFinder<Field> {
         return tryGetFieldValue(field, object);
     }
 
-    public FieldUtils setFast(Object target, Object value) {
+    public FieldUtils setFirst(Object target, Object value) {
         Field field = first();
         try {
             field.set(target, value);

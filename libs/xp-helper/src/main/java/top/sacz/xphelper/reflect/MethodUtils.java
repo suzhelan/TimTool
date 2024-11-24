@@ -3,6 +3,7 @@ package top.sacz.xphelper.reflect;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import top.sacz.xphelper.base.BaseFinder;
 
@@ -40,6 +41,7 @@ public class MethodUtils extends BaseFinder<Method> {
 
     public MethodUtils params(Class<?>... methodParams) {
         this.methodParams = methodParams;
+        this.paramCount = methodParams.length;
         return this;
     }
 
@@ -60,10 +62,22 @@ public class MethodUtils extends BaseFinder<Method> {
         result.removeIf(method -> methodName != null && !method.getName().equals(methodName));
         result.removeIf(method -> returnType != null && !method.getReturnType().equals(returnType));
         result.removeIf(method -> paramCount != null && method.getParameterCount() != paramCount);
-        result.removeIf(method -> methodParams != null && !Arrays.equals(method.getParameterTypes(), methodParams));
+        result.removeIf(method -> methodParams != null && !paramEquals(method.getParameterTypes()));
         writeToMethodCache(result);
         findComplete();
         return this;
+    }
+
+    private boolean paramEquals(Class<?>[] methodParams) {
+        for (int i = 0; i < methodParams.length; i++) {
+            Class<?> type = methodParams[i];
+            Class<?> findType = this.methodParams[i];
+            if (findType == Ignore.class || Objects.equals(type, findType)) {
+                continue;
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -3,7 +3,6 @@ package top.sacz.timtool.ui.adapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import top.sacz.timtool.hook.util.LogUtils
 
 abstract class BaseItemListAdapter<T> : BaseAdapter() {
 
@@ -28,7 +27,6 @@ abstract class BaseItemListAdapter<T> : BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        LogUtils.addRunLog("getView=$position")
         return createView(position, getItem(position), parent)
     }
 
