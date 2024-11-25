@@ -1,13 +1,13 @@
 package top.sacz.timtool.hook
 
 import android.content.Context
-import android.os.Environment
 import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogxmaterialyou.style.MaterialYouStyle
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 import top.sacz.timtool.hook.core.HookItemLoader
+import top.sacz.timtool.hook.util.PathTool
 import top.sacz.timtool.util.KvHelper
 import top.sacz.xphelper.XpHelper
 
@@ -34,8 +34,7 @@ class HookSteps {
             .setHostClassLoader(context.classLoader)
         XpHelper.initContext(context)
         XpHelper.injectResourcesToContext(context)
-        val dataDir =
-            Environment.getExternalStorageDirectory().absolutePath + "/Android/data/" + HookEnv.getInstance().currentHostAppPackageName + "/Tim小助手"
+        val dataDir = PathTool.getModuleDataPath() + "/data"
         KvHelper.initialize(dataDir)
         initDialogX(context)
     }
