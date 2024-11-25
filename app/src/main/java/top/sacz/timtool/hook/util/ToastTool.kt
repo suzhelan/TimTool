@@ -1,25 +1,17 @@
 package top.sacz.timtool.hook.util
 
-import android.content.Context
-import android.os.Handler
-import android.os.Looper
-import android.widget.Toast
-import top.sacz.timtool.hook.HookEnv
+import com.kongzue.dialogx.dialogs.PopTip
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 object ToastTool {
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun show(content: Any) {
-        Handler(Looper.getMainLooper()).post {
-            var activity: Context? = ActivityTools.getActivity()
-            if (activity == null) activity = HookEnv.getInstance().hostAppContext
-            try {
-                Toast.makeText(activity, content.toString(), Toast.LENGTH_LONG).show()
-            } catch (e: Exception) {
-                try {
-                    Toast.makeText(activity, content.toString(), Toast.LENGTH_LONG).show()
-                } catch (ex: Exception) {
-                }
-            }
+        GlobalScope.launch(Dispatchers.Main) {
+            PopTip.show(content.toString())
         }
     }
 }
