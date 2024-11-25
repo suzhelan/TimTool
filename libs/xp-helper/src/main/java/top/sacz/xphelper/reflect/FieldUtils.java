@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import top.sacz.xphelper.base.BaseFinder;
+import top.sacz.xphelper.util.CheckClassType;
 
 public class FieldUtils extends BaseFinder<Field> {
 
@@ -19,7 +20,7 @@ public class FieldUtils extends BaseFinder<Field> {
 
     public static FieldUtils create(Class<?> fromClass) {
         FieldUtils fieldUtils = new FieldUtils();
-        fieldUtils.declaringClass = fromClass;
+        fieldUtils.setDeclaringClass(fromClass);
         return fieldUtils;
     }
 
@@ -47,10 +48,10 @@ public class FieldUtils extends BaseFinder<Field> {
             return this;
         }
         //查找类的所有字段
-        Field[] declaredFields = declaringClass.getDeclaredFields();
+        Field[] declaredFields = getDeclaringClass().getDeclaredFields();
         result.addAll(Arrays.asList(declaredFields));
         //过滤类型
-        result.removeIf(field -> fieldType != null && !field.getType().equals(fieldType));
+        result.removeIf(field -> fieldType != null && !CheckClassType.CheckClass(field.getType(), fieldType));
         //过滤名称
         result.removeIf(field -> fieldName != null && !field.getName().equals(fieldName));
         //写入缓存
@@ -64,7 +65,7 @@ public class FieldUtils extends BaseFinder<Field> {
         StringBuilder signBuilder = new StringBuilder();
         //构建签名缓存
         signBuilder.append("field:")
-                .append(declaringClass)
+                .append(fromClassName)
                 .append(" ")
                 .append(fieldType)
                 .append(" ")

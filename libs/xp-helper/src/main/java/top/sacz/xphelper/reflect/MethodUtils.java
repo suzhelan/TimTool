@@ -1,5 +1,7 @@
 package top.sacz.xphelper.reflect;
 
+import android.util.Log;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +23,7 @@ public class MethodUtils extends BaseFinder<Method> {
 
     public static MethodUtils create(Class<?> fromClass) {
         MethodUtils methodUtils = new MethodUtils();
-        methodUtils.declaringClass = fromClass;
+        methodUtils.setDeclaringClass(fromClass);
         return methodUtils;
     }
 
@@ -57,7 +59,7 @@ public class MethodUtils extends BaseFinder<Method> {
             result = cache;
             return this;
         }
-        Method[] methods = declaringClass.getDeclaredMethods();
+        Method[] methods = getDeclaringClass().getDeclaredMethods();
         result.addAll(Arrays.asList(methods));
         result.removeIf(method -> methodName != null && !method.getName().equals(methodName));
         result.removeIf(method -> returnType != null && !method.getReturnType().equals(returnType));
@@ -84,7 +86,7 @@ public class MethodUtils extends BaseFinder<Method> {
     public String buildSign() {
         StringBuilder build = new StringBuilder();
         build.append("method:")
-                .append(declaringClass)
+                .append(fromClassName)
                 .append(" ")
                 .append(returnType)
                 .append(" ")
@@ -98,15 +100,21 @@ public class MethodUtils extends BaseFinder<Method> {
 
     private <T> T tryCall(Method method, Object object, Object... args) {
         try {
+            Log.d("MethodTool", "tryCall: " + method + " obj=" + object + " args " + Arrays.toString(args));
             return (T) method.invoke(object, args);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public <T> T callFirst(Object object, Object... args) {
+    public <T> T callFirstStatic(Object... args) {
         Method method = first();
-        return tryCall(method, object, args);
+        return tryCall(method, null, args);
+    }
+
+    public <T> T callFirst(Object runTimeObj, Object... args) {
+        Method method = first();
+        return tryCall(method, runTimeObj, args);
     }
 
     public <T> T callLast(Object object, Object... args) {

@@ -20,6 +20,8 @@ public abstract class BaseFinder<T extends Member> {
 
     protected Class<?> declaringClass;
 
+    protected String fromClassName;
+
     protected List<T> result = new ArrayList<>();
 
     private boolean isFind = false;
@@ -90,9 +92,9 @@ public abstract class BaseFinder<T extends Member> {
         if (!isFind) {
             find();
         }
-        if (result.isEmpty() && declaringClass != Object.class) {
+        if (result.isEmpty() && getDeclaringClass() != Object.class) {
             //如果查找不到 向父类查找
-            declaringClass = declaringClass.getSuperclass();
+            setDeclaringClass(getDeclaringClass().getSuperclass());
             return find().first();
         }
         if (result.isEmpty()) {
@@ -105,14 +107,26 @@ public abstract class BaseFinder<T extends Member> {
         if (!isFind) {
             find();
         }
-        if (result.isEmpty() && declaringClass != Object.class) {
+        if (result.isEmpty() && getDeclaringClass() != Object.class) {
             //如果查找不到 向父类查找
-            declaringClass = declaringClass.getSuperclass();
+            setDeclaringClass(getDeclaringClass().getSuperclass());
             return find().first();
         }
         if (result.isEmpty()) {
             throw new ReflectException("can not find " + buildSign());
         }
         return result.get(result.size() - 1);
+    }
+
+    protected Class<?> getDeclaringClass() {
+        return declaringClass;
+    }
+
+    protected BaseFinder<T> setDeclaringClass(Class<?> declaringClass) {
+        this.declaringClass = declaringClass;
+        if (fromClassName == null) {
+            this.fromClassName = declaringClass.getName();
+        }
+        return this;
     }
 }

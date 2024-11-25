@@ -18,7 +18,7 @@ public class ConstructorUtils extends BaseFinder<Constructor<?>> {
 
     public static ConstructorUtils create(Class<?> fromClass) {
         ConstructorUtils constructorUtils = new ConstructorUtils();
-        constructorUtils.declaringClass = fromClass;
+        constructorUtils.setDeclaringClass(fromClass);
         return constructorUtils;
     }
 
@@ -57,7 +57,7 @@ public class ConstructorUtils extends BaseFinder<Constructor<?>> {
             result = cache;
             return this;
         }
-        Constructor<?>[] constructors = declaringClass.getDeclaredConstructors();
+        Constructor<?>[] constructors = getDeclaringClass().getDeclaredConstructors();
         result.addAll(Arrays.asList(constructors));
         result.removeIf(constructor -> paramCount != 0 && constructor.getParameterCount() != paramCount);
         result.removeIf(constructor -> paramTypes != null && !Arrays.equals(constructor.getParameterTypes(), paramTypes));
@@ -70,7 +70,7 @@ public class ConstructorUtils extends BaseFinder<Constructor<?>> {
         try {
             Constructor<?> firstConstructor = first();
             Object instance = firstConstructor.newInstance(args);
-            return declaringClass.cast(instance);
+            return getDeclaringClass().cast(instance);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -80,7 +80,7 @@ public class ConstructorUtils extends BaseFinder<Constructor<?>> {
     public String buildSign() {
         StringBuilder signBuilder = new StringBuilder()
                 .append("constructor:")
-                .append(declaringClass)
+                .append(fromClassName)
                 .append(" ")
                 .append(paramCount)
                 .append(" ")
