@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.robv.android.xposed.XposedHelpers;
 import top.sacz.xphelper.exception.ReflectException;
 
 public abstract class BaseFinder<T extends Member> {
@@ -69,15 +70,7 @@ public abstract class BaseFinder<T extends Member> {
     protected void findComplete() {
         this.isFind = true;
         for (T member : result) {
-            if (member instanceof Field) {
-                ((Field) member).setAccessible(true);
-            }
-            if (member instanceof Method) {
-                ((Method) member).setAccessible(true);
-            }
-            if (member instanceof Constructor<?>) {
-                ((Constructor<?>) member).setAccessible(true);
-            }
+            XposedHelpers.callMethod(member, "setAccessible", true);
         }
     }
 
@@ -111,6 +104,11 @@ public abstract class BaseFinder<T extends Member> {
     public T last() {
         if (!isFind) {
             find();
+        }
+        if (result.isEmpty() && declaringClass != Object.class) {
+            //如果查找不到 向父类查找
+            declaringClass = declaringClass.getSuperclass();
+            return find().first();
         }
         if (result.isEmpty()) {
             throw new ReflectException("can not find " + buildSign());
