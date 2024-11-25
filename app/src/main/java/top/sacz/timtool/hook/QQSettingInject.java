@@ -81,7 +81,7 @@ public class QQSettingInject extends BaseHookItem {
                     List<Object> mItemGroup = new ArrayList<>();
                     mItemGroup.add(mItem);
                     //按长度获取item包装器的构造器
-                    Constructor<?> itemGroupWraperConstructor = ConstructorUtils.build(itemGroupWraperClass).paramCount(5).first();
+                    Constructor<?> itemGroupWraperConstructor = ConstructorUtils.create(itemGroupWraperClass).paramCount(5).first();
                     //新建包装器实例并添加到返回结果
                     Object itemGroupWrap = itemGroupWraperConstructor.newInstance(mItemGroup, null, null, 6, null);
                     itemGroupWraperList.add(0, itemGroupWrap);

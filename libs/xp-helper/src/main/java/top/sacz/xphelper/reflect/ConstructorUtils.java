@@ -12,22 +12,22 @@ public class ConstructorUtils extends BaseFinder<Constructor<?>> {
     private int paramCount;
     private Class<?>[] paramTypes;
 
-    public static ConstructorUtils build(Object target) {
-        return build(target.getClass());
+    public static ConstructorUtils create(Object target) {
+        return create(target.getClass());
     }
 
-    public static ConstructorUtils build(Class<?> fromClass) {
+    public static ConstructorUtils create(Class<?> fromClass) {
         ConstructorUtils constructorUtils = new ConstructorUtils();
         constructorUtils.declaringClass = fromClass;
         return constructorUtils;
     }
 
-    public static ConstructorUtils build(String fromClassName) {
-        return build(ClassUtils.findClass(fromClassName));
+    public static ConstructorUtils create(String fromClassName) {
+        return create(ClassUtils.findClass(fromClassName));
     }
 
     public static Object newInstance(Class<?> fromClass, Class<?>[] paramTypes, Object... args) {
-        return build(fromClass)
+        return create(fromClass)
                 .paramTypes(paramTypes)
                 .newFirstInstance(args);
     }
