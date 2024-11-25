@@ -1,0 +1,81 @@
+syntax = "proto3";
+package top.artmoe.inao.entries;
+option java_package = "top.artmoe.inao.entries";
+
+message QQMessage {
+  MessageHead messageHead = 1;
+  MessageContentInfo messageContentInfo = 2;
+  MessageBody messageBody = 3;
+
+  message MessageHead {
+    int64 senderPeerId = 1;
+    string senderUid = 2;
+    int64 receiverPeerId = 5;
+    string receiverUid = 6;
+    SenderInfo senderInfo = 8;
+
+    message SenderInfo {
+      int64 peerId = 1;
+      int32 msgSubType = 2;
+      string nickName = 4;
+    }
+  }
+  message MessageContentInfo {
+    int32 msgType = 1;
+    int32 msgSubType = 2;
+    int32 subSeq = 3;
+    int32 msgSeq = 5;
+    int64 msgTime = 6;
+  }
+  message MessageBody {
+    RichMsg richMsg = 1;
+    bytes operationInfo = 2;
+
+    message RichMsg {
+      repeated MsgContent msgContent = 2;
+
+      message MsgContent {
+        TextMsg textMsg = 1;
+        MsgSender msgSender = 16;
+
+        message TextMsg {
+          string text = 1;
+        }
+
+        message MsgSender {
+          string nickName = 1;
+        }
+      }
+    }
+
+    message GroupRecallOperationInfo {
+      int64 peerId = 4;
+      Info info = 11;
+      int32 msgSeq = 37;
+
+      message Info {
+        string operatorUid = 1;
+        MsgInfo msgInfo = 3;
+
+        message MsgInfo {
+          int32 msgSeq = 1;
+          int64 msgTime = 2;
+          string senderUid = 6;
+        }
+      }
+    }
+
+    message C2CRecallOperationInfo {
+      Info info = 1;
+
+      message Info {
+        string operatorUid = 1;
+        string receiverUid = 2;
+        int64 msgTime = 5;
+        int64 msgRandom = 6;
+        int32 msgSeq = 20;
+      }
+    }
+  }
+}
+

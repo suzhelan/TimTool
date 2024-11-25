@@ -1,0 +1,52 @@
+syntax = "proto3";
+package top.artmoe.inao.entries;
+option java_package = "top.artmoe.inao.entries";
+
+import "top/artmoe/inao/entries/QQMessage.proto";
+
+//import "google/protobuf/timestamp.proto";
+// proto有3个字段修饰符required(必选),optional(可选),repeated(重复)
+// 咱们的proto文件不使用required,只用optional,因为咱们也不知道哪个字段什么时候才有值,如果是数组一律用repeated修饰.
+// 消息只是包含一组类型化字段的聚合。许多标准简单数据类型都可用作字段类型，包括 bool 、 int32 、 float 、 double 和 string
+// peerId 就是 uin（是数字），uid是乱七八糟的字母
+message InfoSyncPush {
+  int32 type = 3; //同步类型
+  int32 pushId = 4; // 没啥用的信息貌似
+
+  SyncContent syncContent = 7; //普通消息同步内容
+  SyncRecallOperateInfo syncRecallContent = 8;  // 撤回操作的操作信息
+
+  message SyncContent {
+    repeated GroupSyncContent groupSyncContent = 3; // 每个群的同步西信息
+
+    message GroupSyncContent {
+      int64 groupPeerId = 3;  // 群聊的 peerId
+      int32 startSeq = 4; //同步的开始seq
+      int32 endSeq = 5; // 同步的结束seq
+
+      // 如果移除撤回的信息，就在这里就移除了
+      repeated QQMessage qqMessage = 6;  // 消息数组，数组的数量为 endSeq - startSeq
+    }
+  }
+
+
+  message SyncRecallOperateInfo {
+    SyncInfoHead syncInfoHead = 3;
+    repeated SyncInfoBody syncInfoBody = 4;
+    SyncInfoHead subHead = 5;
+
+    message SyncInfoHead {
+      int64 syncTime = 1;
+    }
+
+    message SyncInfoBody {
+      int64 senderPeerId = 1;
+      string senderUid = 2;
+      int64 eventTime = 5;
+      repeated QQMessage msg = 8;
+    }
+  }
+}
+
+
+

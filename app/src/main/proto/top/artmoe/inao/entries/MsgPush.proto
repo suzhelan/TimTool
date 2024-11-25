@@ -1,0 +1,11 @@
+syntax = "proto3";
+package top.artmoe.inao.entries;
+
+option java_package = "top.artmoe.inao.entries";
+
+
+import "top/artmoe/inao/entries/QQMessage.proto";
+
+message MsgPush {
+  QQMessage qqMessage = 1;
+}

@@ -50,9 +50,9 @@ class HookSteps {
         //环境初始化 开始进行hook项目的初始化
         if (HookEnv.getInstance().isMainProcess) {
             XposedBridge.log("[Tim小助手]环境初始化完成")
-            val hookItemLoader = HookItemLoader()
-            hookItemLoader.loadConfig()
-            hookItemLoader.loadHookItem()
         }
+        val hookItemLoader = HookItemLoader()
+        hookItemLoader.loadConfig()
+        hookItemLoader.loadHookItem()
     }
 }

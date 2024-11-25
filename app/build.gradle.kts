@@ -1,9 +1,11 @@
+import com.google.protobuf.gradle.proto
 import top.sacz.buildplugin.BuildConfig
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -56,6 +58,14 @@ android {
         buildConfig = true
     }
 
+    sourceSets {
+        named("main") {
+            proto {
+                srcDirs("src/main/proto")
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -79,9 +89,31 @@ dependencies {
     implementation(libs.fastjson2)
     implementation(libs.base.recyclerview.helper)
 
+    //dialogx
     implementation(libs.suzhelan.dialogx)
     implementation(libs.suzhelan.dialogx.materialstyle)
 
+    //防撤回用到的proto buf解析
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.protobuf)
+    implementation(libs.protobuf.java)
+
 //    implementation(project(":DialogX"))
 //    implementation(project(":DialogXMaterialYou"))
+}
+
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.3"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }
