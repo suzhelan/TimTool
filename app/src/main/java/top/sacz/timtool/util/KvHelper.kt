@@ -93,7 +93,7 @@ class KvHelper(id: String = "default") {
         return kv.getLong(key, def)
     }
 
-    fun getBoolean(key: String, def: Boolean): Boolean {
+    fun getBoolean(key: String, def: Boolean = false): Boolean {
         return kv.getBoolean(key, def)
     }
 
