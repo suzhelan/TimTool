@@ -6,9 +6,7 @@ import top.artmoe.inao.entries.InfoSyncPushOuterClass
 import top.artmoe.inao.entries.MsgPushOuterClass
 import top.artmoe.inao.entries.QQMessageOuterClass
 import top.artmoe.inao.entries.QQMessageOuterClass.QQMessage.MessageBody.C2CRecallOperationInfo
-import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.core.factory.HookItemFactory
-import top.sacz.timtool.hook.util.LogUtils
 
 /**
  * 防撤回核心解析
@@ -65,7 +63,6 @@ object BanRecallMsg {
         msgPush: MsgPushOuterClass.MsgPush,
         param: XC_MethodHook.MethodHookParam
     ) {
-        LogUtils.addRunLog("onC2CRecallByMsgPush", HookEnv.getInstance().processName)
         val operationInfo = C2CRecallOperationInfo.parseFrom(operationInfoByteArray)
         //msg seq
         val recallMsgSeq = operationInfo.info.msgSeq
