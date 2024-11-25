@@ -2,20 +2,18 @@ package top.sacz.timtool.hook.item.api
 
 import android.os.Bundle
 import android.view.View
-import top.sacz.timtool.hook.base.BaseHookItem
+import top.sacz.timtool.hook.base.ApiHookItem
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.core.factory.ExceptionFactory
-import top.sacz.timtool.hook.util.LogUtils
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.Ignore
 import top.sacz.xphelper.reflect.MethodUtils
-import java.lang.reflect.Method
 
 
 @HookItem("监听QQMsgView更新")
-class OnQQMessageView : BaseHookItem() {
+class OnQQMessageView : ApiHookItem() {
 
     companion object {
 
@@ -55,15 +53,9 @@ class OnQQMessageView : BaseHookItem() {
     }
 
     private fun onViewUpdate(aioMsgItem: Any, msgView: View) {
-        val msgRecord = try {
-            val getMsgMethod: Method = MethodUtils.create(aioMsgItem.javaClass)
-                .methodName("getMsgRecord")
-                .first()
-            getMsgMethod.invoke(aioMsgItem)
-        } catch (e: Exception) {
-            LogUtils.addError(e)
-
-        }
+        val msgRecord: Any = MethodUtils.create(aioMsgItem.javaClass)
+            .methodName("getMsgRecord")
+            .callFirst(aioMsgItem)
 
         for ((switchFunctionHookItem, listener) in ON_AIO_CHAT_VIEW_UPDATE_LISTENER_MAP.entries) {
             if (switchFunctionHookItem.isEnabled) {

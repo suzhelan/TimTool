@@ -20,9 +20,9 @@ public class HookItemFactory {
         }
     }
 
-    public static BaseSwitchFunctionHookItem findHookItemByItemName(String itemName) {
+    public static BaseSwitchFunctionHookItem findHookItemByPath(String path) {
         for (BaseHookItem item : ITEM_MAP.values()) {
-            if (item.getItemName().equals(itemName)) {
+            if (item.getPath().equals(path)) {
                 return (BaseSwitchFunctionHookItem) item;
             }
         }

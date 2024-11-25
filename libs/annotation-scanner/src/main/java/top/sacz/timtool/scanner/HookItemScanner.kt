@@ -64,7 +64,7 @@ class HookItemScanner(
                     val valName = symbol.toClassName().simpleName
                     //构建对象并且设置item name
                     addStatement("val %N = %T()", valName, typeName)
-                    addStatement("%N.setItemName(%S)", valName, itemName)
+                    addStatement("%N.setPath(%S)", valName, itemName)
                     addStatement("list.add(%N)", valName)
                 }
                 addStatement("return %N", "list")

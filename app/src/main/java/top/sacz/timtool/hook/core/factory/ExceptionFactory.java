@@ -11,6 +11,7 @@ import java.util.Objects;
 import de.robv.android.xposed.XposedBridge;
 import top.sacz.timtool.BuildConfig;
 import top.sacz.timtool.hook.base.BaseHookItem;
+import top.sacz.timtool.hook.util.LogUtils;
 
 /**
  * 异常处理工厂
@@ -49,6 +50,7 @@ public class ExceptionFactory {
         exceptionsList.add(0, throwable);
         exceptionMap.put(item, exceptionsList);
         if (BuildConfig.DEBUG) {
+            LogUtils.addError(item.getItemName(), throwable);
             XposedBridge.log(throwable);
         }
     }

@@ -80,6 +80,7 @@ class QQMsgViewAdapter : BaseHookItem() {
         for (i in 0..<itemView.childCount) {
             val child = itemView.getChildAt(i)
             if (child.javaClass.name == "com.tencent.qqnt.aio.holder.template.BubbleLayoutCompatPress") {
+                contentViewId = child.id
                 putContentViewId(child.id)
                 //解开hook
                 unhook?.unhook()

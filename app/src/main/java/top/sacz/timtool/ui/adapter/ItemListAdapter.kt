@@ -22,7 +22,7 @@ class ItemListAdapter : BaseItemListAdapter<BaseSwitchFunctionHookItem>() {
         val tvName = itemView.findViewById<TextView>(R.id.tv_item_name)
         val tvTip = itemView.findViewById<TextView>(R.id.tv_item_tip)
         val switchItem = itemView.findViewById<Switch>(R.id.switch_item)
-        tvName.text = model.itemName.substring(model.itemName.lastIndexOf("/") + 1)
+        tvName.text = model.itemName
         tvTip.text = model.tip
         tvTip.visibility = if (model.tip == null) View.GONE else View.VISIBLE
         switchItem.isChecked = model.isEnabled

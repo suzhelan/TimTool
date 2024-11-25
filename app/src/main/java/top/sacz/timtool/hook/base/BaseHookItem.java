@@ -15,19 +15,32 @@ public abstract class BaseHookItem {
     /**
      * 功能名称
      */
-    private String itemName;
+    private String path;
 
     /**
      * 是否加载
      */
     private boolean isLoad = false;
 
-    public String getItemName() {
-        return itemName;
+    public String getSimpleName() {
+        return this.getClass().getSimpleName();
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public String getPath() {
+        return path;
+    }
+
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getItemName() {
+        int index = path.lastIndexOf("/");
+        if (index == -1) {
+            return path;
+        }
+        return path.substring(index + 1);
     }
 
     public boolean isLoad() {

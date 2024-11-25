@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 
 object ToastTool {
 
+    @JvmStatic
     @OptIn(DelicateCoroutinesApi::class)
     fun show(content: Any) {
         GlobalScope.launch(Dispatchers.Main) {

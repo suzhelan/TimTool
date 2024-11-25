@@ -20,7 +20,7 @@ class HookItemLoader {
         }
         //真正去读配置到对象
         config.forEach { (key, value) ->
-            val hookItem = HookItemFactory.findHookItemByItemName(key)
+            val hookItem = HookItemFactory.findHookItemByPath(key)
             if (hookItem != null) {
                 hookItem.isEnabled = value
             }
@@ -45,7 +45,7 @@ class HookItemLoader {
         val config = HashMap<String, Boolean>()
         val allHookItems = HookItemFactory.getAllSwitchFunctionItemList()
         allHookItems.forEach { hookItem ->
-            config[hookItem.itemName] = hookItem.isEnabled
+            config[hookItem.path] = hookItem.isEnabled
         }
         KvHelper().put("item_config", config)
     }
