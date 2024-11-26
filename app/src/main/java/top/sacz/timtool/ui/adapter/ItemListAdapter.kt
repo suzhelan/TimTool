@@ -31,6 +31,9 @@ class ItemListAdapter : BaseItemListAdapter<BaseSwitchFunctionHookItem>() {
             model.startLoad()
             HookItemLoader().saveConfig()
         }
+        model.onClickListener?.let {
+            itemView.setOnClickListener(it)
+        }
         return itemView
     }
 

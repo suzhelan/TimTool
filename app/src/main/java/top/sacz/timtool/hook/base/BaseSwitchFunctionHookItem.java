@@ -1,5 +1,7 @@
 package top.sacz.timtool.hook.base;
 
+import android.view.View;
+
 import de.robv.android.xposed.XC_MethodHook;
 
 public abstract class BaseSwitchFunctionHookItem extends BaseHookItem {
@@ -7,6 +9,10 @@ public abstract class BaseSwitchFunctionHookItem extends BaseHookItem {
     private boolean enabled = isLoadedByDefault();
 
     public String getTip() {
+        return null;
+    }
+
+    public View.OnClickListener getOnClickListener() {
         return null;
     }
 
