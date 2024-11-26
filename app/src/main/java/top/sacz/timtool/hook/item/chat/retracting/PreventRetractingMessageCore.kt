@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat
+package top.sacz.timtool.hook.item.chat.retracting
 
 import com.google.protobuf.ByteString
 import de.robv.android.xposed.XC_MethodHook
@@ -7,11 +7,13 @@ import top.artmoe.inao.entries.MsgPushOuterClass
 import top.artmoe.inao.entries.QQMessageOuterClass
 import top.artmoe.inao.entries.QQMessageOuterClass.QQMessage.MessageBody.C2CRecallOperationInfo
 import top.sacz.timtool.hook.core.factory.HookItemFactory
+import top.sacz.timtool.hook.item.chat.PreventRetractingMessage
 
 /**
  * 防撤回核心解析
+ * 如果top.artmoe.inao.entries包找不到 那么你需要先编译一次 上面的top.artmoe.inao.entries类会自动生成
  */
-object BanRecallMsg {
+object PreventRetractingMessageCore {
 
 
     fun handleInfoSyncPush(buffer: ByteArray, param: XC_MethodHook.MethodHookParam) {

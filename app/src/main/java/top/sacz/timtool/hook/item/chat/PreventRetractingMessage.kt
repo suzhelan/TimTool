@@ -11,13 +11,14 @@ import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.item.api.OnQQMessageView
 import top.sacz.timtool.hook.item.api.QQMsgViewAdapter
+import top.sacz.timtool.hook.item.chat.retracting.PreventRetractingMessageCore
 import top.sacz.timtool.util.KvHelper
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.ConstructorUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.MethodUtils
 
-@HookItem("辅助功能/聊天/防撤回")
+@HookItem("辅助功能/聊天/消息防撤回")
 class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
     private val viewId = 0x298382
     private var retractMessageMap: MutableMap<String, MutableList<Int>> = HashMap()
@@ -38,9 +39,9 @@ class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
             val cmd = param.args[0] as String
             val protoBuf = param.args[1] as ByteArray
             if (cmd == "trpc.msg.register_proxy.RegisterProxy.InfoSyncPush") {
-                BanRecallMsg.handleInfoSyncPush(protoBuf, param)
+                PreventRetractingMessageCore.handleInfoSyncPush(protoBuf, param)
             } else if (cmd == "trpc.msg.olpush.OlPushService.MsgPush") {
-                BanRecallMsg.handleMsgPush(protoBuf, param)
+                PreventRetractingMessageCore.handleMsgPush(protoBuf, param)
             }
         }
         hookAIOMsgUpdate()
