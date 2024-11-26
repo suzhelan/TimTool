@@ -7,8 +7,6 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 import de.robv.android.xposed.XposedHelpers;
 import top.sacz.timtool.hook.util.PathTool;
 import top.sacz.timtool.hook.util.ToastTool;
@@ -146,20 +144,16 @@ public class CreateElement {
      * @return 时长 毫秒值
      */
     public static long getDuration(String path) {
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         long duration = 0;
-        try {
+        try (MediaMetadataRetriever mmr = new MediaMetadataRetriever()) {
             if (path != null) {
                 mmr.setDataSource(path);
             }
             String time = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-            duration = Long.parseLong(time);
-        } catch (Exception ignored) {
-        } finally {
-            try {
-                mmr.release();
-            } catch (IOException ignored) {
+            if (time != null) {
+                duration = Long.parseLong(time);
             }
+        } catch (Exception ignored) {
         }
         return duration;
     }
