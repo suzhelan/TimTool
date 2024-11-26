@@ -53,7 +53,7 @@ public abstract class BaseHookItem {
         }
         try {
             isLoad = true;
-            loadHook(HookEnv.getInstance().getHostClassLoader());
+            loadHook(HookEnv.getHostClassLoader());
         } catch (Exception e) {
             XposedBridge.log(e);
             ExceptionFactory.add(this, e);

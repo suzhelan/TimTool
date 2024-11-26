@@ -6,120 +6,111 @@ import android.content.Context;
  * 单例模式 存储全局变量 包含app的context和版本号等信息
  */
 public class HookEnv {
-    private static final HookEnv INSTANCE = new HookEnv();
     /**
      * 当前宿主包名
      */
-    private String currentHostAppPackageName;
+    private static String currentHostAppPackageName;
     /**
      * 当前宿主进程名称
      */
-    private String processName;
+    private static String processName;
     /**
      * 模块路径
      */
-    private String moduleApkPath;
+    private static String moduleApkPath;
     /**
      * 宿主apk路径
      */
-    private String hostApkPath;
+    private static String hostApkPath;
     /**
      * 宿主版本名称
      */
-    private String versionName;
+    private static String versionName;
     /**
      * 宿主版本号
      */
-    private int versionCode;
+    private static int versionCode;
     /**
      * 全局的Context
      */
-    private Context hostAppContext;
-    private ClassLoader hostClassLoader;
+    private static Context hostAppContext;
+    private static ClassLoader hostClassLoader;
 
     private HookEnv() {
     }
 
-    /**
-     * 获取当前实例
-     */
-    public static HookEnv getInstance() {
-        return INSTANCE;
-    }
-
-    public ClassLoader getHostClassLoader() {
+    public static ClassLoader getHostClassLoader() {
         return hostClassLoader;
     }
 
-    public HookEnv setHostClassLoader(ClassLoader hostClassLoader) {
-        this.hostClassLoader = hostClassLoader;
-        return this;
+    public static void setHostClassLoader(ClassLoader classLoader) {
+        hostClassLoader = classLoader;
+        
     }
 
-    public String getHostApkPath() {
+    public static String getHostApkPath() {
         return hostApkPath;
     }
 
-    public HookEnv setHostApkPath(String hostApkPath) {
-        this.hostApkPath = hostApkPath;
-        return this;
+    public static void setHostApkPath(String apkPath) {
+        hostApkPath = apkPath;
+        
     }
 
-    public String getVersionName() {
+    public static String getVersionName() {
         return versionName;
     }
 
-    public HookEnv setVersionName(String versionName) {
-        this.versionName = versionName;
-        return this;
+    public static void setVersionName(String hostVersionName) {
+        versionName = hostVersionName;
+        
     }
 
-    public int getVersionCode() {
+    public static int getVersionCode() {
         return versionCode;
     }
 
-    public HookEnv setVersionCode(int versionCode) {
-        this.versionCode = versionCode;
-        return this;
+    public static void setVersionCode(int hostVersionCode) {
+        versionCode = hostVersionCode;
+        
     }
 
-    public Context getHostAppContext() {
+    public static Context getHostAppContext() {
         return hostAppContext;
     }
 
-    public HookEnv setHostAppContext(Context hostAppContext) {
-        this.hostAppContext = hostAppContext;
-        return this;
+    public static void setHostAppContext(Context appContext) {
+        hostAppContext = appContext;
+        
     }
 
-    public String getModuleApkPath() {
+    public static String getModuleApkPath() {
         return moduleApkPath;
     }
 
-    public HookEnv setModuleApkPath(String moduleApkPath) {
-        this.moduleApkPath = moduleApkPath;
-        return this;
+    public static void setModuleApkPath(String path) {
+        moduleApkPath = path;
+        
     }
 
-    public String getProcessName() {
+    public static String getProcessName() {
         return processName;
     }
 
-    public HookEnv setProcessName(String processName) {
-        this.processName = processName;
-        return this;
+    public static void setProcessName(String currentProcessName) {
+        processName = currentProcessName;
     }
 
-    public String getCurrentHostAppPackageName() {
+    public static String getCurrentHostAppPackageName() {
         return currentHostAppPackageName;
     }
 
-    public HookEnv setCurrentHostAppPackageName(String currentHostAppPackageName) {
-        this.currentHostAppPackageName = currentHostAppPackageName;
-        return this;
+    public static void setCurrentHostAppPackageName(String packageName) {
+        currentHostAppPackageName = packageName;
+        
     }
 
-    public boolean isMainProcess() {
+    public static boolean isMainProcess() {
         return processName.equals(currentHostAppPackageName);
     }
 }

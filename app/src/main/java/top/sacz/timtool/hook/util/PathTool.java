@@ -23,7 +23,7 @@ public class PathTool {
     public static String getModuleDataPath() {
 //        String directory = getStorageDirectory() + "/Download/QStory";//只有创建该文件的进程才能访问文件 不适用
 //        String directory = getStorageDirectory() + "/Android/media/" + HookEnv.getCurrentHostAppPackageName() + "/QStory";//LSPatch在某些机型上无法使用media文件夹
-        String directory = getStorageDirectory() + "/Android/data/" + HookEnv.getInstance().getCurrentHostAppPackageName() + "/Tim小助手";
+        String directory = getStorageDirectory() + "/Android/data/" + HookEnv.getCurrentHostAppPackageName() + "/Tim小助手";
         File file = new File(directory);
         if (!file.exists()) {
             file.mkdirs();

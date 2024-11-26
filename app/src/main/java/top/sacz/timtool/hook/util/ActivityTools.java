@@ -56,7 +56,7 @@ public class ActivityTools {
                 AssetManager assetManager = resources.getAssets();
                 Method method = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
                 method.setAccessible(true);
-                method.invoke(assetManager, HookEnv.getInstance().getModuleApkPath());
+                method.invoke(assetManager, HookEnv.getModuleApkPath());
                 //再次尝试读自己的资源
             } catch (Exception ex) {
             }

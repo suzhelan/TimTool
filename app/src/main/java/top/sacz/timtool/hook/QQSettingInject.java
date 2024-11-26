@@ -69,7 +69,7 @@ public class QQSettingInject extends BaseHookItem {
                             .params(ClassUtils.findClass("kotlin.jvm.functions.Function0"))
                             .getResult();
                     //动态代理设置事件
-                    Object onClickListener = Proxy.newProxyInstance(HookEnv.getInstance().getHostClassLoader(),
+                    Object onClickListener = Proxy.newProxyInstance(HookEnv.getHostClassLoader(),
                             new Class[]{ClassUtils.findClass("kotlin.jvm.functions.Function0")},
                             new OnClickListener(context, itemClass));
 
