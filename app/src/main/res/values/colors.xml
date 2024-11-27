@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#4A5859</color>
 
+    <color name="text_color">#000000</color>
     <color name="皇家蓝">#4169E1</color>
 
 </resources>
