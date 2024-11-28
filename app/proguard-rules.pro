@@ -21,3 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class top.sacz.timtool.hook.InjectHook {*;}
+-keep class * extends top.sacz.timtool.hook.base.BaseHookItem {*;}
