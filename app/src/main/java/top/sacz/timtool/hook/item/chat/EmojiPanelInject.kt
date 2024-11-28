@@ -12,7 +12,7 @@ class EmojiPanelInject : BaseSwitchFunctionHookItem() {
     }
 
     override fun getOnClickListener(): View.OnClickListener {
-        return View.OnClickListener { BottomEmojiPanelDialog.show() }
+        return View.OnClickListener { BottomEmojiPanelDialog().show() }
     }
 
 }
