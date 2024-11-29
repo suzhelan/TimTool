@@ -6,13 +6,24 @@ import java.util.List;
 
 import top.sacz.timtool.hook.util.PathTool;
 import top.sacz.timtool.hook.util.ToastTool;
+import top.sacz.timtool.util.KvHelper;
 
 /**
  * 表情面板数据提供者
  */
 public class StickerDataProvider {
 
+    private final static KvHelper kvHelper = new KvHelper("表情面板");
+
     private static final String stickerDirectory = PathTool.getModuleDataPath() + "/表情";
+
+    public static String getCurrentSelectionDir() {
+        return kvHelper.getString("currentSelection", "");
+    }
+
+    public static void setCurrentSelectionDir(String currentSelection) {
+        kvHelper.put("currentSelection", currentSelection);
+    }
 
     public static List<String> searchStickerDirectory() {
         File dirFile = new File(stickerDirectory);

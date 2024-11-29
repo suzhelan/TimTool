@@ -3,10 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_round"
+    android:background="@drawable/bg_sticker_panel_round"
     android:maxHeight="500dp"
-    android:orientation="vertical"
-    android:paddingTop="10dp">
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_tab"
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:clickable="false"
+        android:src="@drawable/rect_dialogx_material_you_dialogtap" />
 
     <!--表情文件夹 横向-->
     <top.sacz.timtool.ui.view.CustomRecycleView

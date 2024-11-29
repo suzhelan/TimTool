@@ -17,18 +17,15 @@ import top.sacz.timtool.R;
 import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerDirAdapter;
 import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerPanelAdapter;
 import top.sacz.timtool.ui.view.CustomRecycleView;
-import top.sacz.timtool.util.KvHelper;
 
 /**
  * 表情面板View
  */
 @SuppressLint("ViewConstructor")
 public class StickerPanelView extends BottomPopupView {
-    public final static KvHelper kvHelper = new KvHelper("表情面板");
     private final StickerPanelAdapter stickerPanelAdapter = new StickerPanelAdapter();
     private final StickerDirAdapter dirAdapter = new StickerDirAdapter();
     private final BottomStickerPanelDialog dialog;
-    private int currentPosition = 0;
 
     public StickerPanelView(@NonNull Context context, BottomStickerPanelDialog dialog) {
         super(context);
@@ -58,14 +55,14 @@ public class StickerPanelView extends BottomPopupView {
     }
 
     private void initData() {
-        String currentSelectionDir = kvHelper.getString("currentSelection", "");
+        String currentSelectionDir = StickerDataProvider.getCurrentSelectionDir();
         if (currentSelectionDir.isEmpty()) {
             return;
         }
         updateByDirName(currentSelectionDir);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "NotifyDataSetChanged"})
     private void onBindView(ViewGroup root) {
         //表情文件列表
         CustomRecycleView rvSticker = root.findViewById(R.id.rv_sticker_image);
@@ -75,21 +72,23 @@ public class StickerPanelView extends BottomPopupView {
             dialog.dismiss();
             //调用表情包点击事件
             StickerInfo stickerInfo = stickerPanelAdapter.getItem(position);
-
+            onClickSticker(stickerInfo);
         });
         //表情目录列表
         CustomRecycleView rvStickerDir = root.findViewById(R.id.rv_sticker_dir);
         rvStickerDir.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.HORIZONTAL, false));
         //文件夹的adapter
         dirAdapter.submitList(StickerDataProvider.searchStickerDirectory());
-        dirAdapter.setOnItemClickListener((adapter, view, position) -> {
+        dirAdapter.setOnItemClickListener((adapter, dirView, position) -> {
             //调用更改表情包文件夹
-            if (position == currentPosition) {
+            String dirName = adapter.getItem(position);
+            String currentSelection = StickerDataProvider.getCurrentSelectionDir();
+            if (currentSelection.equals(dirName)) {
                 return;
             }
-            currentPosition = position;
-            String dirName = dirAdapter.getItem(position);
-            kvHelper.put("currentSelection", dirName);
+            //进行一些数据更新操作
+            StickerDataProvider.setCurrentSelectionDir(dirName);
+            adapter.notifyDataSetChanged();
             updateByDirName(dirName);
         });
         rvStickerDir.setAdapter(dirAdapter);

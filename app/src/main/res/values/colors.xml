@@ -3,9 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#4A5859</color>
-    <color name="bg_plugin">@color/white</color>
+    <color name="bg_sticker">@color/white</color>
 
     <color name="text_color">#000000</color>
     <color name="皇家蓝">#4169E1</color>
 
+    <!--透明-->
+    <color name="transparent">#00000000</color>
 </resources>
