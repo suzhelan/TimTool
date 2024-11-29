@@ -46,7 +46,7 @@ android {
     androidResources {
         additionalParameters += arrayOf(
             "--allow-reserved-package-id",
-            "--package-id", "0x19"
+            "--package-id", "0x42"
         )
     }
 
@@ -60,6 +60,7 @@ android {
 
     sourceSets {
         named("main") {
+            res.srcDirs("src/main/res")
             proto {
                 srcDirs("src/main/proto")
             }
@@ -82,6 +83,9 @@ dependencies {
 
     //自己写的小工具 包含一些常用功能 反射工具 注入act res等
     implementation(project(":xp-helper"))
+    //弹窗组件库
+    implementation(project(":xpopup"))
+
     //常用
     implementation(libs.okhttp3)
     implementation(libs.glide)

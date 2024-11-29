@@ -24,7 +24,7 @@ public class CreateElement {
         return XposedHelpers.callMethod(o, "createTextElement", new Class[]{String.class}, text);
     }
 
-    public static Object createEmojiElement(String url) {
+    public static Object createStickerElement(String url) {
         String path = cachePicPath(url);
         Object o = QQEnvTool.getQRouteApi(ClassUtils.findClass("com.tencent.qqnt.msg.api.IMsgUtilApi"));
         return XposedHelpers.callMethod(o, "createPicElement", new Class[]{String.class, boolean.class, int.class}, path, true, 1);

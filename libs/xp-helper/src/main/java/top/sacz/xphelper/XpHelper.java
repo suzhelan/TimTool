@@ -1,6 +1,7 @@
 package top.sacz.xphelper;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -14,7 +15,9 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import top.sacz.xphelper.reflect.ClassUtils;
@@ -51,6 +54,39 @@ public class XpHelper {
         }
     }
 
+    /**
+     * 获取当前正在运行的Activity
+     */
+    @SuppressLint("PrivateApi")
+    public static Activity getTopActivity() {
+        Class<?> activityThreadClass;
+        try {
+            activityThreadClass = Class.forName("android.app.ActivityThread");
+            //获取当前活动线程
+            Object activityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null);
+            @SuppressLint("DiscouragedPrivateApi")
+            Field activitiesField = activityThreadClass.getDeclaredField("mActivities");
+            activitiesField.setAccessible(true);
+            //获取线程Map
+            Map<?, ?> activities = (Map<?, ?>) activitiesField.get(activityThread);
+            if (activities == null) return null;
+            for (Object activityRecord : activities.values()) {
+                Class<?> activityRecordClass = activityRecord.getClass();
+                //获取暂停状态
+                Field pausedField = activityRecordClass.getDeclaredField("paused");
+                pausedField.setAccessible(true);
+                //不是暂停状态的话那就是当前正在运行的Activity
+                if (!pausedField.getBoolean(activityRecord)) {
+                    Field activityField = activityRecordClass.getDeclaredField("activity");
+                    activityField.setAccessible(true);
+                    return (Activity) activityField.get(activityRecord);
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
 
     public static void runOnUiThread(Runnable task) {
         if (Looper.myLooper() == Looper.getMainLooper()) {
@@ -77,6 +113,7 @@ public class XpHelper {
         runOnUiThread(() -> {
             try {
                 res.addLoaders(ResourcesLoaderHolderApi30.sResourcesLoader);
+                injectResourcesBelowApi30(res, path);
             } catch (IllegalArgumentException e) {
                 String expected1 = "Cannot modify resource loaders of ResourcesImpl not registered with ResourcesManager";
                 if (expected1.equals(e.getMessage())) {
@@ -102,6 +139,11 @@ public class XpHelper {
     }
 
     private static class ResourcesLoaderHolderApi30 {
+
         public static ResourcesLoader sResourcesLoader = null;
+
+        private ResourcesLoaderHolderApi30() {
+        }
+
     }
 }

@@ -5,7 +5,8 @@
     <color name="grey">#4A5859</color>
 
     <color name="text_color">#FFFFFF</color>
-    <color name="bg_plugin">@color/white</color>
+
+    <color name="bg_plugin">#1A1C1E</color>
 
     <color name="皇家蓝">#4169E1</color>
 
