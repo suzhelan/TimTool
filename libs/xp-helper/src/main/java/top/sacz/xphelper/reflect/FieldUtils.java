@@ -9,9 +9,23 @@ import top.sacz.xphelper.util.CheckClassType;
 
 public class FieldUtils extends BaseFinder<Field> {
 
-    private final boolean isFindSuperClass = false;
     private Class<?> fieldType;
     private String fieldName;
+
+
+    /**
+     * 获取field值
+     *
+     * @param targetObj 运行时对象
+     * @param fieldName 字段名称
+     * @param fieldType 字段类型
+     */
+    public static <T> T getField(Object targetObj, String fieldName, Class<?> fieldType) {
+        return create(targetObj.getClass())
+                .fieldName(fieldName)
+                .fieldType(fieldType)
+                .firstValue(targetObj);
+    }
 
 
     public static FieldUtils create(Object target) {
