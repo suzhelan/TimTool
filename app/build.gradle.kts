@@ -112,6 +112,7 @@ dependencies {
     //弹窗组件库
     implementation(project(":xpopup"))
 
+    implementation(libs.byte.buddy.android)
     //常用
     implementation(libs.okhttp3)
     implementation(libs.glide)
