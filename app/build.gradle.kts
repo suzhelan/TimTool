@@ -1,5 +1,7 @@
 import com.google.protobuf.gradle.proto
 import top.sacz.buildplugin.BuildConfig
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 plugins {
     alias(libs.plugins.android.application)
@@ -43,6 +45,22 @@ android {
         targetCompatibility = BuildConfig.javaVersion
     }
 
+
+    android.applicationVariants.all {
+        outputs.all {
+            if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
+                val config = project.android.defaultConfig
+                val versionName = config.versionName
+                val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
+                val createTime = LocalDateTime.now().format(formatter)
+                outputFileName =
+                    "${rootProject.name}_${this.name}_${versionName}_${getGitVersion()}.apk"
+            }
+        }
+    }
+
+
+
     androidResources {
         additionalParameters += arrayOf(
             "--allow-reserved-package-id",
@@ -60,13 +78,21 @@ android {
 
     sourceSets {
         named("main") {
-            res.srcDirs("src/main/res")
             proto {
                 srcDirs("src/main/proto")
             }
         }
     }
 
+}
+
+fun getGitVersion(): String {
+    return try {
+        val process = ProcessBuilder("git", "rev-parse", "--short", "HEAD").start()
+        process.inputStream.bufferedReader().use { it.readText().trim() }
+    } catch (e: Exception) {
+        "unknown"
+    }
 }
 
 dependencies {
