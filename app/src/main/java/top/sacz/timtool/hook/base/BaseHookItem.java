@@ -56,13 +56,13 @@ public abstract class BaseHookItem {
         try {
             isLoad = true;
             loadHook(HookEnv.getHostClassLoader());
-        } catch (Exception e) {
+        } catch (Throwable e) {
             XposedBridge.log(e);
             ExceptionFactory.add(this, e);
         }
     }
 
-    public abstract void loadHook(@NonNull ClassLoader loader) throws Exception;
+    public abstract void loadHook(@NonNull ClassLoader loader) throws Throwable;
 
     /**
      * 标准hook方法执行前

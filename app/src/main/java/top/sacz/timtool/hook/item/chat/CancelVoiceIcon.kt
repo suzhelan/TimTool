@@ -8,7 +8,7 @@ import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.MethodUtils
 
 
-@HookItem("辅助功能/聊天/移除聊天界面拍照图标")
+@HookItem("辅助功能/聊天/移除聊天界面语音图标")
 class CancelVoiceIcon : BaseSwitchFunctionHookItem() {
     override fun loadHook(loader: ClassLoader) {
         val m2 =
