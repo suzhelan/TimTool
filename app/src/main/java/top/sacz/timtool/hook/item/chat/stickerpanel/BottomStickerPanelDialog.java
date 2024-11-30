@@ -32,6 +32,7 @@ public class BottomStickerPanelDialog {
     public void show() {
         Activity activity = ActivityTools.getTopActivity();
         XpHelper.injectResourcesToContext(activity);
+        assert activity != null;
         Context fixContext = FixContextUtil.getFixContext(activity);
         StickerPanelView panelView = new StickerPanelView(fixContext, this);
         BasePopupView dialog = new XPopup.Builder(fixContext)

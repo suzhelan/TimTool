@@ -12,7 +12,7 @@ import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.core.factory.ExceptionFactory
-import top.sacz.timtool.hook.item.api.OnQQMessageView
+import top.sacz.timtool.hook.item.api.QQMessageViewListener
 import top.sacz.timtool.hook.item.api.QQMsgViewAdapter
 import top.sacz.timtool.hook.item.chat.rereading.RereadingMessageClickListener
 import top.sacz.timtool.hook.qqapi.ContactUtils
@@ -52,9 +52,9 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
     private val repetitionViewId = 0x2399332
 
     override fun loadHook(loader: ClassLoader) {
-        OnQQMessageView.addMessageViewUpdateListener(
+        QQMessageViewListener.addMessageViewUpdateListener(
             this,
-            object : OnQQMessageView.OnChatViewUpdateListener {
+            object : QQMessageViewListener.OnChatViewUpdateListener {
                 @Throws(Throwable::class)
                 override fun onViewUpdateAfter(msgItemView: View, msgRecord: Any) {
                     val senderUin: Long = FieldUtils.create(msgRecord)

@@ -7,7 +7,7 @@ import top.sacz.xphelper.reflect.ConstructorUtils
 import top.sacz.xphelper.reflect.FieldUtils
 
 @HookItem("监听联系人窗口更新")
-class OnContactListener : ApiHookItem() {
+class QQContactUpdateListener : ApiHookItem() {
     companion object {
         private var currentAIOContact: Any? = null
 

@@ -1,6 +1,6 @@
 package top.sacz.timtool.hook.qqapi;
 
-import top.sacz.timtool.hook.item.api.OnContactListener;
+import top.sacz.timtool.hook.item.api.QQContactUpdateListener;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.reflect.ConstructorUtils;
 import top.sacz.xphelper.reflect.FieldUtils;
@@ -11,7 +11,7 @@ import top.sacz.xphelper.reflect.FieldUtils;
 public class ContactUtils {
 
     public static Object getCurrentContact() {
-        Object currentAIOContact = OnContactListener.getCurrentAIOContact();
+        Object currentAIOContact = QQContactUpdateListener.getCurrentAIOContact();
         Object contact = getContactByAIOContact(currentAIOContact);
         return contact;
     }

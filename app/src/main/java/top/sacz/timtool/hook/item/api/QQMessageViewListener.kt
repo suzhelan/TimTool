@@ -13,7 +13,7 @@ import top.sacz.xphelper.reflect.MethodUtils
 
 
 @HookItem("监听QQMsgView更新")
-class OnQQMessageView : ApiHookItem() {
+class QQMessageViewListener : ApiHookItem() {
 
     companion object {
 

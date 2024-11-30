@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
-import top.sacz.timtool.hook.item.api.OnQQMessageView
+import top.sacz.timtool.hook.item.api.QQMessageViewListener
 import top.sacz.timtool.hook.item.api.QQMsgViewAdapter
 import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.reflect.ClassUtils
@@ -20,9 +20,9 @@ class ShowMessageTime : BaseSwitchFunctionHookItem() {
     private val timeTextViewId = 0x190f01e6
     override fun loadHook(loader: ClassLoader) {
         //责任链设计模式 让每一个有关msg view update 的类都能低耦合嵌入
-        OnQQMessageView.addMessageViewUpdateListener(
+        QQMessageViewListener.addMessageViewUpdateListener(
             this,
-            object : OnQQMessageView.OnChatViewUpdateListener {
+            object : QQMessageViewListener.OnChatViewUpdateListener {
                 override fun onViewUpdateAfter(msgItemView: View, msgRecord: Any) {
                     //约束布局
                     val root = msgItemView as ViewGroup

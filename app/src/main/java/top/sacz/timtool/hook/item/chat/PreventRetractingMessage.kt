@@ -9,7 +9,7 @@ import com.alibaba.fastjson2.TypeReference
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
-import top.sacz.timtool.hook.item.api.OnQQMessageView
+import top.sacz.timtool.hook.item.api.QQMessageViewListener
 import top.sacz.timtool.hook.item.api.QQMsgViewAdapter
 import top.sacz.timtool.hook.item.chat.retracting.PreventRetractingMessageCore
 import top.sacz.timtool.util.KvHelper
@@ -52,9 +52,9 @@ class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
     }
 
     private fun hookAIOMsgUpdate() {
-        OnQQMessageView.addMessageViewUpdateListener(
+        QQMessageViewListener.addMessageViewUpdateListener(
             this,
-            object : OnQQMessageView.OnChatViewUpdateListener {
+            object : QQMessageViewListener.OnChatViewUpdateListener {
                 override fun onViewUpdateAfter(msgItemView: View, msgRecord: Any) {
                     //约束布局
                     val rootView = msgItemView as ViewGroup
