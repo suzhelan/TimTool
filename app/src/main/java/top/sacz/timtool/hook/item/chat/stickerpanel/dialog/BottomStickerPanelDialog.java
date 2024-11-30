@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel;
+package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,7 @@ import com.kongzue.dialogx.util.FixContextUtil;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 
+import top.sacz.timtool.hook.item.chat.stickerpanel.StickerPanelView;
 import top.sacz.xphelper.XpHelper;
 import top.sacz.xphelper.util.ActivityTools;
 

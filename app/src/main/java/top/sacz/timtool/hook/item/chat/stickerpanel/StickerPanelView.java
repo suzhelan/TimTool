@@ -16,6 +16,7 @@ import java.util.List;
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerDirAdapter;
 import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerPanelAdapter;
+import top.sacz.timtool.hook.item.chat.stickerpanel.dialog.BottomStickerPanelDialog;
 import top.sacz.timtool.ui.view.CustomRecycleView;
 
 /**
