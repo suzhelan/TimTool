@@ -1,5 +1,7 @@
 package top.sacz.timtool.hook.base;
 
+import androidx.annotation.NonNull;
+
 import java.lang.reflect.Member;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -60,7 +62,7 @@ public abstract class BaseHookItem {
         }
     }
 
-    public abstract void loadHook(ClassLoader loader) throws Exception;
+    public abstract void loadHook(@NonNull ClassLoader loader) throws Exception;
 
     /**
      * 标准hook方法执行前

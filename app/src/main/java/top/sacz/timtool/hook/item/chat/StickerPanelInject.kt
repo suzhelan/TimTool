@@ -7,7 +7,8 @@ import top.sacz.timtool.hook.item.chat.stickerpanel.BottomStickerPanelDialog
 
 @HookItem("辅助功能/聊天/表情面板")
 class StickerPanelInject : BaseSwitchFunctionHookItem() {
-    override fun loadHook(loader: ClassLoader?) {
+    override fun loadHook(loader: ClassLoader) {
+        // 注入表情面板入口图标
 
     }
 

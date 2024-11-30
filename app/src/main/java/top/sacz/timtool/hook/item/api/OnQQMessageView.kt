@@ -32,7 +32,7 @@ class OnQQMessageView : ApiHookItem() {
         }
     }
 
-    override fun loadHook(loader: ClassLoader?) {
+    override fun loadHook(loader: ClassLoader) {
         val onMsgViewUpdate =
             MethodUtils.create("com.tencent.mobileqq.aio.msglist.holder.AIOBubbleMsgItemVB")
                 .returnType(Void.TYPE)

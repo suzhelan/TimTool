@@ -52,7 +52,7 @@ class QQMsgViewAdapter : BaseHookItem() {
         kv.put("contentViewId${TimVersion.getTimVersion()}", id)
     }
 
-    override fun loadHook(loader: ClassLoader?) {
+    override fun loadHook(loader: ClassLoader) {
         if (findContentViewId() != -1) {
             contentViewId = findContentViewId()
             return

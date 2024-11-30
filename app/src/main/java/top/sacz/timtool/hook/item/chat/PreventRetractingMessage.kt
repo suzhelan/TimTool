@@ -22,7 +22,7 @@ import top.sacz.xphelper.reflect.MethodUtils
 class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
     private val viewId = 0x298382
     private var retractMessageMap: MutableMap<String, MutableList<Int>> = HashMap()
-    override fun loadHook(loader: ClassLoader?) {
+    override fun loadHook(loader: ClassLoader) {
         readData()
 
         val onMSFPushMethod =

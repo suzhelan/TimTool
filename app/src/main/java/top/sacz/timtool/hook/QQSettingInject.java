@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -99,7 +101,7 @@ public class QQSettingInject extends BaseHookItem {
     }
 
     @Override
-    public void loadHook(ClassLoader loader) {
+    public void loadHook(@NonNull ClassLoader loader) {
         hookQQ8970Setting();
     }
 

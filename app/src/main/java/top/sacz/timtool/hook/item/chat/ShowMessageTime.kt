@@ -18,7 +18,7 @@ import java.util.Locale
 @HookItem("辅助功能/聊天/显示消息时间")
 class ShowMessageTime : BaseSwitchFunctionHookItem() {
     private val timeTextViewId = 0x190f01e6
-    override fun loadHook(loader: ClassLoader?) {
+    override fun loadHook(loader: ClassLoader) {
         //责任链设计模式 让每一个有关msg view update 的类都能低耦合嵌入
         OnQQMessageView.addMessageViewUpdateListener(
             this,

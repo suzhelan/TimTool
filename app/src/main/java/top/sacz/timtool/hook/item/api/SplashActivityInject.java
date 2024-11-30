@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import java.lang.reflect.Method;
 
 import top.sacz.timtool.hook.base.BaseHookItem;
@@ -22,7 +24,7 @@ public class SplashActivityInject extends BaseHookItem {
     }
 
     @Override
-    public void loadHook(ClassLoader loader) throws Exception {
+    public void loadHook(@NonNull ClassLoader loader) throws Exception {
         Method onCreateMethod = MethodUtils.create("com.tencent.mobileqq.activity.SplashActivity")
                 .methodName("doOnCreate")
                 .returnType(boolean.class)

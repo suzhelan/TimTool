@@ -18,7 +18,7 @@ class OnContactListener : ApiHookItem() {
 
     }
 
-    override fun loadHook(loader: ClassLoader?) {
+    override fun loadHook(loader: ClassLoader) {
 
         val aioContextImpl: Class<*> =
             ClassUtils.findClass("com.tencent.aio.runtime.AIOContextImpl")
