@@ -8,6 +8,7 @@ import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 
 import top.sacz.xphelper.XpHelper;
+import top.sacz.xphelper.util.ActivityTools;
 
 public class BottomStickerPanelDialog {
 
@@ -29,7 +30,7 @@ public class BottomStickerPanelDialog {
     }
 
     public void show() {
-        Activity activity = XpHelper.getTopActivity();
+        Activity activity = ActivityTools.getTopActivity();
         XpHelper.injectResourcesToContext(activity);
         Context fixContext = FixContextUtil.getFixContext(activity);
         StickerPanelView panelView = new StickerPanelView(fixContext, this);
