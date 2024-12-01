@@ -14,8 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -220,78 +218,6 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void writeObjectToFile(String path, Object obj) throws IOException {
-        writeObjectToFile(new File(path), obj);
-    }
-
-    /**
-     * 文件写入对象
-     */
-    public static void writeObjectToFile(File path, Object obj) throws IOException {
-        writeTextToFile(path.getAbsolutePath(), "", false);
-        FileOutputStream fileOutputStream = null;
-        ObjectOutputStream outputStream = null;
-        try {
-            if (!path.exists()) {
-                if (!path.getParentFile().exists()) {
-                    path.getParentFile().mkdirs();
-                }
-                if (!path.createNewFile()) {
-                    return;
-                }
-            }
-            fileOutputStream = new FileOutputStream(path);
-            outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(obj);
-        } catch (IOException e) {
-            //对象写入失败清空文件内容,防止下次写入读取出现问题
-            writeTextToFile(path.getAbsolutePath(), "", false);
-            throw e;
-        } finally {
-            try {
-                if (outputStream != null) outputStream.close();
-                if (fileOutputStream != null) fileOutputStream.close();
-            } catch (IOException ignored) {
-
-            }
-        }
-    }
-
-    public static Object readFiliObject(String path) throws Exception {
-        return readFileObject(new File(path));
-    }
-
-    /**
-     * 从文件读取对象
-     */
-    public static Object readFileObject(File path) throws Exception {
-        if (path == null || !path.exists()) {
-            if (path != null) {
-                throw new IOException("path No exists(文件不存在) " + path.getAbsolutePath());
-            } else {
-                throw new IOException("Empty File object");
-            }
-        } else if (path.isDirectory()) {
-            throw new IOException("Non-file type(这个File是文件夹而不是文件) :" + path.getAbsolutePath());
-        }
-        FileInputStream inputStream = null;
-        ObjectInputStream objectInputStream = null;
-        Object results;
-        try {
-            inputStream = new FileInputStream(path);
-            objectInputStream = new ObjectInputStream(inputStream);
-            results = objectInputStream.readObject();
-        } finally {
-            if (objectInputStream != null) {
-                objectInputStream.close();
-            }
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
-        return results;
     }
 
     public static void copyFile(String sourceFile, String targetPath) throws IOException {

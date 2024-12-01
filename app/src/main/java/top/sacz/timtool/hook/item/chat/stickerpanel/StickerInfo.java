@@ -7,6 +7,16 @@ public class StickerInfo {
     private String url;
     private String name;
 
+    private long time;
+
+    public long getTime() {
+        return time;
+    }
+
+    public StickerInfo setTime(long time) {
+        this.time = time;
+        return this;
+    }
     public int getType() {
         return type;
     }

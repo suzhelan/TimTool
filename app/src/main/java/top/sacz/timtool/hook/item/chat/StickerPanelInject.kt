@@ -43,8 +43,7 @@ class StickerPanelInject : BaseSwitchFunctionHookItem() {
                 .fieldType(ImageButton::class.java)
                 .firstValue<ImageButton>(targetObj)
             emoBtnView.setOnLongClickListener {
-                BottomStickerPanelDialog()
-                    .show()
+                BottomStickerPanelDialog().show()
                 return@setOnLongClickListener true
             }
         }
@@ -78,7 +77,7 @@ class StickerPanelInject : BaseSwitchFunctionHookItem() {
     }
 
     private fun showSaveStickerDialog(msgRecord: Any) {
-        SaveStickerDialog.show(msgRecord)
+        SaveStickerDialog().show(msgRecord)
     }
 
     override fun getOnClickListener(): View.OnClickListener {

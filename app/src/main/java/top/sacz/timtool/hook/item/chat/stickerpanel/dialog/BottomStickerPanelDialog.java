@@ -1,48 +1,120 @@
 package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.View;
 
-import com.kongzue.dialogx.util.FixContextUtil;
-import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.core.BasePopupView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerPanelView;
-import top.sacz.xphelper.XpHelper;
+import com.kongzue.dialogx.dialogs.BottomDialog;
+import com.kongzue.dialogx.interfaces.OnBindView;
+
+import java.io.File;
+import java.util.List;
+
+import top.sacz.timtool.R;
+import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
+import top.sacz.timtool.hook.item.chat.stickerpanel.StickerInfo;
+import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerDirAdapter;
+import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerPanelAdapter;
+import top.sacz.timtool.ui.view.CustomRecycleView;
+import top.sacz.timtool.ui.view.FollowRecycleViewLinearLayout;
+import top.sacz.timtool.util.ScreenParamUtils;
 import top.sacz.xphelper.util.ActivityTools;
 
 public class BottomStickerPanelDialog {
+    private final StickerPanelAdapter stickerPanelAdapter = new StickerPanelAdapter();
+    private final StickerDirAdapter dirAdapter = new StickerDirAdapter();
 
-    private StickerPanelView panelView;
-    private BasePopupView dialog;
-
-    /**
-     * 关闭弹窗并删除引用以释放内存
-     */
-    public void dismiss() {
-        if (panelView != null) {
-            panelView.dismiss();
-            panelView = null;
-        }
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
-        }
-    }
 
     public void show() {
-        Activity activity = ActivityTools.getTopActivity();
-        XpHelper.injectResourcesToContext(activity);
-        assert activity != null;
-        Context fixContext = FixContextUtil.getFixContext(activity);
-        StickerPanelView panelView = new StickerPanelView(fixContext, this);
-        BasePopupView dialog = new XPopup.Builder(fixContext)
-                .isDestroyOnDismiss(true)
-                .asCustom(panelView)
-                .show();
+        initData();
+        Context context = ActivityTools.getTopActivity();
+        int height = (int) (ScreenParamUtils.getScreenHeight(context) * 0.8);
+        BottomDialog.build()
+                .setMaxHeight(height)
+                .setMinHeight(height)
+                .setScrollableWhenContentLargeThanVisibleRange(false)
+                .setCustomView(new OnBindView<>(R.layout.layout_sticker_panel_dialog) {
+                    @Override
+                    public void onBind(BottomDialog dialog, View v) {
+                        onBindView(dialog, (FollowRecycleViewLinearLayout) v);
+                    }
+                }).show();
 
-        this.panelView = panelView;
-        this.dialog = dialog;
     }
 
+    private void loadFirstStickerDir() {
+        List<String> stickerDirectory = StickerDataProvider.searchStickerDirectory();
+        if (stickerDirectory.isEmpty()) {
+            return;
+        }
+        updateByDirName(stickerDirectory.get(0));
+    }
+
+    private void initData() {
+        //如果记录为空 那么拿第一个来展示
+        String currentSelectionDir = StickerDataProvider.getCurrentSelectionDir();
+        if (currentSelectionDir.isEmpty()) {
+            loadFirstStickerDir();
+            return;
+        }
+        File file = new File(StickerDataProvider.getStickerStorageDirectory(), currentSelectionDir);
+        if (!file.exists()) {
+            loadFirstStickerDir();
+            return;
+        }
+        updateByDirName(currentSelectionDir);
+    }
+
+    @SuppressLint({"ClickableViewAccessibility", "NotifyDataSetChanged"})
+    private void onBindView(BottomDialog dialog, FollowRecycleViewLinearLayout root) {
+        //表情文件列表
+        CustomRecycleView rvSticker = root.findViewById(R.id.rv_sticker_image);
+        root.setFollowRecycleView(rvSticker);
+        rvSticker.setLayoutManager(new GridLayoutManager(root.getContext(), 4));
+        rvSticker.setAdapter(stickerPanelAdapter);
+        stickerPanelAdapter.setOnItemClickListener((adapter, view, position) -> {
+            dialog.dismiss();
+            //调用表情包点击事件
+            StickerInfo stickerInfo = stickerPanelAdapter.getItem(position);
+            onClickSticker(stickerInfo);
+        });
+        stickerPanelAdapter.setOnItemLongClickListener((adapter, view, position) -> {
+            StickerInfo stickerInfo = stickerPanelAdapter.getItem(position);
+
+            new DeleteStickerDialog().show(stickerInfo, () -> {
+                adapter.removeAt(position);
+            });
+            return true;
+        });
+        //表情目录列表
+        CustomRecycleView rvStickerDir = root.findViewById(R.id.rv_sticker_dir);
+        rvStickerDir.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        //文件夹的adapter
+        dirAdapter.submitList(StickerDataProvider.searchStickerDirectory());
+        dirAdapter.setOnItemClickListener((adapter, dirView, position) -> {
+            //调用更改表情包文件夹
+            String dirName = adapter.getItem(position);
+            String currentSelection = StickerDataProvider.getCurrentSelectionDir();
+            if (currentSelection.equals(dirName)) {
+                return;
+            }
+            //进行一些数据更新操作
+            StickerDataProvider.setCurrentSelectionDir(dirName);
+            adapter.notifyDataSetChanged();
+            updateByDirName(dirName);
+        });
+        rvStickerDir.setAdapter(dirAdapter);
+    }
+
+    private void updateByDirName(String dir) {
+        List<StickerInfo> stickerInfoList = StickerDataProvider.searchStickerFile(dir);
+        stickerPanelAdapter.submitList(stickerInfoList);
+    }
+
+    private void onClickSticker(StickerInfo stickerInfo) {
+
+    }
 }

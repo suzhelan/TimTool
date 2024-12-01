@@ -11,7 +11,7 @@ import top.sacz.timtool.util.FileUtils;
 
 public class LogUtils {
     //日志根目录 需以目录分隔符结束
-    private static final String LOG_ROOT_DIRECTORY = PathTool.getModuleDataPath() + "/Log/";
+    private static final String LOG_ROOT_DIRECTORY = PathTool.getModuleDataPath() + "/log/";
 
     private static String getRunLogDirectory() {
         return LOG_ROOT_DIRECTORY + "RunLog" + File.separator;

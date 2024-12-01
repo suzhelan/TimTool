@@ -8,6 +8,7 @@
     <color name="text_color">#000000</color>
     <color name="皇家蓝">#4169E1</color>
 
+    <color name="warning">#EB5545</color>
     <!--透明-->
     <color name="transparent">#00000000</color>
 </resources>

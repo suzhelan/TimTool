@@ -13,11 +13,24 @@ import okhttp3.Response;
 
 public class DownloadManager {
 
+    /**
+     * 异步下载
+     */
+    public static void downloadAsync(String url, String path, Runnable callback) {
+        new Thread(() -> {
+            download(url, path);
+            callback.run();
+        }).start();
+    }
+
     public static void download(String url, String path) {
         try {
             File downloadPath = new File(path);
             if (!downloadPath.getParentFile().exists()) {
                 downloadPath.getParentFile().mkdirs();
+            }
+            if (downloadPath.exists()) {
+                downloadPath.delete();
             }
             if (!downloadPath.exists()) {
                 downloadPath.createNewFile();

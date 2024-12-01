@@ -61,6 +61,22 @@ public class QQImageMsgUtils {
         return url;
     }
 
+    public static String getMsgRecordPicMd5(Object msgRecord) {
+        ArrayList<Object> elements = FieldUtils.getField(msgRecord, "elements", ArrayList.class);
+        String md5 = "";
+        for (Object msgElement : elements) {
+            Object picElement = MethodUtils.create(msgElement.getClass())
+                    .methodName("getPicElement")
+                    .returnType(ClassUtils.findClass("com.tencent.qqnt.kernel.nativeinterface.PicElement"))
+                    .callFirst(msgElement);
+            if (picElement == null) {
+                continue;
+            }
+            md5 = FieldUtils.getField(picElement, "md5HexStr", String.class);
+        }
+        return md5;
+    }
+
     public static List<String> getMsgRecordPicUrlList(Object msgRecord) {
         ArrayList<Object> elements = FieldUtils.getField(msgRecord, "elements", ArrayList.class);
         int chatType = FieldUtils.getField(msgRecord, "chatType", int.class);
