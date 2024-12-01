@@ -16,7 +16,6 @@ import java.util.List;
 
 import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
 import top.sacz.timtool.hook.qqapi.QQImageMsgUtils;
-import top.sacz.timtool.hook.util.ToastTool;
 import top.sacz.timtool.net.DownloadManager;
 import top.sacz.timtool.util.FileUtils;
 
@@ -37,7 +36,10 @@ public class SaveStickerDialog {
                         savedDirs.addAll(Arrays.asList(text));
                     }
                 })
-                .setOtherButton("新建一个文件夹", (OnMenuButtonClickListener<MessageMenu>) (dialog, v) -> true)
+                .setOtherButton("新建一个文件夹", (OnMenuButtonClickListener<MessageMenu>) (dialog, v) -> {
+                    new CreateStickerDirDialog().show(dialog);
+                    return true;
+                })
                 .setOtherTextInfo(new TextInfo().setFontColor(Color.parseColor("#FF6699")).setBold(true))
                 .setOkButton("确定",
                         (OnMenuButtonClickListener<MessageMenu>) (dialog, v) -> {
@@ -51,18 +53,17 @@ public class SaveStickerDialog {
         //下载到缓存目录先
         String cachePath = StickerDataProvider.getCacheDir() + "/" + md5;
         DownloadManager.downloadAsync(picUrl, cachePath, () -> {
-            PopTip popTip = PopTip.show("正在保存").noAutoDismiss();
             //下载好了 一个一个复制到其他目录
             for (CharSequence dirName : dirNameList) {
                 try {
                     String targetPath = StickerDataProvider.getStickerStorageDirectory() + "/" + dirName + "/" + md5;
                     FileUtils.copyFile(cachePath, targetPath);
-                    popTip.setMessage("成功保存到 " + dirName);
+                    PopTip.show("成功保存到:" + dirName).iconSuccess();
                 } catch (IOException e) {
-                    ToastTool.show(e);
+                    PopTip.show("保存失败" + e).iconError();
                 }
             }
-            popTip.dismiss();
+
         });
     }
 

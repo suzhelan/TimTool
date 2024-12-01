@@ -5,6 +5,6 @@ package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
  */
 public class StickerDirChangeDialog {
     public void show(String dirName) {
-
+        //TODO 长按文件夹弹出可以修改
     }
 }

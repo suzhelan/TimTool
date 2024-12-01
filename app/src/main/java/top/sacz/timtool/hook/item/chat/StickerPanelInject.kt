@@ -26,6 +26,9 @@ import java.io.File
 @HookItem("辅助功能/聊天/表情面板")
 class StickerPanelInject : BaseSwitchFunctionHookItem() {
 
+    override fun getTip(): String {
+        return "长按聊天界面表情图标出现 全新的表情面板,更加精美和流畅的UI"
+    }
     @Throws(Exception::class)
     override fun loadHook(loader: ClassLoader) {
 
@@ -82,8 +85,6 @@ class StickerPanelInject : BaseSwitchFunctionHookItem() {
 
     override fun getOnClickListener(): View.OnClickListener {
         return View.OnClickListener {
-            BottomStickerPanelDialog()
-                .show()
         }
     }
 
