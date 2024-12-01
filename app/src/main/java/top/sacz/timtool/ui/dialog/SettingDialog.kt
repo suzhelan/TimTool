@@ -20,7 +20,7 @@ class SettingDialog {
             FixContextUtil.getFixLayoutInflater(activity).inflate(R.layout.layout_setting, null)
         onBindView(rootView)
         MessageDialog.build()
-            .setTitleIcon(R.mipmap.ic_launcher)
+            .setTitleIcon(R.mipmap.ic_launcher_round)
             .setTitle(R.string.app_name)
             .setMessage(R.string.setting_message)
             .show()
