@@ -20,14 +20,13 @@ import top.sacz.timtool.net.DownloadManager;
 import top.sacz.timtool.util.FileUtils;
 
 public class SaveStickerDialog {
-    private MessageMenu saveDialog;
 
     public void show(Object msgRecord) {
         String picUrl = QQImageMsgUtils.getMsgRecordPicUrl(msgRecord);
         String picMD5 = QQImageMsgUtils.getMsgRecordPicMd5(msgRecord).toUpperCase();
         List<String> dirs = StickerDataProvider.searchStickerDirectory();
         List<CharSequence> savedDirs = new ArrayList<>();
-        saveDialog = MessageMenu.showStringList(dirs)
+        MessageMenu.showStringList(dirs)
                 .setMessage("保存到")
                 .setTitle("保存表情到")
                 .setOnMenuItemClickListener(new OnMenuItemSelectListener<>() {
@@ -63,7 +62,6 @@ public class SaveStickerDialog {
                     PopTip.show("保存失败" + e).iconError();
                 }
             }
-
         });
     }
 

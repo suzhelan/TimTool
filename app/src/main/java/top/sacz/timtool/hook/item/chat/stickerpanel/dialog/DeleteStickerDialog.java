@@ -27,19 +27,20 @@ public class DeleteStickerDialog {
      */
     public void show(StickerInfo stickerInfo, Runnable callback) {
         Activity activity = ActivityTools.getTopActivity();
-        int padding = ScreenParamUtils.dpToPx(activity, 40);
+
         ImageView stickerImageView = new ImageView(activity);
+        int padding = ScreenParamUtils.dpToPx(activity, 40);
         stickerImageView.setPadding(padding, padding, padding, 0);
         Glide.with(HookEnv.getHostAppContext())
                 .load(new File(stickerInfo.getPath()))
                 .fitCenter()
                 .into(stickerImageView);
+
         int warningColor = HookEnv.getHostAppContext().getColor(R.color.warning);
         MessageDialog.show("删除贴纸", "确定要删除该贴纸吗?这将无法还原")
                 .setCustomView(new OnBindView<>(stickerImageView) {
                     @Override
                     public void onBind(MessageDialog dialog, View v) {
-
                     }
                 })
                 .setOkButton("删除", (dialog, v) -> {
