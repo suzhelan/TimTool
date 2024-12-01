@@ -15,7 +15,7 @@ import top.sacz.timtool.util.FileUtils;
 /**
  * 比如修改文件夹名称什么的
  */
-public class StickerDirChangeDialog {
+public class ChangeStickerDirDialog {
 
     public void show(String dirName, Runnable callback) {
         int warningColor = HookEnv.getHostAppContext().getColor(R.color.warning);

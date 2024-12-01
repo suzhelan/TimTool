@@ -104,7 +104,7 @@ public class BottomStickerPanelDialog {
         dirAdapter.submitList(StickerDataProvider.searchStickerDirectory());
         dirAdapter.setOnItemLongClickListener((adapter, dirView, position) -> {
             String dirName = adapter.getItem(position);
-            new StickerDirChangeDialog().show(dirName, () -> {
+            new ChangeStickerDirDialog().show(dirName, () -> {
                 adapter.submitList(StickerDataProvider.searchStickerDirectory());
                 initData();
             });
