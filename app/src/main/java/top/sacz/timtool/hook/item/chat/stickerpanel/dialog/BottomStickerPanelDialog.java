@@ -56,7 +56,9 @@ public class BottomStickerPanelDialog {
         if (stickerDirectory.isEmpty()) {
             return;
         }
-        updateByDirName(stickerDirectory.get(0));
+        String firstDirName = stickerDirectory.get(0);
+        StickerDataProvider.setCurrentSelectionDir(firstDirName);
+        updateByDirName(firstDirName);
     }
 
     private void initData() {
@@ -100,6 +102,14 @@ public class BottomStickerPanelDialog {
         rvStickerDir.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.HORIZONTAL, false));
         //文件夹的adapter
         dirAdapter.submitList(StickerDataProvider.searchStickerDirectory());
+        dirAdapter.setOnItemLongClickListener((adapter, dirView, position) -> {
+            String dirName = adapter.getItem(position);
+            new StickerDirChangeDialog().show(dirName, () -> {
+                adapter.submitList(StickerDataProvider.searchStickerDirectory());
+                initData();
+            });
+            return true;
+        });
         dirAdapter.setOnItemClickListener((adapter, dirView, position) -> {
             //调用更改表情包文件夹
             String dirName = adapter.getItem(position);
