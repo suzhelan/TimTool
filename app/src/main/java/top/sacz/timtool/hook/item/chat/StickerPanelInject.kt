@@ -23,7 +23,7 @@ import top.sacz.xphelper.reflect.MethodUtils
 import java.io.File
 
 
-@HookItem("辅助功能/聊天/表情面板")
+@HookItem("辅助功能/表情与图片/表情面板")
 class StickerPanelInject : BaseSwitchFunctionHookItem() {
 
     override fun getTip(): String {
