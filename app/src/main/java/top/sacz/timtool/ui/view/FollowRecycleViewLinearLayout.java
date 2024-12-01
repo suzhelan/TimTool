@@ -12,7 +12,6 @@ import com.kongzue.dialogx.interfaces.ScrollController;
 
 public class FollowRecycleViewLinearLayout extends LinearLayout implements ScrollController {
 
-
     private CustomRecycleView followRecycleView;
 
     public FollowRecycleViewLinearLayout(Context context) {

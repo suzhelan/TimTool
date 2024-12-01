@@ -79,6 +79,9 @@ public class CustomRecycleView extends RecyclerView implements ScrollController 
      */
     @Override
     public int getScrollDistance() {
+        if (getChildCount() == 0) {
+            return 0;
+        }
         LinearLayoutManager layoutManager = (LinearLayoutManager) getLayoutManager();
         View firstVisibleItem = this.getChildAt(0);
         int firstItemPosition = layoutManager.findFirstVisibleItemPosition();
