@@ -5,9 +5,9 @@ import android.util.Log;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import top.sacz.xphelper.base.BaseFinder;
+import top.sacz.xphelper.util.CheckClassType;
 
 public class MethodUtils extends BaseFinder<Method> {
 
@@ -62,7 +62,7 @@ public class MethodUtils extends BaseFinder<Method> {
         Method[] methods = getDeclaringClass().getDeclaredMethods();
         result.addAll(Arrays.asList(methods));
         result.removeIf(method -> methodName != null && !method.getName().equals(methodName));
-        result.removeIf(method -> returnType != null && !method.getReturnType().equals(returnType));
+        result.removeIf(method -> returnType != null && !CheckClassType.checkType(method.getReturnType(), returnType));
         result.removeIf(method -> paramCount != null && method.getParameterCount() != paramCount);
         result.removeIf(method -> methodParams != null && !paramEquals(method.getParameterTypes()));
         writeToMethodCache(result);
@@ -74,7 +74,7 @@ public class MethodUtils extends BaseFinder<Method> {
         for (int i = 0; i < methodParams.length; i++) {
             Class<?> type = methodParams[i];
             Class<?> findType = this.methodParams[i];
-            if (findType == Ignore.class || Objects.equals(type, findType)) {
+            if (findType == Ignore.class || CheckClassType.checkType(type, findType)) {
                 continue;
             }
             return false;

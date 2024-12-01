@@ -74,7 +74,7 @@ public class FieldUtils extends BaseFinder<Field> {
         Field[] declaredFields = getDeclaringClass().getDeclaredFields();
         result.addAll(Arrays.asList(declaredFields));
         //过滤类型
-        result.removeIf(field -> fieldType != null && !CheckClassType.CheckClass(field.getType(), fieldType));
+        result.removeIf(field -> fieldType != null && !CheckClassType.checkType(field.getType(), fieldType));
         //过滤名称
         result.removeIf(field -> fieldName != null && !field.getName().equals(fieldName));
         //写入缓存
