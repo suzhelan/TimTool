@@ -13,9 +13,8 @@ public class StickerInfo {
         return time;
     }
 
-    public StickerInfo setTime(long time) {
+    public void setTime(long time) {
         this.time = time;
-        return this;
     }
     public int getType() {
         return type;
