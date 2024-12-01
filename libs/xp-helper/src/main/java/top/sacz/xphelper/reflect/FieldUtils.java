@@ -27,6 +27,15 @@ public class FieldUtils extends BaseFinder<Field> {
                 .firstValue(targetObj);
     }
 
+    /**
+     * 设置字段值
+     */
+    public static void setField(Object target, String fieldName, Object value) {
+        FieldUtils.create(target)
+                .fieldName(fieldName)
+                .fieldType(value.getClass())
+                .setFirst(target, value);
+    }
 
     public static FieldUtils create(Object target) {
         return create(target.getClass());

@@ -11,6 +11,7 @@ import com.kongzue.dialogx.dialogs.BottomDialog;
 import com.kongzue.dialogx.interfaces.OnBindView;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import top.sacz.timtool.R;
@@ -18,9 +19,14 @@ import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
 import top.sacz.timtool.hook.item.chat.stickerpanel.StickerInfo;
 import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerDirAdapter;
 import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerPanelAdapter;
+import top.sacz.timtool.hook.qqapi.ContactUtils;
+import top.sacz.timtool.hook.qqapi.CreateElement;
+import top.sacz.timtool.hook.qqapi.QQSendMsgTool;
 import top.sacz.timtool.ui.view.CustomRecycleView;
 import top.sacz.timtool.ui.view.FollowRecycleViewLinearLayout;
 import top.sacz.timtool.util.ScreenParamUtils;
+import top.sacz.xphelper.reflect.ClassUtils;
+import top.sacz.xphelper.reflect.FieldUtils;
 import top.sacz.xphelper.util.ActivityTools;
 
 public class BottomStickerPanelDialog {
@@ -115,6 +121,14 @@ public class BottomStickerPanelDialog {
     }
 
     private void onClickSticker(StickerInfo stickerInfo) {
-
+        Object msgElement = CreateElement.createStickerElement(stickerInfo.getPath());
+        Object picElement = FieldUtils.getField(msgElement, "picElement", ClassUtils.findClass("com.tencent.qqnt.kernel.nativeinterface.PicElement"));
+        FieldUtils.setField(picElement, "summary", "[动画表情]");
+        //下面这两行设不设置都行
+        FieldUtils.setField(picElement, "storeID", 1);
+        FieldUtils.setField(picElement, "emojiFrom", 0);
+        ArrayList<Object> msgElementList = new ArrayList<>();
+        msgElementList.add(msgElement);
+        QQSendMsgTool.sendMsg(ContactUtils.getCurrentContact(), msgElementList);
     }
 }

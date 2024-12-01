@@ -10,7 +10,6 @@ import top.sacz.timtool.hook.util.ToastTool;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.reflect.MethodUtils;
 
-//method com.tencent.qqnt.msg.api.impl.MsgServiceImpl.forwardMsg argument 2 has type com.tencent.qqnt.kernelpublic.nativeinterface.Contact, got com.tencent.qqnt.aio.holder.template.TemplateLayout
 public class QQSendMsgTool {
     /**
      * 发送一条消息
