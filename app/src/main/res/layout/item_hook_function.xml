@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.textview.MaterialTextView
+        android:textColor="@color/text_color"
         android:id="@+id/tv_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_item_name"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="50dp"
         android:textColor="@color/grey" />
 
 </RelativeLayout>
