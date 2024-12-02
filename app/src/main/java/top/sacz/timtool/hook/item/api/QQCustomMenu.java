@@ -26,6 +26,9 @@ import top.sacz.xphelper.reflect.MethodUtils;
 @HookItem("QQ长按菜单接口")
 public class QQCustomMenu extends ApiHookItem {
 
+    /**
+     * 抽象类
+     */
     private static Class<?> baseMenuItemClass;
 
     public static Object createMenuItem(Object aioMsgItem, int id, String text, Callable<?> callable) {
