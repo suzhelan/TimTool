@@ -18,7 +18,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 #常用库
 okhttp = "5.0.0-alpha.14"
-protobufJavalite = "3.8.0"
+
 retrofit2 = "2.11.0"
 fastkv = "2.6.0"
 fastjson2 = "2.0.53"
@@ -47,7 +47,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 fastkv = { group = 'io.github.billywei01', name = 'fastkv', version.ref = "fastkv" }
 fastjson2 = { module = "com.alibaba.fastjson2:fastjson2", version.ref = "fastjson2" }
 okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
-protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobufJavalite" }
+
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 base-recyclerview-helper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "base-recyclerview-helper" }

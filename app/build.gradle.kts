@@ -109,8 +109,7 @@ dependencies {
 
     //自己写的小工具 包含一些常用功能 反射工具 注入act res等
     implementation(project(":xp-helper"))
-    //弹窗组件库
-    implementation(project(":xpopup"))
+
 
     implementation(libs.byte.buddy.android)
     //常用
