@@ -20,6 +20,7 @@ import top.sacz.xphelper.reflect.MethodUtils
 
 @HookItem("辅助功能/聊天/消息防撤回")
 class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
+
     private val viewId = 0x298382
     private var retractMessageMap: MutableMap<String, MutableList<Int>> = HashMap()
     override fun loadHook(loader: ClassLoader) {
