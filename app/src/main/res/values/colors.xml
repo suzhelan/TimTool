@@ -7,6 +7,9 @@
 
     <color name="text_color">#000000</color>
     <color name="皇家蓝">#4169E1</color>
+    <color name="露草色">#33a3dc</color>
+
+    <color name="ripple_color">#14313335</color>
 
     <color name="warning">#EB5545</color>
     <!--透明-->

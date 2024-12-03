@@ -1,5 +1,5 @@
 import com.google.protobuf.gradle.proto
-import top.sacz.buildplugin.BuildConfig
+import top.sacz.buildplugin.BuildVersionConfig
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -11,14 +11,14 @@ plugins {
 }
 
 android {
-    namespace = "top.sacz.timtool"
-    compileSdk = BuildConfig.compileSdk
+    namespace = BuildVersionConfig.applicationId
+    compileSdk = BuildVersionConfig.compileSdk
 
     defaultConfig {
-        applicationId = "top.sacz.timtool"
-        minSdk = BuildConfig.minSdk
-        //noinspection OldTargetApi
-        targetSdk = BuildConfig.targetSdk
+
+        applicationId = BuildVersionConfig.applicationId
+        minSdk = BuildVersionConfig.minSdk
+        targetSdk = BuildVersionConfig.targetSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -27,10 +27,12 @@ android {
             abiFilters.add("arm64-v8a")
         }
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BUILD_GIT_VERSION", "\"${getGitVersion()}\"")
+        buildConfigField("long", "BUILD_TIMESTAMP", "${System.currentTimeMillis()}L")
     }
 
     buildTypes {
+
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -41,8 +43,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = BuildConfig.javaVersion
-        targetCompatibility = BuildConfig.javaVersion
+        sourceCompatibility = BuildVersionConfig.javaVersion
+        targetCompatibility = BuildVersionConfig.javaVersion
     }
 
 
@@ -69,7 +71,11 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = BuildConfig.kotlin
+        jvmTarget = BuildVersionConfig.kotlin
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildFeatures {
