@@ -66,7 +66,6 @@ public class MethodUtils extends BaseFinder<Method> {
         result.removeIf(method -> paramCount != null && method.getParameterCount() != paramCount);
         result.removeIf(method -> methodParams != null && !paramEquals(method.getParameterTypes()));
         writeToMethodCache(result);
-        findComplete();
         return this;
     }
 

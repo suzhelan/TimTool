@@ -79,7 +79,6 @@ public class FieldUtils extends BaseFinder<Field> {
         result.removeIf(field -> fieldName != null && !field.getName().equals(fieldName));
         //写入缓存
         writeToFieldCache(result);
-        findComplete();
         return this;
     }
 

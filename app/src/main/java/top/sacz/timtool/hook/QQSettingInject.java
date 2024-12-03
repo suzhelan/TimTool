@@ -16,6 +16,7 @@ import java.util.List;
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.base.BaseHookItem;
 import top.sacz.timtool.hook.core.annotation.HookItem;
+import top.sacz.timtool.hook.util.LogUtils;
 import top.sacz.timtool.ui.dialog.SettingDialog;
 import top.sacz.xphelper.XpHelper;
 import top.sacz.xphelper.reflect.ClassUtils;
@@ -93,6 +94,7 @@ public class QQSettingInject extends BaseHookItem {
                      * itemClass可能是com.tencent.mobileqq.setting.processor.b 而不是我们想要的 所以需要判断过滤第一次和catch过滤第二次
                      * 通常此catch由ConstructorUtils找不到构造方法抛出异常以实现第二次过滤
                      */
+                    LogUtils.addError(e);
                 }
             }
 

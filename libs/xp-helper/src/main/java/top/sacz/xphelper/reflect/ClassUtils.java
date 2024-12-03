@@ -82,19 +82,19 @@ public class ClassUtils {
     public static void intiClassLoader(ClassLoader loader) {
         if (loader == null) throw new ReflectException("类加载器为Null 无法设置");
         //如果我们自己重写了 就不再次继承
-        if (loader instanceof XClassLoader) {
+        if (loader instanceof CacheClassLoader) {
             classLoader = loader;
             return;
         }
-        classLoader = new XClassLoader(loader);
+        classLoader = new CacheClassLoader(loader);
     }
 
 
-    private static class XClassLoader extends ClassLoader {
+    private static class CacheClassLoader extends ClassLoader {
         private static final Map<String, Class<?>> CLASS_CACHE = new HashMap<>();
         private final ClassLoader oldClassLoader;
 
-        public XClassLoader(ClassLoader classLoader) {
+        public CacheClassLoader(ClassLoader classLoader) {
             super(classLoader);
             this.oldClassLoader = classLoader;
         }

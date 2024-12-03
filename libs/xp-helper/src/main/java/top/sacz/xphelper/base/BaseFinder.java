@@ -27,7 +27,6 @@ public abstract class BaseFinder<T extends Member> {
     private boolean isFind = false;
 
     protected BaseFinder() {
-
     }
 
     protected void writeToFieldCache(List<Field> value) {
@@ -69,50 +68,72 @@ public abstract class BaseFinder<T extends Member> {
         return null;
     }
 
-    protected void findComplete() {
+    /**
+     * 由子类实现的实际查找方法
+     *
+     * @return this
+     */
+    public abstract BaseFinder<T> find();
+
+    /**
+     * 构建缓存签名
+     */
+    public abstract String buildSign();
+
+    /**
+     * 进行查找,查找后如果没有结果会自动向父类查找
+     *
+     * @return this
+     */
+    public BaseFinder<T> findAndSuper() {
+        if (this.isFind) {
+            return this;
+        }
+        find();
+        if (result.isEmpty() && getDeclaringClass() != Object.class) {
+            //如果查找不到 向父类查找
+            return setDeclaringClass(getDeclaringClass().getSuperclass())
+                    .findAndSuper();
+        }
+        //彻底的查找结束
         this.isFind = true;
+        //设置可访问
         for (T member : result) {
             XposedHelpers.callMethod(member, "setAccessible", true);
         }
+
+        return this;
     }
 
-    public abstract BaseFinder<T> find();
-
-    public abstract String buildSign();
-
-
+    /**
+     * 在所有获取结果的方法都需要调用 不然不会查找 {@link #findAndSuper();}
+     *
+     * @return 结果列表
+     */
     public List<T> getResult() {
-        if (!isFind) {
-            find();
-        }
+        findAndSuper();
         return result;
     }
 
+    public T get(int index) {
+        if (getResult().isEmpty()) {
+            throw new ReflectException("can not find " + buildSign());
+        }
+        if (result.size() <= index) {
+            throw new ReflectException("The resulting number is " + result.size() + " and the index is " + index + ":" + buildSign());
+        }
+        return result.get(index);
+    }
+
     public T first() {
-        if (!isFind) {
-            find();
-        }
-        if (result.isEmpty() && getDeclaringClass() != Object.class) {
-            //如果查找不到 向父类查找
-            setDeclaringClass(getDeclaringClass().getSuperclass());
-            return find().first();
-        }
-        if (result.isEmpty()) {
+        if (getResult().isEmpty()) {
             throw new ReflectException("can not find " + buildSign());
         }
         return result.get(0);
     }
 
     public T last() {
-        if (!isFind) {
-            find();
-        }
-        if (result.isEmpty() && getDeclaringClass() != Object.class) {
-            //如果查找不到 向父类查找
-            setDeclaringClass(getDeclaringClass().getSuperclass());
-            return find().first();
-        }
-        if (result.isEmpty()) {
+        if (getResult().isEmpty()) {
             throw new ReflectException("can not find " + buildSign());
         }
         return result.get(result.size() - 1);
