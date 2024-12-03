@@ -29,6 +29,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun onTelegramClick(view: View) {
+        //跳转到浏览器
+        val url = "https://t.me/timtool"
+        val intent = Intent()
+        intent.action = Intent.ACTION_VIEW
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
+
     fun onGithubClick(view: View) {
         //跳转到浏览器
         val url = "https://github.com/suzhelan/TimTool"

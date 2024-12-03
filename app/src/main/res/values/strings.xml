@@ -8,7 +8,8 @@
         构建时间：%s\n
     </string>
 
-
+    <string name="telegram">Telegram</string>
+    
     <string name="github">Github</string>
 
 </resources>

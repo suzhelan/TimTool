@@ -1,11 +1,7 @@
 package top.sacz.xphelper.reflect;
 
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Array;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,11 +88,9 @@ public class ClassUtils {
 
     private static class CacheClassLoader extends ClassLoader {
         private static final Map<String, Class<?>> CLASS_CACHE = new HashMap<>();
-        private final ClassLoader oldClassLoader;
 
         public CacheClassLoader(ClassLoader classLoader) {
             super(classLoader);
-            this.oldClassLoader = classLoader;
         }
 
         @Override
@@ -113,7 +107,7 @@ public class ClassUtils {
                     try {
                         clazz = getBaseTypeClass(name.substring(index + 1));
                     } catch (Exception e) {
-                        clazz = oldClassLoader.loadClass(name.substring(index + 1));
+                        clazz = super.loadClass(name.substring(index + 1));
                     }
                     //转换数组类型
                     for (int i = 0; i < name.length(); i++) {
@@ -132,7 +126,7 @@ public class ClassUtils {
                     clazz = getBaseTypeClass(name);
                 } catch (Exception e) {
                     //因为默认的ClassLoader.load() 不能加载"int"这种类型
-                    clazz = oldClassLoader.loadClass(name);
+                    clazz = super.loadClass(name);
                 }
                 CLASS_CACHE.put(name, clazz);
                 return clazz;
@@ -141,41 +135,5 @@ public class ClassUtils {
             }
         }
 
-        @Override
-        public URL getResource(String name) {
-            return oldClassLoader.getResource(name);
-        }
-
-        @Override
-        public Enumeration<URL> getResources(String name) throws IOException {
-            return oldClassLoader.getResources(name);
-        }
-
-
-        @Override
-        public InputStream getResourceAsStream(String name) {
-            return oldClassLoader.getResourceAsStream(name);
-        }
-
-
-        @Override
-        public void setDefaultAssertionStatus(boolean enabled) {
-            oldClassLoader.setDefaultAssertionStatus(enabled);
-        }
-
-        @Override
-        public void setPackageAssertionStatus(String packageName, boolean enabled) {
-            oldClassLoader.setPackageAssertionStatus(packageName, enabled);
-        }
-
-        @Override
-        public void setClassAssertionStatus(String className, boolean enabled) {
-            oldClassLoader.setClassAssertionStatus(className, enabled);
-        }
-
-        @Override
-        public void clearAssertionStatus() {
-            oldClassLoader.clearAssertionStatus();
-        }
     }
 }

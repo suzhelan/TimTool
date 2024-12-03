@@ -69,6 +69,46 @@
         app:cardMaxElevation="15dp">
 
         <LinearLayout
+            android:id="@+id/ll_to_telegram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_trans_border_null_ripple"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:onClick="onTelegramClick"
+            android:orientation="horizontal"
+            android:padding="25dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/github"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_telegram" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/telegram"
+                android:textColor="@color/text_color"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="60dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="15dp">
+
+        <LinearLayout
             android:id="@+id/ll_to_github"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
