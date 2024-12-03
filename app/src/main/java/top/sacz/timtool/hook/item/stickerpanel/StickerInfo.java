@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel;
+package top.sacz.timtool.hook.item.stickerpanel;
 
 public class StickerInfo {
     private String path;

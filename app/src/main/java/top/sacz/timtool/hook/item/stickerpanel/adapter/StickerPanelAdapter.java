@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel.adapter;
+package top.sacz.timtool.hook.item.stickerpanel.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,7 +16,7 @@ import java.io.File;
 
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.HookEnv;
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerInfo;
+import top.sacz.timtool.hook.item.stickerpanel.StickerInfo;
 import top.sacz.timtool.util.ScreenParamUtils;
 
 public class StickerPanelAdapter extends BaseQuickAdapter<StickerInfo, QuickViewHolder> {

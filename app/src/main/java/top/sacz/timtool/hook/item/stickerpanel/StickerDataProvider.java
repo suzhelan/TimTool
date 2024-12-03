@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel;
+package top.sacz.timtool.hook.item.stickerpanel;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
+package top.sacz.timtool.hook.item.stickerpanel.dialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.sacz.timtool.R;
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerInfo;
-import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerDirAdapter;
-import top.sacz.timtool.hook.item.chat.stickerpanel.adapter.StickerPanelAdapter;
+import top.sacz.timtool.hook.item.stickerpanel.StickerDataProvider;
+import top.sacz.timtool.hook.item.stickerpanel.StickerInfo;
+import top.sacz.timtool.hook.item.stickerpanel.adapter.StickerDirAdapter;
+import top.sacz.timtool.hook.item.stickerpanel.adapter.StickerPanelAdapter;
 import top.sacz.timtool.hook.qqapi.ContactUtils;
 import top.sacz.timtool.hook.qqapi.CreateElement;
 import top.sacz.timtool.hook.qqapi.QQSendMsgTool;

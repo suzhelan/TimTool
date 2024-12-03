@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel.adapter;
+package top.sacz.timtool.hook.item.stickerpanel.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -10,7 +10,7 @@ import com.chad.library.adapter4.BaseQuickAdapter;
 import com.chad.library.adapter4.viewholder.QuickViewHolder;
 
 import top.sacz.timtool.R;
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
+import top.sacz.timtool.hook.item.stickerpanel.StickerDataProvider;
 
 public class StickerDirAdapter extends BaseQuickAdapter<String, QuickViewHolder> {
 

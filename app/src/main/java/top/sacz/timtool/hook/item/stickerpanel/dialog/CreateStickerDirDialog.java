@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
+package top.sacz.timtool.hook.item.stickerpanel.dialog;
 
 import com.kongzue.dialogx.dialogs.InputDialog;
 import com.kongzue.dialogx.dialogs.MessageMenu;
@@ -7,7 +7,7 @@ import com.kongzue.dialogx.dialogs.PopTip;
 import java.io.File;
 import java.util.List;
 
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
+import top.sacz.timtool.hook.item.stickerpanel.StickerDataProvider;
 
 public class CreateStickerDirDialog {
     public void show(MessageMenu dialog) {

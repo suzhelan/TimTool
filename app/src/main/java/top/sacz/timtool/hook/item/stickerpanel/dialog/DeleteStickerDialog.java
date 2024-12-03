@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
+package top.sacz.timtool.hook.item.stickerpanel.dialog;
 
 import android.app.Activity;
 import android.view.View;
@@ -13,7 +13,7 @@ import java.io.File;
 
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.HookEnv;
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerInfo;
+import top.sacz.timtool.hook.item.stickerpanel.StickerInfo;
 import top.sacz.timtool.hook.util.ToastTool;
 import top.sacz.timtool.util.ScreenParamUtils;
 import top.sacz.xphelper.util.ActivityTools;

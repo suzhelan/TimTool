@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
+package top.sacz.timtool.hook.item.stickerpanel.dialog;
 
 
 import android.graphics.Color;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
+import top.sacz.timtool.hook.item.stickerpanel.StickerDataProvider;
 import top.sacz.timtool.hook.qqapi.QQImageMsgUtils;
 import top.sacz.timtool.net.DownloadManager;
 import top.sacz.timtool.util.FileUtils;

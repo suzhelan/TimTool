@@ -1,4 +1,4 @@
-package top.sacz.timtool.hook.item.chat.stickerpanel.dialog;
+package top.sacz.timtool.hook.item.stickerpanel.dialog;
 
 import com.kongzue.dialogx.dialogs.InputDialog;
 import com.kongzue.dialogx.dialogs.MessageDialog;
@@ -9,7 +9,7 @@ import java.io.File;
 
 import top.sacz.timtool.R;
 import top.sacz.timtool.hook.HookEnv;
-import top.sacz.timtool.hook.item.chat.stickerpanel.StickerDataProvider;
+import top.sacz.timtool.hook.item.stickerpanel.StickerDataProvider;
 import top.sacz.timtool.util.FileUtils;
 
 /**

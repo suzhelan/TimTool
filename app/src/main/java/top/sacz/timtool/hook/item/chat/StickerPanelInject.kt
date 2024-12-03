@@ -12,8 +12,8 @@ import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.item.api.QQCustomMenu
-import top.sacz.timtool.hook.item.chat.stickerpanel.dialog.BottomStickerPanelDialog
-import top.sacz.timtool.hook.item.chat.stickerpanel.dialog.SaveStickerDialog
+import top.sacz.timtool.hook.item.stickerpanel.dialog.BottomStickerPanelDialog
+import top.sacz.timtool.hook.item.stickerpanel.dialog.SaveStickerDialog
 import top.sacz.timtool.hook.util.PathTool
 import top.sacz.timtool.hook.util.ToastTool
 import top.sacz.timtool.util.DrawableUtil
@@ -46,7 +46,8 @@ class StickerPanelInject : BaseSwitchFunctionHookItem() {
                 .fieldType(ImageButton::class.java)
                 .firstValue<ImageButton>(targetObj)
             emoBtnView.setOnLongClickListener {
-                BottomStickerPanelDialog().show()
+                BottomStickerPanelDialog()
+                    .show()
                 return@setOnLongClickListener true
             }
         }
