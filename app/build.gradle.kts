@@ -1,7 +1,6 @@
+
 import com.google.protobuf.gradle.proto
 import top.sacz.buildplugin.BuildVersionConfig
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 plugins {
     alias(libs.plugins.android.application)
@@ -29,6 +28,15 @@ android {
 
         buildConfigField("String", "BUILD_GIT_VERSION", "\"${getGitVersion()}\"")
         buildConfigField("long", "BUILD_TIMESTAMP", "${System.currentTimeMillis()}L")
+
+        signingConfigs {
+            //需要在buildTypes主动引用,暂时不需要
+            create("release") {
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+            }
+        }
     }
 
     buildTypes {
@@ -41,27 +49,25 @@ android {
                 "proguard-rules.pro"
             )
         }
+
     }
+
     compileOptions {
         sourceCompatibility = BuildVersionConfig.javaVersion
         targetCompatibility = BuildVersionConfig.javaVersion
     }
-
 
     android.applicationVariants.all {
         outputs.all {
             if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
                 val config = project.android.defaultConfig
                 val versionName = config.versionName
-                val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
-                val createTime = LocalDateTime.now().format(formatter)
+
                 outputFileName =
                     "${rootProject.name}_${this.name}_${versionName}.apk"
             }
         }
     }
-
-
 
     androidResources {
         additionalParameters += arrayOf(
