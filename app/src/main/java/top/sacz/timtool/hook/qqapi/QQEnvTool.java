@@ -6,6 +6,19 @@ import top.sacz.xphelper.reflect.MethodUtils;
 
 public class QQEnvTool {
 
+    public static String getCurrentAccountNickName() {
+        try {
+            Object runTime = getAppRuntime();
+            if (runTime == null) return null;
+            return MethodUtils.create(runTime)
+                    .methodName("getCurrentNickname")
+                    .returnType(String.class)
+                    .callFirst(runTime);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static String getCurrentUin() {
         try {
             Object runTime = getAppRuntime();

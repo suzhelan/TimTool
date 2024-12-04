@@ -14,7 +14,7 @@ class HookItemLoader {
     fun loadConfig() {
         //读取配置 如果不存在则new一个
         val type = object : TypeReference<HashMap<String, Boolean>>() {}
-        var config: Map<String, Boolean>? = KvHelper().getObject("item_config", type)
+        var config: Map<String, Boolean>? = KvHelper("item_config").getObject("item_config", type)
         if (config == null) {
             config = HashMap()
         }
@@ -47,6 +47,6 @@ class HookItemLoader {
         allHookItems.forEach { hookItem ->
             config[hookItem.path] = hookItem.isEnabled
         }
-        KvHelper().put("item_config", config)
+        KvHelper("item_config").put("item_config", config)
     }
 }

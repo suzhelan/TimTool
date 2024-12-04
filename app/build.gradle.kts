@@ -124,6 +124,8 @@ dependencies {
     implementation(libs.byte.buddy.android)
     //常用
     implementation(libs.okhttp3)
+    implementation(libs.retrofit2)
+    implementation(libs.squareup.retrofit.converter.gson)
     implementation(libs.glide)
     implementation(libs.fastkv)
     implementation(libs.fastjson2)

@@ -8,6 +8,7 @@ import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 import top.sacz.timtool.hook.core.HookItemLoader
 import top.sacz.timtool.hook.util.PathTool
+import top.sacz.timtool.net.NewLoginTask
 import top.sacz.timtool.util.KvHelper
 import top.sacz.xphelper.XpHelper
 
@@ -49,6 +50,7 @@ class HookSteps {
         //环境初始化 开始进行hook项目的初始化
         if (HookEnv.isMainProcess()) {
             XposedBridge.log("[Tim小助手]环境初始化完成")
+            NewLoginTask().loginAndGetUserInfoAsync()
         }
         val hookItemLoader = HookItemLoader()
         hookItemLoader.loadConfig()

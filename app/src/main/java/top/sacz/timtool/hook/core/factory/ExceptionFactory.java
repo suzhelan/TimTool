@@ -50,9 +50,9 @@ public class ExceptionFactory {
         exceptionsList.add(0, throwable);
         exceptionMap.put(item, exceptionsList);
         if (BuildConfig.DEBUG) {
-            LogUtils.addError(item.getItemName(), throwable);
-            XposedBridge.log(throwable);
         }
+        XposedBridge.log(throwable);
+        LogUtils.addError(item.getItemName(), throwable);
     }
 
     public static String getStackTrace(BaseHookItem hookItem) {

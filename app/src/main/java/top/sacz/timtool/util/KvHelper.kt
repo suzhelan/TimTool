@@ -4,6 +4,7 @@ import android.content.Context
 import com.alibaba.fastjson2.JSON
 import com.alibaba.fastjson2.TypeReference
 import io.fastkv.FastKV
+import io.fastkv.interfaces.FastCipher
 
 
 /**
@@ -11,6 +12,7 @@ import io.fastkv.FastKV
  */
 class KvHelper(id: String = "default") {
     private var kv = FastKV.Builder(storePath, id)
+        .cipher(Cipher())
         .build()
 
     init {
@@ -152,4 +154,34 @@ class KvHelper(id: String = "default") {
         return kv.contains(key)
     }
 
+    /**
+     * fast kv的加密实现接口
+     */
+    private class Cipher : FastCipher {
+        val key = "TimToolConfigEncryptKey"
+        override fun encrypt(src: ByteArray): ByteArray {
+            return AESHelper.encrypt(src, key)
+        }
+
+        override fun decrypt(dst: ByteArray): ByteArray {
+            return AESHelper.decrypt(dst, key)
+        }
+
+        override fun encrypt(src: Int): Int {
+            return src
+        }
+
+        override fun encrypt(src: Long): Long {
+            return src
+        }
+
+        override fun decrypt(dst: Int): Int {
+            return dst
+        }
+
+        override fun decrypt(dst: Long): Long {
+            return dst
+        }
+
+    }
 }

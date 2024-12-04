@@ -47,6 +47,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 fastkv = { group = 'io.github.billywei01', name = 'fastkv', version.ref = "fastkv" }
 fastjson2 = { module = "com.alibaba.fastjson2:fastjson2", version.ref = "fastjson2" }
 okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+squareup-retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }
 
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
