@@ -62,9 +62,7 @@ android {
             if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
                 val config = project.android.defaultConfig
                 val versionName = config.versionName
-
-                outputFileName =
-                    "${rootProject.name}_${this.name}_${versionName}.apk"
+                outputFileName = "${rootProject.name}_${this.name}_${versionName}.apk"
             }
         }
     }
