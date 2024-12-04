@@ -12,8 +12,8 @@ import top.sacz.timtool.hook.common.CommonMethod
  * 模块入口
  */
 
-private const val TIM_PACKAGE = "com.tencent.tim"
-private const val QQ_PACKAGE = "com.tencent.mobileqq"
+private val TIM_PACKAGE = HookEnv.TIM_PACKAGE
+private val QQ_PACKAGE = HookEnv.QQ_PACKAGE
 private const val TAG = "[Tim助手]"
 
 class InjectHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
