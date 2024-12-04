@@ -41,7 +41,7 @@ class QQMsgViewAdapter : BaseHookItem() {
 
     private fun findContentViewId(): Int {
         return KvHelper(javaClass.simpleName).getInt(
-            "contentViewId${TimVersion.getTimVersion()}",
+            "contentViewId${TimVersion.getVersionName()}",
             -1
         )
     }
@@ -49,7 +49,7 @@ class QQMsgViewAdapter : BaseHookItem() {
     private fun putContentViewId(id: Int) {
         val kv = KvHelper(javaClass.simpleName)
         kv.clearAll()
-        kv.put("contentViewId${TimVersion.getTimVersion()}", id)
+        kv.put("contentViewId${TimVersion.getVersionName()}", id)
     }
 
     override fun loadHook(loader: ClassLoader) {

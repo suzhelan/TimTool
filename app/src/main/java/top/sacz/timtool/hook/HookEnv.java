@@ -6,6 +6,10 @@ import android.content.Context;
  * 单例模式 存储全局变量 包含app的context和版本号等信息
  */
 public class HookEnv {
+
+    public static String TIM_PACKAGE = "com.tencent.tim";
+    public static String QQ_PACKAGE = "com.tencent.mobileqq";
+
     /**
      * 当前宿主包名
      */
@@ -23,6 +27,10 @@ public class HookEnv {
      */
     private static String hostApkPath;
     /**
+     * 宿主应用名
+     */
+    private static String appName;
+    /**
      * 宿主版本名称
      */
     private static String versionName;
@@ -39,13 +47,30 @@ public class HookEnv {
     private HookEnv() {
     }
 
+    public static boolean isTim() {
+        return TIM_PACKAGE.equals(currentHostAppPackageName);
+    }
+
+    public static boolean isQQ() {
+        return QQ_PACKAGE.equals(currentHostAppPackageName);
+    }
+
+    public static String getAppName() {
+        return appName;
+    }
+
+
+    public static void setAppName(String appName) {
+        HookEnv.appName = appName;
+    }
+
     public static ClassLoader getHostClassLoader() {
         return hostClassLoader;
     }
 
     public static void setHostClassLoader(ClassLoader classLoader) {
         hostClassLoader = classLoader;
-        
+
     }
 
     public static String getHostApkPath() {
@@ -54,7 +79,7 @@ public class HookEnv {
 
     public static void setHostApkPath(String apkPath) {
         hostApkPath = apkPath;
-        
+
     }
 
     public static String getVersionName() {
@@ -63,7 +88,7 @@ public class HookEnv {
 
     public static void setVersionName(String hostVersionName) {
         versionName = hostVersionName;
-        
+
     }
 
     public static int getVersionCode() {
@@ -72,7 +97,7 @@ public class HookEnv {
 
     public static void setVersionCode(int hostVersionCode) {
         versionCode = hostVersionCode;
-        
+
     }
 
     public static Context getHostAppContext() {
@@ -81,7 +106,7 @@ public class HookEnv {
 
     public static void setHostAppContext(Context appContext) {
         hostAppContext = appContext;
-        
+
     }
 
     public static String getModuleApkPath() {
@@ -90,7 +115,7 @@ public class HookEnv {
 
     public static void setModuleApkPath(String path) {
         moduleApkPath = path;
-        
+
     }
 
     public static String getProcessName() {
@@ -107,7 +132,7 @@ public class HookEnv {
 
     public static void setCurrentHostAppPackageName(String packageName) {
         currentHostAppPackageName = packageName;
-        
+
     }
 
     public static boolean isMainProcess() {

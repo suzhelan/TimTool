@@ -1,7 +1,9 @@
 <resources>
+
     <string name="app_name">Tim小助手</string>
-    <string name="setting_message">Github Suzhelan/TimTool</string>
     <string name="simple_desc">Tim功能性Xposed模块</string>
+
+    <string name="setting_message">模块版本:%s %s版本:%s</string>
 
     <string name="build_info">
         构建版本：%s\n
@@ -9,7 +11,7 @@
     </string>
 
     <string name="telegram">Telegram</string>
-    
+
     <string name="github">Github</string>
 
 </resources>

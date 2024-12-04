@@ -25,8 +25,11 @@ class HookSteps {
 
     fun initContext(context: Context) {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+        val packageManager = context.packageManager
+        val appName = packageManager.getApplicationLabel(context.applicationInfo).toString()
         HookEnv.setHostAppContext(context)
         HookEnv.setHostApkPath(context.applicationInfo.sourceDir)
+        HookEnv.setAppName(appName)
         HookEnv.setVersionCode(packageInfo.versionCode)
         HookEnv.setVersionName(packageInfo.versionName)
         HookEnv.setHostClassLoader(context.classLoader)
@@ -40,7 +43,6 @@ class HookSteps {
     private fun initDialogX(context: Context) {
         DialogX.init(context)
         DialogX.globalStyle = MaterialYouStyle()
-        DialogX.dialogMaxWidth
     }
 
     fun initHooks() {
