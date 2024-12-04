@@ -56,7 +56,7 @@ android {
                 val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
                 val createTime = LocalDateTime.now().format(formatter)
                 outputFileName =
-                    "${rootProject.name}_${this.name}_${versionName}_${getGitVersion()}.apk"
+                    "${rootProject.name}_${this.name}_${versionName}.apk"
             }
         }
     }
