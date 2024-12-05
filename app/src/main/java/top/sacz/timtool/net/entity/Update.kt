@@ -1,5 +1,7 @@
 package top.sacz.timtool.net.entity
 
+import java.util.Date
+
 data class HasUpdate(
     val hasUpdate: Boolean,
     val isForceUpdate: Boolean,
@@ -10,7 +12,7 @@ data class UpdateInfo(
     val fileName: String,
     val forceUpdate: Boolean,
     val id: Int,
-    val time: String,
+    val time: Date,
     val updateLog: String,
     val versionCode: Int,
     val versionName: String

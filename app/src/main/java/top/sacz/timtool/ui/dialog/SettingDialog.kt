@@ -13,6 +13,7 @@ import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.core.factory.HookItemFactory
+import top.sacz.timtool.net.UpdateService
 import top.sacz.timtool.ui.adapter.ItemListAdapter
 
 class SettingDialog {
@@ -20,6 +21,17 @@ class SettingDialog {
 
     @SuppressLint("InflateParams")
     fun show(activity: Context) {
+
+        val updateService = UpdateService()
+        //尝试直接获取更新
+        if (updateService.hasUpdate()) {
+            updateService.showUpdateDialog()
+
+            if (updateService.isForceUpdate()) {
+                return
+            }
+        }
+
 
         val messageText = activity.getString(R.string.setting_message)
             .format(BuildConfig.VERSION_NAME, HookEnv.getAppName(), HookEnv.getVersionName())

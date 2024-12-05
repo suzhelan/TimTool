@@ -14,4 +14,9 @@
 
     <string name="github">Github</string>
 
+    <string name="update_toast">[Tim小助手]有新版本</string>
+    <string name="update_title">有新更新 v</string>
+    <string name="to_update">去更新</string>
+    <string name="is_force_update">不能取消,你必须要更新</string>
+    <string name="next">下次再说</string>
 </resources>

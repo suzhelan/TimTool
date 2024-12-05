@@ -20,6 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+
 # 不会对代码进行重命名或优化 会增加一定内存
 #-dontobfuscate
 # 不进行优化，建议使用此选项 会增加一定内存
@@ -31,10 +32,11 @@
  # 不进行预校验,Android不需要,可加快混淆速度。
 -dontpreverify
 
+
 # 模块专属
 -keep class top.sacz.timtool.hook.InjectHook {*;}
 -keep class * extends top.sacz.timtool.hook.base.BaseHookItem {*;}
--keep class top.sacz.timtool.entity.** {*;}
+-keep class top.sacz.timtool.net.entity.** {*;}
 
 # 枚举类
 -keepclassmembers enum * {

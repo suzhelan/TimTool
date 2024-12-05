@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.databinding.ActivityMainBinding
+import top.sacz.timtool.net.UpdateService
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -26,8 +27,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(bind.root)
         requestTransparentStatusBar()
         initBuildInfo()
+        val updateService = UpdateService()
 
+        updateService.requestUpdateAsync { hasUpdate ->
+            if (hasUpdate) {
+                updateService.showUpdateDialog()
+            }
+        }
     }
+
 
     fun onTelegramClick(view: View) {
         //跳转到浏览器

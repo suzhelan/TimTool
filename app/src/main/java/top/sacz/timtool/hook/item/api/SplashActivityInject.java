@@ -36,4 +36,5 @@ public class SplashActivityInject extends BaseHookItem {
             XpHelper.injectResourcesToContext(activity);
         }, 1000);
     }
+
 }
