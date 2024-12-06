@@ -3,7 +3,7 @@ package top.sacz.timtool.hook;
 public class TimVersion {
 
     public static long TIM_4_0_96 = 4010;
-
+    public static long TIM_4_97 = 4011;
 
     public static String getAppName() {
         return HookEnv.getAppName();
