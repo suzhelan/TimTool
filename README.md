@@ -10,10 +10,6 @@
 <p>永久免费模块，请勿上当受骗</p>
 </div>
 
---- 
-
-## [连接到主仓库](https://github.com/suzhelan/TimTool)
-
 ---
 
 ## 适配的版本范围 TimNT 4.x.x(目前维护到4.0.97 最新版)
