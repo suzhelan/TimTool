@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.res.ResourcesCompat
+import de.robv.android.xposed.XC_MethodReplacement
+import de.robv.android.xposed.XposedBridge
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
@@ -24,7 +26,10 @@ import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.ConstructorUtils
 import top.sacz.xphelper.reflect.FieldUtils
+import top.sacz.xphelper.reflect.Ignore
+import top.sacz.xphelper.reflect.MethodUtils
 import java.io.File
+import java.lang.reflect.Method
 
 @SuppressLint("UseCompatLoadingForDrawables")
 @HookItem("辅助功能/聊天/复读")
@@ -51,7 +56,38 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
 
     private val repetitionViewId = 0x2399332
 
+    private fun hideQQRepetitionView() {
+        //隐藏QQ原本的复读图标
+        val followComponentMethod: Method =
+            MethodUtils.create("com.tencent.mobileqq.aio.msglist.holder.component.msgfollow.AIOMsgFollowComponent")
+                .returnType(Void.TYPE)
+                .params(
+                    Int::class.javaPrimitiveType,
+                    Ignore::class.java,
+                    MutableList::class.java
+                )
+                .first()
+
+        XposedBridge.hookMethod(followComponentMethod, object : XC_MethodReplacement(25) {
+            @Throws(Throwable::class)
+            override fun replaceHookedMethod(param: MethodHookParam) {
+                val thisObject = param.thisObject
+                val originalRepeatIcon: ImageView =
+                    MethodUtils.create(thisObject.javaClass)
+                        .returnType(
+                            ImageView::class.java
+                        ).callFirst(thisObject)
+                originalRepeatIcon.setImageDrawable(null)
+                if (originalRepeatIcon.visibility != View.GONE) {
+                    originalRepeatIcon.visibility = View.GONE
+                }
+            }
+        })
+    }
+
     override fun loadHook(loader: ClassLoader) {
+        hideQQRepetitionView()
+
         QQMessageViewListener.addMessageViewUpdateListener(
             this,
             object : QQMessageViewListener.OnChatViewUpdateListener {
