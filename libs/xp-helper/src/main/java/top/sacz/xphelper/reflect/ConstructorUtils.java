@@ -45,7 +45,7 @@ public class ConstructorUtils extends BaseFinder<Constructor<?>> {
         return this;
     }
 
-    public ConstructorUtils paramTypes(Class<?>[] paramTypes) {
+    public ConstructorUtils paramTypes(Class<?>... paramTypes) {
         this.paramTypes = paramTypes;
         this.paramCount = paramTypes.length;
         return this;
