@@ -24,12 +24,12 @@ class QQContactUpdateListener : ApiHookItem() {
             ClassUtils.findClass("com.tencent.aio.runtime.AIOContextImpl")
         val method = ConstructorUtils.create(aioContextImpl)
             .paramTypes(
-                arrayOf(
-                    ClassUtils.findClass("com.tencent.aio.main.fragment.ChatFragment"),
+
+                ClassUtils.findClass("com.tencent.aio.main.fragment.ChatFragment"),
                     ClassUtils.findClass("com.tencent.aio.data.AIOParam"),
                     ClassUtils.findClass("androidx.lifecycle.LifecycleOwner"),
                     ClassUtils.findClass("kotlin.jvm.functions.Function0")
-                )
+
             ).first()
         hookBefore(method) { param ->
             val aioParam = param.args[1]
