@@ -19,4 +19,7 @@
     <string name="to_update">去更新</string>
     <string name="is_force_update">不能取消,你必须要更新</string>
     <string name="next">下次再说</string>
+
+    <string name="message_bubbles_rounded_demo">许你一个美好的明天，愿世间的每一个角落都洒满璀璨的星光</string>
+
 </resources>
