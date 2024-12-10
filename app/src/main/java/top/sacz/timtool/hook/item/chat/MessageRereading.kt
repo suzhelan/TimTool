@@ -5,8 +5,12 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.res.ResourcesCompat
+import com.kongzue.dialogx.dialogs.MessageDialog
+import com.kongzue.dialogx.interfaces.OnBindView
 import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
 import top.sacz.timtool.R
@@ -16,6 +20,7 @@ import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.core.factory.ExceptionFactory
 import top.sacz.timtool.hook.item.api.QQMessageViewListener
 import top.sacz.timtool.hook.item.api.QQMsgViewAdapter
+import top.sacz.timtool.hook.item.chat.rereading.MessageRereadingConfig
 import top.sacz.timtool.hook.item.chat.rereading.RereadingMessageClickListener
 import top.sacz.timtool.hook.qqapi.ContactUtils
 import top.sacz.timtool.hook.qqapi.QQEnvTool
@@ -34,6 +39,37 @@ import java.lang.reflect.Method
 @SuppressLint("UseCompatLoadingForDrawables")
 @HookItem("辅助功能/聊天/复读")
 class MessageRereading : BaseSwitchFunctionHookItem() {
+
+    override fun getOnClickListener(): View.OnClickListener? {
+        return View.OnClickListener {
+            var editSize: EditText? = null
+            var isDoubleClick: CheckBox? = null
+            MessageDialog.build()
+                .setCustomView(object :
+                    OnBindView<MessageDialog>(R.layout.layout_rereading_setting) {
+                    override fun onBind(
+                        dialog: MessageDialog,
+                        v: View
+                    ) {
+                        editSize = v.findViewById(R.id.edit_repeat_icon_size)
+                        isDoubleClick = v.findViewById(R.id.cb_double_click_repeat)
+                        editSize.setText(MessageRereadingConfig.getSize().toString())
+                        isDoubleClick.isChecked = MessageRereadingConfig.isDoubleClickMode()
+                    }
+                })
+                .setOkButton("保存") { _, _ ->
+                    MessageRereadingConfig.setSize(editSize!!.text.toString().toFloat())
+                    MessageRereadingConfig.setDoubleClickMode(isDoubleClick!!.isChecked)
+                    false
+                }
+                .show()
+
+        }
+    }
+
+    override fun getTip(): String? {
+        return "点击可以设置一些参数"
+    }
 
     val icon: Drawable by lazy {
         val context = HookEnv.getHostAppContext()
@@ -125,7 +161,8 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
                     } catch (e: Exception) {
                         ExceptionFactory.add(this@MessageRereading, e)
                     }
-                    val size: Int = ScreenParamUtils.dpToPx(context, 24f)
+                    val size: Int =
+                        ScreenParamUtils.dpToPx(context, MessageRereadingConfig.getSize())
 
                     //制定约束布局参数 用反射做 不然androidx引用的是模块的而不是QQ自身的
                     val newlayoutParams: ViewGroup.LayoutParams = ConstructorUtils.newInstance(

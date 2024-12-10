@@ -4,7 +4,7 @@ import top.sacz.timtool.util.KvHelper
 
 object MessageRereadingConfig {
     // 两次点击按钮之间的点击间隔不能少于500毫秒
-    private val MIN_CLICK_DELAY_TIME: Int = 500
+    private const val MIN_CLICK_DELAY_TIME: Int = 500
     private var lastClickTime: Long = 0
 
     private val config: KvHelper by lazy { KvHelper("消息复读") }
@@ -17,11 +17,11 @@ object MessageRereadingConfig {
         config.put("isDoubleClickMode", isDoubleClickMode)
     }
 
-    fun getSize(): Int {
-        return config.getInt("size")
+    fun getSize(): Float {
+        return config.getFloat("size", 24f)
     }
 
-    fun setSize(size: Int) {
+    fun setSize(size: Float) {
         config.put("size", size)
     }
 
