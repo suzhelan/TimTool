@@ -6,6 +6,7 @@
     android:theme="@style/Theme.TimTool">
 
     <TextView
+        android:textColor="@color/white"
         android:gravity="center"
         android:id="@+id/tv_message_demo"
         android:layout_width="wrap_content"

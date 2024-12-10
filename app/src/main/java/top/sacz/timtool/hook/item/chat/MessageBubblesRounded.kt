@@ -9,10 +9,10 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.view.View
 import android.widget.SeekBar
+import android.widget.TextView
 import com.kongzue.dialogx.dialogs.MessageDialog
-import com.kongzue.dialogx.interfaces.OnBindingView
+import com.kongzue.dialogx.interfaces.OnBindView
 import top.sacz.timtool.R
-import top.sacz.timtool.databinding.LayoutMessageBubblesRoundedChangeBinding
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.util.KvHelper
@@ -42,15 +42,14 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
             MessageDialog.build()
                 .setTitle(R.string.message_bubbles_rounded_title)
                 .setCustomView(object :
-                    OnBindingView<MessageDialog, LayoutMessageBubblesRoundedChangeBinding>() {
+                    OnBindView<MessageDialog>(R.layout.layout_message_bubbles_rounded_change) {
                     override fun onBind(
-                        dialog: MessageDialog,
-                        v: View,
-                        binding: LayoutMessageBubblesRoundedChangeBinding
+                        dialog: MessageDialog?,
+                        v: View
                     ) {
-                        val tvText = binding.tvMessageDemo
-                        val tvRadii = binding.tvRadii
-                        val radii = binding.sbRadii
+                        val tvText = v.findViewById<TextView>(R.id.tv_message_demo)
+                        val tvRadii = v.findViewById<TextView>(R.id.tv_radii)
+                        val radii = v.findViewById<SeekBar>(R.id.sb_radii)
                         tvRadii.text = "${getRadiiDp()}dp"
                         radii.progress = getRadiiDp()
                         tvText.background = GenerateBubbleDrawable().getBubbleDrawable(

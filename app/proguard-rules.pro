@@ -32,11 +32,11 @@
  # 不进行预校验,Android不需要,可加快混淆速度。
 -dontpreverify
 
-
 # 模块专属
 -keep class top.sacz.timtool.hook.InjectHook {*;}
 -keep class * extends top.sacz.timtool.hook.base.BaseHookItem {*;}
 -keep class top.sacz.timtool.net.entity.** {*;}
+
 
 # 枚举类
 -keepclassmembers enum * {
