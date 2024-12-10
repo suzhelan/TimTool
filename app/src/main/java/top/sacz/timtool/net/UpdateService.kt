@@ -2,7 +2,6 @@ package top.sacz.timtool.net
 
 import android.content.Intent
 import android.net.Uri
-import androidx.annotation.Keep
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopTip
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -16,13 +15,12 @@ import top.sacz.timtool.net.entity.UpdateInfo
 import top.sacz.timtool.util.TimeUtils
 import top.sacz.xphelper.util.ActivityTools
 
-@Keep
 class UpdateService {
     companion object {
         /**
          * 更新信息列表
          */
-        private lateinit var updateInfoList: List<UpdateInfo>
+        private var updateInfoList: List<UpdateInfo> = listOf()
 
         /**
          * 是否有更新
