@@ -18,7 +18,6 @@ import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.util.KvHelper
 import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.XpHelper.context
-import top.sacz.xphelper.reflect.Ignore
 import top.sacz.xphelper.reflect.MethodUtils
 
 @HookItem("辅助功能/聊天/消息气泡圆度优化")
@@ -72,6 +71,7 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                                         .toFloat()
                                 )
                             }
+
                             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                             }
 
@@ -88,22 +88,44 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
 
 
     override fun loadHook(loader: ClassLoader) {
-        //method name w
-        val textContent1 = MethodUtils.create("com.tencent.mobileqq.aio.msg.TextMsgContent")
-            .params(Drawable::class.java, Int::class.java, Int::class.java, Ignore::class.java)
-            .first()
-        hookBefore(textContent1) {
-            val backgroundLayer = it.args[0] as LayerDrawable
-            val textViewBackground = backgroundLayer.getDrawable(0) as GradientDrawable
-            val radii = ScreenParamUtils.dpToPx(context, getRadiiDp().toFloat()).toFloat()
-            textViewBackground.cornerRadii = floatArrayOf(
-                radii, radii,
-                radii, radii,
-                radii, radii,
-                radii, radii
-            )
-        }
+        /* 这样就是只作用于文本消息 //method name w
+         val textContent1 = MethodUtils.create("com.tencent.mobileqq.aio.msg.TextMsgContent")
+             .params(Drawable::class.java, Int::class.java, Int::class.java, Ignore::class.java)
+             .first()
+         hookBefore(textContent1) {
+             val backgroundLayer = it.args[0] as LayerDrawable
+             val textViewBackground = backgroundLayer.getDrawable(0) as GradientDrawable
+             val radii = ScreenParamUtils.dpToPx(context, getRadiiDp().toFloat()).toFloat()
+             textViewBackground.cornerRadii = floatArrayOf(
+                 radii, radii,
+                 radii, radii,
+                 radii, radii,
+                 radii, radii
+             )
+         }*/
 
+        //作用全部消息
+        val buildDrawableMethod = MethodUtils.create("com.tencent.mobileqq.aio.utils.ai")
+            .params(
+                Context::class.java,
+                loader.loadClass("com.tencent.mobileqq.aio.msglist.holder.skin.TimBubbleStyle"),
+                Float::class.java
+            )
+            .returnType(Drawable::class.java)
+            .result
+        for (method in buildDrawableMethod) {
+            hookAfter(method) { param ->
+                val backgroundLayer = param.result as LayerDrawable
+                val textViewBackground = backgroundLayer.getDrawable(0) as GradientDrawable
+                val radii = ScreenParamUtils.dpToPx(context, getRadiiDp().toFloat()).toFloat()
+                textViewBackground.cornerRadii = floatArrayOf(
+                    radii, radii,
+                    radii, radii,
+                    radii, radii,
+                    radii, radii
+                )
+            }
+        }
     }
 
     /**
