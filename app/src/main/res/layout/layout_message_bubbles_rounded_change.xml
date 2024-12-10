@@ -6,6 +6,7 @@
     android:theme="@style/Theme.TimTool">
 
     <TextView
+        android:gravity="center"
         android:id="@+id/tv_message_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
         android:paddingBottom="10dp"
-        android:text="@string/message_bubbles_rounded_demo"
+        android:text="@string/message_bubbles_rounded_text"
         android:textSize="18sp" />
 
 
@@ -33,7 +34,7 @@
             android:id="@+id/sb_radii"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="100" />
+            android:max="50" />
     </LinearLayout>
 
 

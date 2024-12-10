@@ -12,16 +12,39 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ActivityTools {
     public static ResourcesLoader resourcesLoader = null;
 
+    public static List<View> getAllChildViews(Activity activity) {
+        View view = activity.getWindow().getDecorView();
+        return getAllChildViews(view);
+
+    }
+
+    public static List<View> getAllChildViews(View view) {
+        List<View> allChildren = new ArrayList<>();
+        if (view instanceof ViewGroup) {
+            ViewGroup vp = (ViewGroup) view;
+            for (int i = 0; i < vp.getChildCount(); i++) {
+                View views = vp.getChildAt(i);
+                allChildren.add(views);
+                //递归调用
+                allChildren.addAll(getAllChildViews(views));
+            }
+        }
+        return allChildren;
+    }
     public static void injectResourcesToContext(Context context, String moduleApkPath) {
         Resources res = context.getResources();
         if (Build.VERSION.SDK_INT >= 30) {

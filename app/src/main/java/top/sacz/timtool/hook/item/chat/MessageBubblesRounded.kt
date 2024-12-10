@@ -1,5 +1,6 @@
 package top.sacz.timtool.hook.item.chat
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
@@ -10,6 +11,7 @@ import android.view.View
 import android.widget.SeekBar
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.interfaces.OnBindingView
+import top.sacz.timtool.R
 import top.sacz.timtool.databinding.LayoutMessageBubblesRoundedChangeBinding
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
@@ -34,10 +36,11 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
         KvHelper("修改气泡圆角").put("radii", radii)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun getOnClickListener(): View.OnClickListener? {
         return View.OnClickListener { view ->
             MessageDialog.build()
-                .setTitle("自定义头像圆角")
+                .setTitle(R.string.message_bubbles_rounded_title)
                 .setCustomView(object :
                     OnBindingView<MessageDialog, LayoutMessageBubblesRoundedChangeBinding>() {
                     override fun onBind(
@@ -48,6 +51,13 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                         val tvText = binding.tvMessageDemo
                         val tvRadii = binding.tvRadii
                         val radii = binding.sbRadii
+                        tvRadii.text = "${getRadiiDp()}dp"
+                        radii.progress = getRadiiDp()
+                        tvText.background = GenerateBubbleDrawable().getBubbleDrawable(
+                            context = context,
+                            true,
+                            ScreenParamUtils.dpToPx(context, getRadiiDp().toFloat()).toFloat()
+                        )
                         radii.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                             override fun onProgressChanged(
                                 seekBar: SeekBar,
@@ -55,15 +65,14 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                                 fromUser: Boolean
                             ) {
                                 setRadiiDp(progress)
-                                tvRadii.text = "${progress}dp"
+                                tvRadii.text = "${getRadiiDp()}dp"
                                 tvText.background = GenerateBubbleDrawable().getBubbleDrawable(
                                     context = context,
-                                    false,
+                                    true,
                                     ScreenParamUtils.dpToPx(context, getRadiiDp().toFloat())
                                         .toFloat()
                                 )
                             }
-
                             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                             }
 
@@ -72,9 +81,7 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                         })
                     }
                 })
-                .setOkButton("确定") { _, _ ->
-                    false
-                }
+                .setOkButton("确定")
                 .show()
 
         }
