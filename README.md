@@ -21,7 +21,7 @@
 
 ## 适配的版本范围 TimNT 4.x.x(目前维护到4.0.97 最新版)
 
-![Module-Img](https://github.com/suzhelan/TimTool/blob/master/github/img/v1.0.png)
+![Module-Img](https://github.com/suzhelan/TimTool/blob/master/github/img/v1.5.png)
 
 ### 该插件仅供学习与练习
 

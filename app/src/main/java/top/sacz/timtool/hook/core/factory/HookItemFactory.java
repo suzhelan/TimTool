@@ -19,7 +19,6 @@ public class HookItemFactory {
         for (BaseHookItem item : items) {
             ITEM_MAP.put(item.getClass(), item);
         }
-        items.sort(Comparator.comparing(BaseHookItem::getSimpleName));
     }
 
     public static BaseSwitchFunctionHookItem findHookItemByPath(String path) {
@@ -38,6 +37,7 @@ public class HookItemFactory {
                 result.add((BaseSwitchFunctionHookItem) item);
             }
         }
+        result.sort(Comparator.comparing(BaseHookItem::getSimpleName));
         return result;
     }
 
