@@ -1,10 +1,9 @@
 package top.sacz.timtool.hook.core.factory;
 
-import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import top.sacz.timtool.hook.base.BaseHookItem;
@@ -20,16 +19,7 @@ public class HookItemFactory {
         for (BaseHookItem item : items) {
             ITEM_MAP.put(item.getClass(), item);
         }
-        //排序
-        items.sort((o1, o2) -> {
-            if (o1 instanceof BaseSwitchFunctionHookItem && o2 instanceof BaseSwitchFunctionHookItem) {
-                //按中文排序
-                String itemName = o1.getItemName();
-                String o2ItemName = o2.getItemName();
-                return Collator.getInstance(Locale.CHINESE).compare(itemName, o2ItemName);
-            }
-            return 0;
-        });
+        items.sort(Comparator.comparing(BaseHookItem::getSimpleName));
     }
 
     public static BaseSwitchFunctionHookItem findHookItemByPath(String path) {
