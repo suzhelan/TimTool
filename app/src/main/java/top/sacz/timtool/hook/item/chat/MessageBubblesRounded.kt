@@ -88,23 +88,8 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
 
 
     override fun loadHook(loader: ClassLoader) {
-        /* 这样就是只作用于文本消息 //method name w
-         val textContent1 = MethodUtils.create("com.tencent.mobileqq.aio.msg.TextMsgContent")
-             .params(Drawable::class.java, Int::class.java, Int::class.java, Ignore::class.java)
-             .first()
-         hookBefore(textContent1) {
-             val backgroundLayer = it.args[0] as LayerDrawable
-             val textViewBackground = backgroundLayer.getDrawable(0) as GradientDrawable
-             val radii = ScreenParamUtils.dpToPx(context, getRadiiDp().toFloat()).toFloat()
-             textViewBackground.cornerRadii = floatArrayOf(
-                 radii, radii,
-                 radii, radii,
-                 radii, radii,
-                 radii, radii
-             )
-         }*/
 
-        //作用全部消息
+        //生成背景的方法
         val buildDrawableMethod = MethodUtils.create("com.tencent.mobileqq.aio.utils.ai")
             .params(
                 Context::class.java,
@@ -118,6 +103,7 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                 val backgroundLayer = param.result as LayerDrawable
                 val textViewBackground = backgroundLayer.getDrawable(0) as GradientDrawable
                 val radii = ScreenParamUtils.dpToPx(context, getRadiiDp().toFloat()).toFloat()
+                //控制圆角统一
                 textViewBackground.cornerRadii = floatArrayOf(
                     radii, radii,
                     radii, radii,
