@@ -6,7 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.util.FixContextUtil
 import top.sacz.timtool.BuildConfig
@@ -15,6 +15,7 @@ import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.core.factory.HookItemFactory
 import top.sacz.timtool.net.UpdateService
 import top.sacz.timtool.ui.adapter.ItemListAdapter
+import top.sacz.timtool.ui.view.CustomRecycleView
 
 class SettingDialog {
 
@@ -95,10 +96,12 @@ class SettingDialog {
         ibTelegram.setOnClickListener {
             onTelegramClick(it)
         }
-        val itemViewList = rootView.findViewById<ListView>(R.id.lv_item_list)
+        val itemViewList = rootView.findViewById<CustomRecycleView>(R.id.rv_item_list)
         val itemList = HookItemFactory.getAllSwitchFunctionItemList()
         val adapter = ItemListAdapter()
         adapter.submitList(itemList)
+        itemViewList.layoutManager = LinearLayoutManager(rootView.context)
         itemViewList.adapter = adapter
     }
+
 }

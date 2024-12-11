@@ -31,12 +31,11 @@
             android:src="@drawable/ic_telegram_fill" />
     </LinearLayout>
 
-    <com.kongzue.dialogx.util.views.DialogListView
-        android:id="@+id/lv_item_list"
+    <top.sacz.timtool.ui.view.CustomRecycleView
+        android:id="@+id/rv_item_list"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:divider="@null"
         android:dividerHeight="18dp" />
-
 </LinearLayout>
