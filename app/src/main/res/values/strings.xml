@@ -14,6 +14,9 @@
 
     <string name="github">Github</string>
 
+    <string name="ok">确认</string>
+    <string name="all_update_log">所有更新日志</string>
+    <string name="loading">加载中...</string>
     <string name="update_toast">[Tim小助手]有新版本</string>
     <string name="update_title">有新更新 v</string>
     <string name="to_update">去更新</string>
@@ -25,4 +28,5 @@
     <string name="double_click_repeat">双击复读</string>
     <string name="repeat_icon_size">复读图标大小</string>
 
+    <string name="view_update_log">查看历史更新日志</string>
 </resources>

@@ -92,8 +92,8 @@ public class ActivityTools {
         if (Looper.myLooper() == Looper.getMainLooper()) {
             task.run();
         } else {
-            Handler sHandler = new Handler(Looper.getMainLooper());
-            sHandler.postDelayed(task, 0L);
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(task, 0L);
         }
     }
 

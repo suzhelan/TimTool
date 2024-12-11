@@ -6,12 +6,37 @@
     android:padding="20dp"
     android:theme="@style/Theme.TimTool">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ib_update_log"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/view_update_log"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_log" />
+
+        <ImageButton
+            android:id="@+id/ib_telegram"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/view_update_log"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_telegram_fill" />
+    </LinearLayout>
+
     <com.kongzue.dialogx.util.views.DialogListView
         android:id="@+id/lv_item_list"
-        android:divider="@null"
-        android:dividerHeight="18dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:divider="@null"
+        android:dividerHeight="18dp" />
 
 </LinearLayout>

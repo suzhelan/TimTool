@@ -87,6 +87,14 @@ class SettingDialog {
     }
 
     private fun onBindView(rootView: View) {
+        val ibViewAllUpdateLog = rootView.findViewById<View>(R.id.ib_update_log)
+        ibViewAllUpdateLog.setOnClickListener {
+            UpdateLogDialog().show()
+        }
+        val ibTelegram = rootView.findViewById<View>(R.id.ib_telegram)
+        ibTelegram.setOnClickListener {
+            onTelegramClick(it)
+        }
         val itemViewList = rootView.findViewById<ListView>(R.id.lv_item_list)
         val itemList = HookItemFactory.getAllSwitchFunctionItemList()
         val adapter = ItemListAdapter()
