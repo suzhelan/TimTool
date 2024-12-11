@@ -12,6 +12,7 @@ import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.databinding.ActivityMainBinding
 import top.sacz.timtool.net.UpdateService
+import top.sacz.timtool.ui.dialog.UpdateLogDialog
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -55,6 +56,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onClickShowUpdateLogDialog(view: View) {
+        val updateLogDialog = UpdateLogDialog()
+        updateLogDialog.show()
+    }
     private fun initBuildInfo() {
         val dateFormat = SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss", Locale.getDefault())
         val buildTime = dateFormat.format(Date(BuildConfig.BUILD_TIMESTAMP))

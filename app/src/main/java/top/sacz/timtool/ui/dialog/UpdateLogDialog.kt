@@ -19,7 +19,7 @@ class UpdateLogDialog {
 
     fun show() {
         val dialog = MessageDialog.build()
-            .setTitle(R.string.all_update_log)
+            .setTitle(R.string.view_update_log)
             .setMessage(R.string.loading)
             .setOkButton(R.string.ok)
             .show()
