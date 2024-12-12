@@ -70,9 +70,11 @@ class FileUploadRename : BaseSwitchFunctionHookItem() {
         hookBefore(troopMethod, { param ->
             val item = param.args[1]
             val fileName: String = FieldUtils.getField(item, "FileName", String::class.java)
-            val localFile: String = FieldUtils.getField(item, "LocalFile", String::class.java)
-            if (meetHitConditions(fileName, localFile)) {
-                FieldUtils.setField(item, "FileName", getFormattedFileNameByPath(localFile))
+            val localFile: String? = FieldUtils.getField(item, "LocalFile", String::class.java)
+            localFile?.let { file ->
+                if (meetHitConditions(fileName, file)) {
+                    FieldUtils.setField(item, "FileName", getFormattedFileNameByPath(file))
+                }
             }
         }, 25)
         hookBefore(troopMethod, { param ->
