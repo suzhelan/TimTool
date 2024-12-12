@@ -12,10 +12,11 @@ import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.kongzue.dialogx.dialogs.MessageDialog
+import com.kongzue.dialogx.util.TextInfo
 import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.databinding.ActivityMainBinding
-import top.sacz.timtool.hook.util.ToastTool
 import top.sacz.timtool.net.UpdateService
 import top.sacz.timtool.ui.dialog.UpdateLogDialog
 import java.text.SimpleDateFormat
@@ -67,9 +68,29 @@ class MainActivity : AppCompatActivity() {
         //隐藏图标
         val cbHideIcon = bind.cbHideIcon
         cbHideIcon.isChecked = isHideActivity
-        cbHideIcon.setOnCheckedChangeListener { _, isChecked ->
-            ToastTool.show(isChecked)
-            isHideActivity = isChecked
+        cbHideIcon.setOnCheckedChangeListener { v, isChecked ->
+            if (isChecked) {
+                MessageDialog.show(
+                    "确认要隐藏图标吗",
+                    "这样会让模块在桌面上消失,但是你可以在框架打开模块"
+                )
+                    .setOkButton("确定")
+                    .setOkTextInfo(TextInfo().setFontColor(getColor(R.color.warning)).setBold(true))
+                    .setOkButton { _, _ ->
+                        isHideActivity = true
+                        false
+                    }
+                    .setOkButton("取消") { _, _ ->
+                        v.isChecked = false
+                        false
+                    }
+                    .onDismiss { dialog ->
+                        v.isChecked = false
+                    }
+                return@setOnCheckedChangeListener
+            } else {
+                isHideActivity = false
+            }
         }
     }
 
