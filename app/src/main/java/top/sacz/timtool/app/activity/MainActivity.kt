@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         val cbHideIcon = bind.cbHideIcon
         cbHideIcon.isChecked = isHideActivity
         cbHideIcon.setOnCheckedChangeListener { v, isChecked ->
+            v.isChecked = false
             if (isChecked) {
                 MessageDialog.show(
                     "确认要隐藏图标吗",
@@ -80,12 +81,8 @@ class MainActivity : AppCompatActivity() {
                         isHideActivity = true
                         false
                     }
-                    .setOkButton("取消") { _, _ ->
-                        v.isChecked = false
+                    .setCancelButton("取消") { _, _ ->
                         false
-                    }
-                    .onDismiss { dialog ->
-                        v.isChecked = false
                     }
                 return@setOnCheckedChangeListener
             } else {
