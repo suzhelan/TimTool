@@ -30,4 +30,10 @@
     <string name="view_update_log">历史更新日志</string>
 
     <string name="hide_icon">隐藏桌面图标</string>
+
+    <string name="me_daytime_bubble">自己-常规模式</string>
+    <string name="me_dark_bubble">自己-深色模式</string>
+    <string name="target_daytime_bubble">对方-常规模式</string>
+    <string name="target_dark_bubble">对方-深色模式</string>
+
 </resources>

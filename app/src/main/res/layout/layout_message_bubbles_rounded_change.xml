@@ -6,17 +6,17 @@
     android:theme="@style/Theme.TimTool">
 
     <TextView
-        android:textColor="@color/white"
-        android:gravity="center"
         android:id="@+id/tv_message_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:gravity="center"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
         android:paddingBottom="10dp"
         android:text="@string/message_bubbles_rounded_text"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
 
@@ -38,5 +38,75 @@
             android:max="50" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/me_daytime_bubble" />
+
+        <EditText
+            android:id="@+id/edit_me_daytime_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/me_daytime_bubble" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/me_dark_bubble" />
+
+        <EditText
+            android:id="@+id/edit_me_dark_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/me_dark_bubble" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/target_daytime_bubble" />
+
+        <EditText
+            android:id="@+id/edit_target_dark_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/target_daytime_bubble" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/target_dark_bubble" />
+
+        <EditText
+            android:id="@+id/edit_target_daytime_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/target_dark_bubble" />
+    </LinearLayout>
 </LinearLayout>

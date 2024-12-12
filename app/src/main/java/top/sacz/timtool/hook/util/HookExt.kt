@@ -18,7 +18,6 @@ fun String.method(): Method = MethodUtils.getMethodByDesc(this)
  */
 fun <T> Any.invoke(
     name: String,
-    returnType: Class<T>? = null,
     vararg args: Any?
 ): T {
     val paramTypes = args.map {
@@ -30,9 +29,8 @@ fun <T> Any.invoke(
     }.toTypedArray()
     return MethodUtils.create(this)
         .methodName(name)
-        .returnType(returnType)
         .params(*paramTypes)
-        .callFirst<T>(this, args)
+        .callFirst<T>(this, *args)
 }
 
 /**
