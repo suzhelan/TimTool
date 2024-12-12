@@ -28,4 +28,6 @@
     <string name="repeat_icon_size">复读图标大小</string>
 
     <string name="view_update_log">历史更新日志</string>
+
+    <string name="hide_icon">隐藏桌面图标</string>
 </resources>

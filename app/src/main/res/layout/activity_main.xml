@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".app.activity.MainActivity">
 
@@ -177,6 +178,13 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <CheckBox
+        android:id="@+id/cb_hide_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/hide_icon" />
 
     <TextView
         android:id="@+id/tv_build_info"
