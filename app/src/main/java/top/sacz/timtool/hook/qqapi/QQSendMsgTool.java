@@ -46,6 +46,13 @@ public class QQSendMsgTool {
                 }));
     }
 
+    /**
+     * 分享消息
+     *
+     * @param msgIdList         消息id list
+     * @param contact           消息id从哪个contact获取
+     * @param targetContactList 目标分享聊天会话
+     */
     public static void forwardMsg(ArrayList<Long> msgIdList, Object contact, ArrayList<Object> targetContactList) {
         try {
             Class<?> IMsgServiceClass = ClassUtils.findClass("com.tencent.qqnt.msg.api.IMsgService");

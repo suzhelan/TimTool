@@ -8,6 +8,7 @@ import java.util.List;
 
 import top.sacz.xphelper.base.BaseFinder;
 import top.sacz.xphelper.util.CheckClassType;
+import top.sacz.xphelper.util.DexMethodDescriptor;
 
 public class MethodUtils extends BaseFinder<Method> {
 
@@ -16,6 +17,12 @@ public class MethodUtils extends BaseFinder<Method> {
     private Class<?>[] methodParams;
     private Integer paramCount;
 
+    /**
+     * 通过方法签名获取方法对象
+     */
+    public static Method getMethodByDesc(String desc) throws NoSuchMethodException {
+        return new DexMethodDescriptor(desc).getMethodInstance(ClassUtils.getClassLoader());
+    }
 
     public static MethodUtils create(Object target) {
         return create(target.getClass());
