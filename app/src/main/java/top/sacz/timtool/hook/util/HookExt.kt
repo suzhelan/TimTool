@@ -10,7 +10,7 @@ import java.lang.reflect.Method
  * 通过方法签名获取方法
  *
  */
-fun String.method(): Method = MethodUtils.getMethodByDesc(this)
+fun String.toMethod(): Method = MethodUtils.getMethodByDesc(this)
 
 /**
  * 对象拓展 通过对象的方法参数调用
