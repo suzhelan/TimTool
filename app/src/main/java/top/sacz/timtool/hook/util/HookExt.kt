@@ -16,7 +16,7 @@ fun String.toMethod(): Method = MethodUtils.getMethodByDesc(this)
  * 对象拓展 通过对象的方法参数调用
  * 不支持静态方法的调用
  */
-fun <T> Any.invoke(
+fun <T> Any.call(
     methodName: String,
     vararg args: Any?
 ): T {
