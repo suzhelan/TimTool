@@ -25,7 +25,7 @@ fastjson2 = "2.0.53"
 glide = "4.16.0"
 base-recyclerview-helper = "4.1.6"
 
-dialogx = "0.0.50.beta26"
+dialogx = "0.0.50.beta28fix"
 
 protobuf-java = "4.28.2"
 kotlinx-serialization-protobuf = "1.7.3"

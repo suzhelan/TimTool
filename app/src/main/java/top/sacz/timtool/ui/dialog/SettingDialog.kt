@@ -46,7 +46,7 @@ class SettingDialog {
 
         dialog.dialogImpl.apply {
             val rootView =
-                FixContextUtil.getFixLayoutInflater(activity).inflate(R.layout.layout_setting, null)
+                FixContextUtil.getFixInflater(activity).inflate(R.layout.layout_setting, null)
             onBindView(rootView)
 
             boxList.addView(
