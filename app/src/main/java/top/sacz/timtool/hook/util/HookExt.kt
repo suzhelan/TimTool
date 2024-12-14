@@ -17,7 +17,7 @@ fun String.toMethod(): Method = MethodUtils.getMethodByDesc(this)
  * 不支持静态方法的调用
  */
 fun <T> Any.invoke(
-    name: String,
+    methodName: String,
     vararg args: Any?
 ): T {
     val paramTypes = args.map {
@@ -28,7 +28,7 @@ fun <T> Any.invoke(
         }
     }.toTypedArray()
     return MethodUtils.create(this)
-        .methodName(name)
+        .methodName(methodName)
         .params(*paramTypes)
         .callFirst<T>(this, *args)
 }

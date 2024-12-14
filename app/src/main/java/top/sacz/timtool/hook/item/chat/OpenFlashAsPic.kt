@@ -1,8 +1,8 @@
 package top.sacz.timtool.hook.item.chat
 
-import de.robv.android.xposed.XposedHelpers
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
+import top.sacz.timtool.hook.util.call
 import top.sacz.timtool.hook.util.toMethod
 import top.sacz.xphelper.reflect.FieldUtils
 
@@ -14,7 +14,7 @@ class OpenFlashAsPic : BaseSwitchFunctionHookItem() {
     override fun loadHook(loader: ClassLoader) {
         hookAfter("Lcom/tencent/mobileqq/aio/msg/AIOMsgItem;->getMsgRecord()Lcom/tencent/qqnt/kernel/nativeinterface/MsgRecord;".toMethod()) { param ->
             val msgRecord = param.result
-            val subMsgType = XposedHelpers.callMethod(msgRecord, "getSubMsgType") as Int
+            val subMsgType: Int = msgRecord.call("getSubMsgType")
             if ((subMsgType and 8192) != 0) {
                 FieldUtils.setField(msgRecord, "subMsgType", subMsgType and 8192.inv())
             }

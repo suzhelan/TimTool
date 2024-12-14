@@ -18,7 +18,7 @@ import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.util.ToastTool
-import top.sacz.timtool.hook.util.invoke
+import top.sacz.timtool.hook.util.call
 import top.sacz.timtool.util.KvHelper
 import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.XpHelper.context
@@ -166,8 +166,8 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                 HookEnv.getHostAppContext(),
                 false,
                 radii,
-                thisObject.invoke("c", timBubbleStyle),
-                thisObject.invoke("a", timBubbleStyle)
+                thisObject.call("c", timBubbleStyle),
+                thisObject.call("a", timBubbleStyle)
             )
         }
 
@@ -181,8 +181,8 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                 HookEnv.getHostAppContext(),
                 true,
                 radii,
-                thisObject.invoke("c", timBubbleStyle),
-                thisObject.invoke("a", timBubbleStyle)
+                thisObject.call("c", timBubbleStyle),
+                thisObject.call("a", timBubbleStyle)
             )
         }
     }
