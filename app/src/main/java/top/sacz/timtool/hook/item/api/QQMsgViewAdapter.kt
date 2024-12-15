@@ -53,7 +53,7 @@ class QQMsgViewAdapter : BaseHookItem() {
     }
 
     override fun loadHook(loader: ClassLoader) {
-        if (findContentViewId() != -1) {
+        if (findContentViewId() > 0) {
             contentViewId = findContentViewId()
             return
         }
