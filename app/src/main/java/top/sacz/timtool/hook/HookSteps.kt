@@ -44,6 +44,7 @@ class HookSteps {
 
     private fun initDialogX(context: Context) {
         DialogX.init(context)
+        DialogX.globalTheme = DialogX.THEME.AUTO
         DialogX.globalStyle = MaterialYouStyle()
     }
 

@@ -14,6 +14,7 @@ public class FixApplication extends Application {
         //初始化dialogx
         KvHelper.initialize(this);
         DialogX.init(this);
+        DialogX.globalTheme = DialogX.THEME.AUTO;
         DialogX.globalStyle = new MaterialYouStyle();
     }
 }
