@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kongzue.dialogx.dialogs.MessageDialog
-import com.kongzue.dialogx.util.FixContextUtil
+import com.kongzue.dialogx.interfaces.OnBindView
 import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
@@ -41,21 +41,19 @@ class SettingDialog {
         val dialog = MessageDialog.build()
             .setTitleIcon(R.drawable.ic_github)
             .setTitle(R.string.app_name)
+            .setCustomView(object : OnBindView<MessageDialog>(R.layout.layout_setting) {
+                override fun onBind(
+                    p0: MessageDialog?,
+                    p1: View?
+                ) {
+                    onBindView(p1 as ViewGroup)
+                }
+
+            })
             .setMessage(messageText)
             .show()
 
         dialog.dialogImpl.apply {
-            val rootView =
-                FixContextUtil.getFixInflater(activity).inflate(R.layout.layout_setting, null)
-            onBindView(rootView)
-
-            boxList.addView(
-                rootView,
-                ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            )
 
             txtDialogTitle.setOnClickListener {
                 onGithubClick(it)
