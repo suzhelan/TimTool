@@ -1,9 +1,10 @@
-package top.sacz.timtool.hook.item.chat
+package top.sacz.timtool.hook.item.file
 
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.util.Log
 import com.kongzue.dialogx.dialogs.MessageMenu
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
@@ -29,7 +30,7 @@ class SystemFileSelector : BaseSwitchFunctionHookItem() {
                 // reserved for special usage
                 return false
             }
-            if ("guild" in android.util.Log.getStackTraceString(Throwable())) {
+            if ("guild" in Log.getStackTraceString(Throwable())) {
                 // Filter out calls in the guild
                 return false
             }
@@ -75,4 +76,3 @@ class SystemFileSelector : BaseSwitchFunctionHookItem() {
         XposedBridge.hookAllMethods(Activity::class.java, "startActivityForResult", hook)
     }
 }
-
