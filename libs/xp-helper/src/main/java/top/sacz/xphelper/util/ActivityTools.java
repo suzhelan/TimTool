@@ -3,6 +3,9 @@ package top.sacz.xphelper.util;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.content.res.loader.ResourcesLoader;
@@ -26,6 +29,25 @@ import java.util.Map;
 public class ActivityTools {
     public static ResourcesLoader resourcesLoader = null;
 
+    /**
+     * 获取所有声明在AndroidManifest中已经有注册过的activityInfo
+     *
+     * @param context 上下文
+     */
+    public static ActivityInfo[] getAllActivity(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packageInfo;
+        try {
+            packageInfo = packageManager.getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_ACTIVITIES);
+            //所有的Activity
+            ActivityInfo[] activities = packageInfo.activities;
+            return activities;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static List<View> getAllChildViews(Activity activity) {
         View view = activity.getWindow().getDecorView();
         return getAllChildViews(view);

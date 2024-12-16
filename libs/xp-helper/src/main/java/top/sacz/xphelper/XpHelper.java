@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import de.robv.android.xposed.IXposedHookZygoteInit;
+import top.sacz.xphelper.activity.ActivityProxyManager;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.util.ActivityTools;
 
@@ -12,12 +13,13 @@ public class XpHelper {
     public static Context context;
     public static ClassLoader classLoader;
 
-    private static String moduleApkPath;
+    public static String moduleApkPath;
 
     public static void initContext(Context application) {
         context = application;
         classLoader = application.getClassLoader();
         ClassUtils.intiClassLoader(classLoader);
+        ActivityProxyManager.initActivityProxyManager(application);
     }
 
     public static void initZygote(IXposedHookZygoteInit.StartupParam startupParam) {
