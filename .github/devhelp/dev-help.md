@@ -35,3 +35,9 @@ class DownloadEmotion : BaseSwitchFunctionHookItem() {
 
 }
 ```
+如果你是Java开发者，可以参考如下代码
+
+```java
+
+```
+
