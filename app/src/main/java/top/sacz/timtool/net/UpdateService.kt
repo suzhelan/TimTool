@@ -1,9 +1,12 @@
 package top.sacz.timtool.net
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopTip
+import de.robv.android.xposed.XC_MethodHook
+import de.robv.android.xposed.XposedHelpers
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +19,7 @@ import top.sacz.timtool.net.entity.HasUpdate
 import top.sacz.timtool.net.entity.UpdateInfo
 import top.sacz.timtool.util.TimeUtils
 import top.sacz.xphelper.util.ActivityTools
+
 
 class UpdateService {
     companion object {
@@ -41,6 +45,23 @@ class UpdateService {
      */
     fun requestUpdateAsyncAndToast() {
         requestUpdateAsync { hasUpdate ->
+            if (isForceUpdate()) {
+                //如果act已经初始化了
+                ActivityTools.getTopActivity()?.let { activity ->
+                    showUpdateDialog()
+                    return@requestUpdateAsync
+                }
+                //如果act没初始化完成就检测到了 hook activity
+                XposedHelpers.findAndHookMethod(
+                    Activity::class.java,
+                    "onResume",
+                    object : XC_MethodHook() {
+                        @Throws(Throwable::class)
+                        override fun afterHookedMethod(param: MethodHookParam) {
+                            showUpdateDialog()
+                        }
+                    })
+            }
             if (hasUpdate) {
                 PopTip.show(R.string.update_toast)
                     .showLong()
