@@ -6,6 +6,7 @@ import android.os.Looper;
 
 import java.util.HashMap;
 
+import top.sacz.timtool.hook.base.AbstractChooseActivity;
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem;
 import top.sacz.timtool.hook.core.annotation.HookItem;
 import top.sacz.timtool.hook.core.factory.ExceptionFactory;
@@ -31,6 +32,9 @@ public class SnowflakesFall extends BaseSwitchFunctionHookItem {
     }
 
     private void updateStates(Activity activity, boolean isShow) {
+        if (AbstractChooseActivity.class.isAssignableFrom(activity.getClass())) {
+            return;
+        }
         try {
             SnowflakesFallTool show = showList.get(activity);
             if (show == null) {

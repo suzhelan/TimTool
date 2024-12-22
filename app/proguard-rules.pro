@@ -38,6 +38,8 @@
 -keep class top.sacz.timtool.net.entity.** {*;}
 
 
+-keep class * extends android.app.Activity {*;}
+
 # 枚举类
 -keepclassmembers enum * {
     public static **[] values();
