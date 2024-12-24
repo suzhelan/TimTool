@@ -16,7 +16,7 @@ import top.sacz.timtool.hook.core.annotation.HookItem
 @HookItem("辅助功能/聊天/禁用内置浏览器")
 class DisableTimBrowser : BaseSwitchFunctionHookItem() {
 
-    override fun getTip(): String? {
+    override fun getTip(): String {
         return "打开非QQ官方网页时使用外部浏览器打开"
     }
 
