@@ -1,5 +1,6 @@
 package top.sacz.timtool.hook;
 
+import android.app.Application;
 import android.content.Context;
 
 /**
@@ -42,6 +43,20 @@ public class HookEnv {
      * 全局的Context
      */
     private static Context hostAppContext;
+
+    /**
+     * 无需多言
+     */
+    private static Application application;
+
+    public static Application getApplication() {
+        return application;
+    }
+
+    public static void setApplication(Application application) {
+        HookEnv.application = application;
+    }
+
     private static ClassLoader hostClassLoader;
 
     private HookEnv() {

@@ -1,5 +1,6 @@
 package top.sacz.timtool.hook
 
+import android.app.Application
 import android.content.Context
 import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogxmaterialyou.style.MaterialYouStyle
@@ -25,11 +26,13 @@ class HookSteps {
         HookEnv.setModuleApkPath(startupParam.modulePath)
     }
 
-    fun initContext(context: Context) {
+    fun initContext(application: Application) {
+        val context = application.baseContext
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         val packageManager = context.packageManager
         val appName = packageManager.getApplicationLabel(context.applicationInfo).toString()
         HookEnv.setHostAppContext(context)
+        HookEnv.setApplication(application)
         HookEnv.setHostApkPath(context.applicationInfo.sourceDir)
         HookEnv.setAppName(appName)
         HookEnv.setVersionCode(packageInfo.versionCode)

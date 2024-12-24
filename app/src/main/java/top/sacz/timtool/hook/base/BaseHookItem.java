@@ -55,14 +55,25 @@ public abstract class BaseHookItem {
         }
         try {
             isLoad = true;
-            loadHook(HookEnv.getHostClassLoader());
+            initOnce();
+            if (initOnce()) {
+                loadHook(HookEnv.getHostClassLoader());
+            }
         } catch (Throwable e) {
             XposedBridge.log(e);
             ExceptionFactory.add(this, e);
         }
     }
 
-    public abstract void loadHook(@NonNull ClassLoader loader) throws Throwable;
+    /**
+     * 在loadHook前执行一次 返回true表示继续执行loadHook
+     * 如果返回false 表示由initOnce自行处理loadHook事件
+     */
+    public boolean initOnce() {
+        return true;
+    }
+
+    public abstract void loadHook(@NonNull ClassLoader classLoader) throws Throwable;
 
     /**
      * 标准hook方法执行前

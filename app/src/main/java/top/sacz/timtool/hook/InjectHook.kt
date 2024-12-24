@@ -1,6 +1,6 @@
 package top.sacz.timtool.hook
 
-import android.content.ContextWrapper
+import android.app.Application
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.XC_MethodHook
@@ -43,10 +43,9 @@ class InjectHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
         val onCreateContextMethod = CommonMethod.getContextCreateMethod(loadPackageParam)
         XposedBridge.hookMethod(onCreateContextMethod, object : XC_MethodHook() {
             override fun afterHookedMethod(param: MethodHookParam) {
-                val application = param.thisObject as ContextWrapper
-                val context = application.baseContext
+                val application = param.thisObject as Application
                 //init env
-                hookSteps.initContext(context)
+                hookSteps.initContext(application)
                 hookSteps.initHooks()
             }
         })
