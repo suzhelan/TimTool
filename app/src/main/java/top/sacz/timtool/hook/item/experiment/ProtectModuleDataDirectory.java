@@ -23,7 +23,7 @@ public class ProtectModuleDataDirectory extends ApiHookItem {
     private static final HashSet<String> FILES_TO_HIDE = new HashSet<>();
 
     static {
-        FILES_TO_HIDE.add("QStory");
+        FILES_TO_HIDE.add("Tim小助手");
     }
 
     private HashSet<String> mPathPrefixList;
