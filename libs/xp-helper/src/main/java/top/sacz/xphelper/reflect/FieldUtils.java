@@ -6,6 +6,7 @@ import java.util.List;
 
 import top.sacz.xphelper.base.BaseFinder;
 import top.sacz.xphelper.util.CheckClassType;
+import top.sacz.xphelper.util.DexFieldDescriptor;
 
 public class FieldUtils extends BaseFinder<Field> {
 
@@ -13,6 +14,17 @@ public class FieldUtils extends BaseFinder<Field> {
     private String fieldName;
 
 
+    public static Field getFieldByDesc(String desc) throws NoSuchMethodException {
+        Field field = new DexFieldDescriptor(desc).getFieldInstance(ClassUtils.getClassLoader());
+        field.setAccessible(true);
+        return field;
+    }
+
+    public static Field getFieldByDesc(String desc, ClassLoader classLoader) throws NoSuchMethodException {
+        Field field = new DexFieldDescriptor(desc).getFieldInstance(classLoader);
+        field.setAccessible(true);
+        return field;
+    }
     /**
      * 获取field值
      *

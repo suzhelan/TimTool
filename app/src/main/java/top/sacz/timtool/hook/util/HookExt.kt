@@ -3,6 +3,7 @@ package top.sacz.timtool.hook.util
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.Ignore
 import top.sacz.xphelper.reflect.MethodUtils
+import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 /**
@@ -12,6 +13,12 @@ import java.lang.reflect.Method
  */
 fun String.toMethod(): Method = MethodUtils.getMethodByDesc(this)
 
+fun String.toMethod(classLoader: ClassLoader): Method =
+    MethodUtils.getMethodByDesc(this, classLoader)
+
+fun String.toField(): Field = FieldUtils.getFieldByDesc(this)
+
+fun String.toField(classLoader: ClassLoader): Field = FieldUtils.getFieldByDesc(this, classLoader)
 /**
  * 对象拓展 通过对象的方法参数调用
  * 不支持静态方法的调用

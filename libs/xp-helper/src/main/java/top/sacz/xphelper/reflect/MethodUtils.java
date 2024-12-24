@@ -21,7 +21,15 @@ public class MethodUtils extends BaseFinder<Method> {
      * 通过方法签名获取方法对象
      */
     public static Method getMethodByDesc(String desc) throws NoSuchMethodException {
-        return new DexMethodDescriptor(desc).getMethodInstance(ClassUtils.getClassLoader());
+        Method method = new DexMethodDescriptor(desc).getMethodInstance(ClassUtils.getClassLoader());
+        method.setAccessible(true);
+        return method;
+    }
+
+    public static Method getMethodByDesc(String desc, ClassLoader classLoader) throws NoSuchMethodException {
+        Method method = new DexMethodDescriptor(desc).getMethodInstance(classLoader);
+        method.setAccessible(true);
+        return method;
     }
 
     public static MethodUtils create(Object target) {
