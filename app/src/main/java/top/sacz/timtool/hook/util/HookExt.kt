@@ -9,16 +9,19 @@ import java.lang.reflect.Method
 /**
  * 方法拓展
  * 通过方法签名获取方法
- *
  */
 fun String.toMethod(): Method = MethodUtils.getMethodByDesc(this)
 
-fun String.toMethod(classLoader: ClassLoader): Method =
-    MethodUtils.getMethodByDesc(this, classLoader)
+fun String.toMethod(clsLoader: ClassLoader): Method = MethodUtils.getMethodByDesc(this, clsLoader)
 
+/**
+ * 变量拓展
+ * 通过变量签名获取变量
+ */
 fun String.toField(): Field = FieldUtils.getFieldByDesc(this)
 
-fun String.toField(classLoader: ClassLoader): Field = FieldUtils.getFieldByDesc(this, classLoader)
+fun String.toField(clsLoader: ClassLoader): Field = FieldUtils.getFieldByDesc(this, clsLoader)
+
 /**
  * 对象拓展 通过对象的方法参数调用
  * 不支持静态方法的调用
@@ -41,8 +44,9 @@ fun <T> Any.call(
 }
 
 /**
- * 对象拓展 通过对象的属性名获取
- * 传参 name或者字段类型
+ * 对象拓展
+ * 获取字段值
+ * 传参 字段名 或者 字段类型
  */
 fun <T> Any.getFieldValue(name: String? = null, type: Class<out T>? = null): T {
     return FieldUtils.create(this)
@@ -52,8 +56,9 @@ fun <T> Any.getFieldValue(name: String? = null, type: Class<out T>? = null): T {
 }
 
 /**
+ * 对象拓展
  * 设置字段值
- * 传参 name或者字段类型
+ * 传参 字段名 或者 字段类型
  */
 fun <T> Any.setFieldValue(name: String? = null, type: Class<out T>? = null, value: T) {
     FieldUtils.create(this)
@@ -62,3 +67,26 @@ fun <T> Any.setFieldValue(name: String? = null, type: Class<out T>? = null, valu
         .setFirst(this, value)
 }
 
+/**
+ * 类拓展
+ * 获取静态字段值
+ * 传参 字段名 或者 字段类型
+ */
+fun <T> Class<*>.getStaticFieldValue(name: String? = null, type: Class<out T>? = null): T {
+    return FieldUtils.create(this)
+        .fieldName(name)
+        .fieldType(type)
+        .firstValue<T>(null)
+}
+
+/**
+ * 类拓展
+ * 设置静态字段值
+ * 传参 字段名 或者 字段类型
+ */
+fun <T> Class<*>.setStaticFieldValue(name: String? = null, type: Class<out T>? = null, value: T) {
+    FieldUtils.create(this)
+        .fieldName(name)
+        .fieldType(type)
+        .setFirst(null, value)
+}
