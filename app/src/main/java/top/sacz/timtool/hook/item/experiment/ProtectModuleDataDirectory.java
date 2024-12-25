@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.system.Os;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
@@ -49,7 +50,7 @@ public class ProtectModuleDataDirectory extends ApiHookItem {
 
     @SuppressLint("SdCardPath")
     @Override
-    public void loadHook(ClassLoader classLoader) {
+    public void loadHook(@NonNull ClassLoader classLoader) {
         Context ctx = HookEnv.getHostAppContext();
         String packageName = ctx.getPackageName();
         // UserHandle.PER_USER_RANGE

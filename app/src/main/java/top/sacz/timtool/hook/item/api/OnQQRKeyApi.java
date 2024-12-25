@@ -1,5 +1,7 @@
 package top.sacz.timtool.hook.item.api;
 
+import androidx.annotation.NonNull;
+
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
 
@@ -52,7 +54,7 @@ public class OnQQRKeyApi extends ApiHookItem {
     }
 
     @Override
-    public void loadHook(ClassLoader classLoader) throws Throwable {
+    public void loadHook(@NonNull ClassLoader classLoader) throws Throwable {
         Method method = MethodUtils.create("mqq.app.msghandle.MsgRespHandler")
                 .methodName("dispatchRespMsg")
                 .params(

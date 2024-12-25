@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
 
 import top.sacz.timtool.hook.base.AbstractChooseActivity;
@@ -58,7 +60,7 @@ public class SnowflakesFall extends BaseSwitchFunctionHookItem {
     }
 
     @Override
-    public void loadHook(ClassLoader classLoader) throws Exception {
+    public void loadHook(@NonNull ClassLoader classLoader) throws Exception {
         //窗口焦点可见时
         hookAfter(Activity.class.getDeclaredMethod("onWindowFocusChanged", boolean.class), param -> {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {

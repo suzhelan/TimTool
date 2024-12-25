@@ -5,10 +5,13 @@ import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 // 辅助功能/聊天/复读
 
 //辅助功能
-data class CategoryTitleUI(var title: String, var dir: List<Category>)
+data class ParentCategory(
+    val parentTitle: String,
+    var categoryList: MutableList<Category> = mutableListOf()
+)
 
-//聊天
-data class Category(var title: String, var items: List<ItemUI>)
+//类别
+data class Category(val title: String, var items: MutableList<ItemUI> = mutableListOf())
 
 //具体的功能名称
 data class ItemUI(

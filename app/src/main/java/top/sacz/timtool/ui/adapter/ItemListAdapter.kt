@@ -1,5 +1,6 @@
 package top.sacz.timtool.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class ItemListAdapter : BaseQuickAdapter<BaseSwitchFunctionHookItem, QuickViewHo
         return QuickViewHolder(R.layout.item_hook_function, parent)
     }
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onBindViewHolder(
         holder: QuickViewHolder,
         position: Int,
