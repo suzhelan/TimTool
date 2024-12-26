@@ -47,11 +47,11 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
             MessageDialog.build()
                 .setCustomView(object :
                     OnBindView<MessageDialog>(R.layout.layout_rereading_setting) {
+                    @SuppressLint("SetTextI18n")
                     override fun onBind(
                         dialog: MessageDialog,
                         v: View
                     ) {
-                        // 通过 v.findViewById(id) 可以获取到布局中的控件对象
                         editSize = v.findViewById(R.id.edit_repeat_icon_size)
                         isDoubleClick = v.findViewById(R.id.cb_double_click_repeat)
                         editSize.setText(MessageRereadingConfig.getSize().toString())
@@ -59,8 +59,8 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
                     }
                 })
                 .setOkButton("保存") { _, _ ->
-                    MessageRereadingConfig.setSize(editSize!!.text.toString().toFloat())
-                    MessageRereadingConfig.setDoubleClickMode(isDoubleClick!!.isChecked)
+                    MessageRereadingConfig.setSize(editSize.text.toString().toFloat())
+                    MessageRereadingConfig.setDoubleClickMode(isDoubleClick.isChecked)
                     false
                 }
                 .show()
