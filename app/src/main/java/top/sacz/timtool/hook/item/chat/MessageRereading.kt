@@ -42,8 +42,8 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
 
     override fun getOnClickListener(): View.OnClickListener {
         return View.OnClickListener {
-            var editSize: EditText? = null
-            var isDoubleClick: CheckBox? = null
+            lateinit var editSize: EditText
+            lateinit var isDoubleClick: CheckBox
             MessageDialog.build()
                 .setCustomView(object :
                     OnBindView<MessageDialog>(R.layout.layout_rereading_setting) {
@@ -51,6 +51,7 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
                         dialog: MessageDialog,
                         v: View
                     ) {
+                        // 通过 v.findViewById(id) 可以获取到布局中的控件对象
                         editSize = v.findViewById(R.id.edit_repeat_icon_size)
                         isDoubleClick = v.findViewById(R.id.cb_double_click_repeat)
                         editSize.setText(MessageRereadingConfig.getSize().toString())
