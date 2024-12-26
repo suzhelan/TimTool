@@ -53,11 +53,11 @@ class HookSteps {
     }
 
     fun initHooks() {
+        val methodFindProcessor = HookItemMethodFindProcessor()
         //环境初始化 开始进行hook项目的初始化
         if (HookEnv.isMainProcess()) {
-            val methodFindProcessor = HookItemMethodFindProcessor()
             if (methodFindProcessor.isDataExpire()) {
-                methodFindProcessor.init()
+                methodFindProcessor.startFindAsync { initHooks() }
                 return
             }
             XposedBridge.log("[Tim小助手]环境初始化完成")
@@ -67,6 +67,7 @@ class HookSteps {
             val service = UpdateService()
             service.requestUpdateAsyncAndToast()
         }
+        methodFindProcessor.scanConfigMethod()
         val hookItemLoader = HookItemLoader()
         hookItemLoader.loadConfig()
         hookItemLoader.loadHookItem()

@@ -1,6 +1,8 @@
 package top.sacz.xphelper.dexkit.cache;
 
 
+import android.util.Log;
+
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.TypeReference;
@@ -29,6 +31,7 @@ public class DexKitCache {
         ArrayList<Method> result = new ArrayList<>();
         ArrayList<String> methodInfoList = kvHelper.getObject(key, new TypeReference<>() {
         });
+        Log.d("Cache", "getMethodList: " + key);
         if (methodInfoList != null) {
             for (String methodInfo : methodInfoList) {
                 result.add(findMethodByJSON(methodInfo));

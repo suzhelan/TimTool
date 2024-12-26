@@ -1,9 +1,5 @@
 package top.sacz.xphelper.dexkit;
 
-import androidx.annotation.NonNull;
-
-import com.alibaba.fastjson2.JSON;
-
 import org.luckypray.dexkit.query.FindMethod;
 import org.luckypray.dexkit.query.enums.MatchType;
 import org.luckypray.dexkit.query.matchers.MethodMatcher;
@@ -12,6 +8,7 @@ import org.luckypray.dexkit.result.MethodDataList;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import top.sacz.xphelper.dexkit.cache.DexKitCache;
@@ -120,13 +117,8 @@ public class MethodFinder {
             return this;
         }
 
-        @NonNull
-        @Override
-        public String toString() {
-            return JSON.toJSONString(this);
-        }
 
-        private FindMethod getFindMethod() {
+        private FindMethod buildFindMethod() {
             FindMethod findMethod = FindMethod.create();
             if (searchPackages != null) {
                 findMethod.searchPackages(searchPackages);
@@ -134,10 +126,10 @@ public class MethodFinder {
             if (excludePackages != null) {
                 findMethod.excludePackages(excludePackages);
             }
-            return findMethod.matcher(getMethodMatcher());
+            return findMethod.matcher(buildMethodMatcher());
         }
 
-        private MethodMatcher getMethodMatcher() {
+        private MethodMatcher buildMethodMatcher() {
             MethodMatcher methodMatcher = MethodMatcher.create();
             if (declaredClass != null) {
                 methodMatcher.declaredClass(declaredClass);
@@ -188,7 +180,7 @@ public class MethodFinder {
             }
             ArrayList<Method> methods = new ArrayList<>();
             //使用dexkit查找方法
-            MethodDataList methodDataList = DexFinder.getDexKitBridge().findMethod(getFindMethod());
+            MethodDataList methodDataList = DexFinder.getDexKitBridge().findMethod(buildFindMethod());
             if (methodDataList.isEmpty()) {
                 return methods;
             }
@@ -213,9 +205,53 @@ public class MethodFinder {
         public Method first() throws Exception {
             List<Method> methods = find();
             if (methods.isEmpty()) {
-                throw new NoSuchMethodException("No method found");
+                throw new NoSuchMethodException("No method found :" + this);
             }
             return methods.get(0);
+        }
+
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            //拼入字段值 无需拼入字段名 如果为空则不拼入
+            if (declaredClass != null) {
+                builder.append(declaredClass.getName());
+            }
+            if (methodName != null && !methodName.isEmpty()) {
+                builder.append(methodName);
+            }
+            if (returnType != null) {
+                builder.append(returnType.getName());
+            }
+            if (parameters != null) {
+                builder.append(Arrays.toString(parameters));
+            }
+            if (invokeMethods != null) {
+                builder.append(Arrays.toString(invokeMethods));
+            }
+            if (callMethods != null) {
+                builder.append(Arrays.toString(callMethods));
+            }
+            if (usingNumbers != null) {
+                builder.append(Arrays.toString(usingNumbers));
+            }
+            if (isParamCount) {
+                builder.append(paramCount);
+            }
+            if (isModifiers) {
+                builder.append(modifiers);
+            }
+            if (stringContent != null && stringContent.length != 0) {
+                builder.append(Arrays.toString(stringContent));
+            }
+            if (searchPackages != null) {
+                builder.append(Arrays.toString(searchPackages));
+            }
+            if (excludePackages != null) {
+                builder.append(Arrays.toString(excludePackages));
+            }
+            return builder.toString();
         }
     }
 }

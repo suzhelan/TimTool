@@ -7,7 +7,7 @@ import top.sacz.xphelper.dexkit.MethodFinder;
  */
 public interface IMethodFinder {
 
-    void find();
+    void find() throws Throwable;
 
     default MethodFinder.MethodBridge buildMethodFinder() {
         return MethodFinder.build();
