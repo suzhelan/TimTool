@@ -31,6 +31,8 @@ public class HookEnv {
      * 宿主应用名
      */
     private static String appName;
+
+
     /**
      * 宿主版本名称
      */
