@@ -9,7 +9,7 @@ import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.MethodUtils
 import java.lang.reflect.Method
 
-@HookItem("辅助功能/聊天/文件上传重命名")
+@HookItem("辅助功能/文件/文件上传重命名")
 class FileUploadRename : BaseSwitchFunctionHookItem() {
 
     override fun getTip(): String {

@@ -40,7 +40,7 @@ import java.lang.reflect.Method
 @HookItem("辅助功能/聊天/复读")
 class MessageRereading : BaseSwitchFunctionHookItem() {
 
-    override fun getOnClickListener(): View.OnClickListener? {
+    override fun getOnClickListener(): View.OnClickListener {
         return View.OnClickListener {
             var editSize: EditText? = null
             var isDoubleClick: CheckBox? = null
@@ -67,7 +67,7 @@ class MessageRereading : BaseSwitchFunctionHookItem() {
         }
     }
 
-    override fun getTip(): String? {
+    override fun getTip(): String {
         return "点击可以设置一些参数"
     }
 
