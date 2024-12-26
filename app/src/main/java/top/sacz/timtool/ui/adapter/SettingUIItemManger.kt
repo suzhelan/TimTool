@@ -7,7 +7,7 @@ import top.sacz.timtool.ui.bean.ItemUI
 import top.sacz.timtool.ui.bean.ParentCategory
 
 class SettingUIItemManger {
-    val result = mutableListOf<ParentCategory>()
+    private val result = mutableListOf<ParentCategory>()
 
     fun parseHookItemAsUI(): List<ParentCategory> {
         result.clear()

@@ -23,6 +23,7 @@ class ItemListAdapter : BaseQuickAdapter<BaseSwitchFunctionHookItem, QuickViewHo
         return QuickViewHolder(R.layout.item_hook_function, parent)
     }
 
+
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onBindViewHolder(
         holder: QuickViewHolder,

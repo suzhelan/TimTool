@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.kongzue.dialogx.dialogs.BottomDialog;
+import com.kongzue.dialogx.interfaces.DialogLifecycleCallback;
 import com.kongzue.dialogx.interfaces.OnBindView;
 
 import java.io.File;
@@ -33,12 +34,23 @@ public class BottomStickerPanelDialog {
     private final StickerPanelAdapter stickerPanelAdapter = new StickerPanelAdapter();
     private final StickerDirAdapter dirAdapter = new StickerDirAdapter();
 
-
+    private boolean isShowing = false;
     public void show() {
         initData();
         Context context = ActivityTools.getTopActivity();
         int height = (int) (ScreenParamUtils.getScreenHeight(context) * 0.8);
         BottomDialog.build()
+                .setDialogLifecycleCallback(new DialogLifecycleCallback<BottomDialog>() {
+                    @Override
+                    public void onShow(BottomDialog dialog) {
+                        isShowing = true;
+                    }
+
+                    @Override
+                    public void onDismiss(BottomDialog dialog) {
+                        isShowing = false;
+                    }
+                })
                 .setMaxHeight(height)
                 .setMinHeight(height)
                 .setScrollableWhenContentLargeThanVisibleRange(false)

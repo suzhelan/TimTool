@@ -16,6 +16,6 @@ data class Category(val title: String, var items: MutableList<ItemUI> = mutableL
 //具体的功能名称
 data class ItemUI(
     var title: String,
-    var desc: String,
+    var desc: String? = null,
     var switchFunctionHookItem: BaseSwitchFunctionHookItem
 )

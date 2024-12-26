@@ -14,7 +14,6 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@id/switch_item"
         android:minHeight="25dp"
-        android:text="功能名称"
         android:textSize="18sp"
         tools:text="功能名称" />
 
