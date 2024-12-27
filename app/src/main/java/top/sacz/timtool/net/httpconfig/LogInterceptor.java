@@ -1,7 +1,5 @@
 package top.sacz.timtool.net.httpconfig;
 
-import android.util.Log;
-
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 
@@ -18,6 +16,7 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
 import top.sacz.timtool.BuildConfig;
+import top.sacz.timtool.util.Log;
 
 public class LogInterceptor implements Interceptor {
     @NotNull
@@ -61,7 +60,7 @@ public class LogInterceptor implements Interceptor {
             //不是json格式
         }
         if (BuildConfig.DEBUG) {
-            Log.d("[Tim小助手]请求日志", log);
+            Log.d("请求日志:" + log);
         }
     }
 }

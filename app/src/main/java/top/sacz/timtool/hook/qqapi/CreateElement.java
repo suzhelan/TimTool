@@ -2,7 +2,6 @@ package top.sacz.timtool.hook.qqapi;
 
 import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,13 +10,12 @@ import de.robv.android.xposed.XposedHelpers;
 import top.sacz.timtool.hook.util.PathTool;
 import top.sacz.timtool.hook.util.ToastTool;
 import top.sacz.timtool.net.DownloadManager;
+import top.sacz.timtool.util.Log;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.reflect.ConstructorUtils;
 import top.sacz.xphelper.reflect.FieldUtils;
 
-
 public class CreateElement {
-
 
     public static Object createTextElement(String text) {
         Object o = QQEnvTool.getQRouteApi(ClassUtils.findClass("com.tencent.qqnt.msg.api.IMsgUtilApi"));
@@ -66,7 +64,6 @@ public class CreateElement {
         return XposedHelpers.callMethod(o, "createFileElement", new Class[]{String.class}, path);
     }
 
-
     public static Object createVideoElement(String path) {
         Object o = QQEnvTool.getQRouteApi(ClassUtils.findClass("com.tencent.qqnt.msg.api.IMsgUtilApi"));
         return XposedHelpers.callMethod(o, "createVideoElement", new Class[]{String.class}, path);
@@ -102,7 +99,7 @@ public class CreateElement {
             XposedHelpers.callMethod(msgElement, "setGrayTipElement", new Class[]{ClassUtils.findClass("com.tencent.qqnt.kernel.nativeinterface.GrayTipElement")}, grayTipElement);
             return msgElement;
         } catch (Exception e) {
-            Log.d("报错:createJsonGrayTipElement", String.valueOf(e));
+            Log.d("报错:createJsonGrayTipElement", e);
             return null;
         }
     }
@@ -123,7 +120,6 @@ public class CreateElement {
             return null;
         }
     }
-
 
     public static String cachePicPath(String Path) {
         String mPath = Path.toLowerCase();
