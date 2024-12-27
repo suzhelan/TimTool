@@ -11,16 +11,17 @@ import java.lang.reflect.Method
 @HookItem("辅助功能/聊天/禁止回复自动艾特")
 class DisableReplyAutoAt : BaseSwitchFunctionHookItem(), IMethodFinder {
     lateinit var method: Method
-    override fun loadHook(loader: ClassLoader) {
-        hookBefore(method) { param ->
-            param.result = null
-        }
-    }
 
     override fun find() {
         method = buildMethodFinder()
             .searchPackages("com.tencent.mobileqq.aio.input.reply")
             .useString("msgItem.msgRecord.senderUid")
             .first()
+    }
+
+    override fun loadHook(loader: ClassLoader) {
+        hookBefore(method) { param ->
+            param.result = null
+        }
     }
 }
