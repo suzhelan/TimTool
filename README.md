@@ -8,9 +8,13 @@
 
 <p>对Tim,QQ进行的扩展优化的Xposed模块</p>
 <p>永久免费模块，请勿上当受骗</p>
-</div>
+</div>  
 
----
+---  
+## 可以的话请在右上角为此项目点一个<kbd>:star:STAR</kbd> 这会帮助到开发历程
+### 参与此项目的学习与开发 [开发指南](https://github.com/suzhelan/TimTool/blob/master/.github/devhelp/dev-help.md)
+
+---  
 ### 各渠道更新频率  
 * **更新频率**
     - 随缘更新
