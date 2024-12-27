@@ -9,7 +9,7 @@ import top.sacz.xphelper.reflect.FieldUtils
 /**
  * 思路 https://github.com/cinit/QAuxiliary -> cc.ioctl.hook.msg.FlashPicHook
  */
-@HookItem("辅助功能/聊天/以图片方式打开闪照")
+@HookItem("辅助功能/图片与表情/以图片方式打开闪照")
 class OpenFlashAsPic : BaseSwitchFunctionHookItem() {
     override fun loadHook(loader: ClassLoader) {
         hookAfter("Lcom/tencent/mobileqq/aio/msg/AIOMsgItem;->getMsgRecord()Lcom/tencent/qqnt/kernel/nativeinterface/MsgRecord;".toMethod()) { param ->
