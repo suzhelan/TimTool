@@ -64,9 +64,43 @@ class DisableReplyAutoAt : BaseSwitchFunctionHookItem(), IMethodFinder {
     }
 }
 ```
-如果你是Java开发者，可以参考如下代码
 
+如果你是Java开发者，可以参考如下代码
 ```java
 
+@HookItem("辅助功能/聊天/消息长按菜单添加复读")
+public class MessageMenuAddRereading extends BaseSwitchFunctionHookItem {
+
+   @Override
+   public void loadHook(@NonNull ClassLoader classLoader) throws Throwable {
+      //qq创建长按菜单的方法
+      Method setMenuMethod = MethodUtils.create("com.tencent.qqnt.aio.menu.ui.QQCustomMenuExpandableLayout")
+              .methodName("setMenu")
+              .params(Ignore.class, View.class)
+              .returnType(void.class)
+              .first();
+      hookBefore(setMenuMethod, param -> {
+         Object itemListWrapper = param.args[0];
+         //这个参数第一个为list的字段是长按的菜单列表
+         List<Object> itemList = FieldUtils.create(itemListWrapper)
+                 .fieldType(List.class)
+                 .firstValue(itemListWrapper);
+         //获取第一个菜单
+         Object item = itemList.get(0);
+         //解析出msgRecord
+         Object aioMsgItem = FieldUtils.getFirstType(item, ClassUtils.findClass("com.tencent.mobileqq.aio.msg.AIOMsgItem"));
+         Object msgRecord = XposedHelpers.callMethod(aioMsgItem, "getMsgRecord");
+         //构建长按菜单选项
+         Object itemButton = QQCustomMenu.createMenuItem(aioMsgItem, R.drawable.repeat, "复读",
+                 () -> {
+                    RereadingMessageClickListener listener = new RereadingMessageClickListener(msgRecord, ContactUtils.getCurrentContact());
+                    listener.rereading();
+                    return null;
+                 });
+         //添加选项到菜单
+         itemList.add(0, itemButton);
+      });
+   }
+}
 ```
 
