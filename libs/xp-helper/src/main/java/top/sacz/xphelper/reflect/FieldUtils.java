@@ -49,6 +49,24 @@ public class FieldUtils extends BaseFinder<Field> {
                 .setFirst(target, value);
     }
 
+    /**
+     * 根据字段类型获取首个字段值
+     */
+    public static <T> T getFirstType(Object runtimeObj, Class<?> fieldType) {
+        return FieldUtils.create(runtimeObj.getClass())
+                .fieldType(fieldType)
+                .firstValue(runtimeObj);
+    }
+
+    /**
+     * 设置首个为此类型的字段值
+     */
+    public static void setFirstType(Object target, Object value) {
+        FieldUtils.create(target)
+                .fieldName(value.getClass().getName())
+                .setFirst(target, value);
+    }
+
     public static FieldUtils create(Object target) {
         return create(target.getClass());
     }

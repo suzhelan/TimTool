@@ -14,14 +14,16 @@ class RereadingMessageClickListener(private val msgRecord: Any, private val cont
     override fun onClick(v: View?) {
         //启用双击
         if (MessageRereadingConfig.isDoubleClickMode() && MessageRereadingConfig.isFastClick()) {
-            if (forward()) return
-            QQSendMsgTool.sendMsg(contact, elements)
+            rereading()
         } else if (!MessageRereadingConfig.isFastClick()) {
-            if (forward()) return
-            QQSendMsgTool.sendMsg(contact, elements)
+            rereading()
         }
     }
 
+    fun rereading() {
+        if (forward()) return
+        QQSendMsgTool.sendMsg(contact, elements)
+    }
     private fun forward(): Boolean {
         try {
             var isForwardMsg = false

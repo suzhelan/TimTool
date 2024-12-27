@@ -76,7 +76,7 @@ class StickerPanelInject : BaseSwitchFunctionHookItem() {
                         .callFirst(aioMsgItem)
                     showSaveStickerDialog(msgRecord)
                 }
-            result.add(saveMenu)
+            result.add(0, saveMenu)
         }
     }
 
