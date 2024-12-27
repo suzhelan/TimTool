@@ -59,7 +59,7 @@ fun <T> Any.getFieldValue(name: String? = null, type: Class<*>? = null): T {
  * 获取字段值 传参字段名
  */
 fun <T> Any.getFieldValue(name: String): T {
-    return this.getFieldValue(name)
+    return this.getFieldValue(name, null)
 }
 
 /**
@@ -79,6 +79,20 @@ fun <T> Any.setFieldValue(name: String? = null, type: Class<*>? = null, value: T
         .fieldName(name)
         .fieldType(type)
         .setFirst(this, value)
+}
+
+/**
+ * 设置字段值 传参字段名
+ */
+fun <T> Any.setFieldValue(name: String, value: T) {
+    this.setFieldValue(name, null, value)
+}
+
+/**
+ * 设置字段值 传参字段类型
+ */
+fun <T> Any.setFieldValue(type: Class<*>, value: T) {
+    this.setFieldValue(null, type, value)
 }
 
 /**
