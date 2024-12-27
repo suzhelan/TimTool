@@ -42,7 +42,8 @@ class DownloadEmotion : BaseSwitchFunctionHookItem() {
 2. 在类中调用 buildMethodFinder() 会生成方法查找器 传入查询条件
 3. 调用 first() 得到首个结果 (调用find())会得到结果列表  
    IMethodFinder.find() 会在QQ或模块版本变动调用一次并查找数据并缓存 随后在正常情况会使用缓存
-   防止过多的性能开销
+   防止过多的性能开销  
+   严禁在IMethodFinder.find()外的地方调用buildMethodFinder() 这可能将会导致本次启动内存泄露
 
 ```kotlin
 @HookItem("辅助功能/聊天/禁止回复自动艾特")

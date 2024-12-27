@@ -9,6 +9,9 @@ import top.sacz.timtool.hook.util.getStaticFieldValue
  */
 @HookItem("辅助功能/实验性/强制平板模式")
 class ForcePadMode : BaseSwitchFunctionHookItem() {
+    override fun getTip(): String {
+        return "需要重启生效 可能需要重新登录"
+    }
     override fun loadHook(loader: ClassLoader) {
         val appSettingClass = loader.loadClass("com.tencent.common.config.AppSetting")
         hookBefore(appSettingClass.getDeclaredMethod("f")) { param ->
