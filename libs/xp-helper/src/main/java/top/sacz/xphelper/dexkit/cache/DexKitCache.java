@@ -17,6 +17,11 @@ import top.sacz.xphelper.util.KvHelper;
 
 public class DexKitCache {
 
+    public static void clearCache() {
+        KvHelper kvHelper = new KvHelper("DexKitCache");
+        kvHelper.clearAll();
+    }
+
     public static void putMethodList(String key, List<Method> methodList) {
         KvHelper kvHelper = new KvHelper("DexKitCache");
         ArrayList<String> infoList = new ArrayList<>();

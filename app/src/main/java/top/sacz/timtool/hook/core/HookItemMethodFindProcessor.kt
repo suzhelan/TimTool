@@ -43,6 +43,7 @@ class HookItemMethodFindProcessor {
         show("开始查找方法")
         //Dispatchers.Default CPU密集型操作，比如一些计算型任务
         GlobalScope.launch(Dispatchers.Default) {
+            DexFinder.clearCache()
             DexFinder.create(HookEnv.getHostApkPath())
             HookItemFactory.getAllItemList().forEach { hookItem: BaseHookItem ->
                 if (hookItem is IMethodFinder) {

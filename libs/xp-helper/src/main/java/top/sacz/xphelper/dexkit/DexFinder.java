@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import top.sacz.xphelper.XpHelper;
+import top.sacz.xphelper.dexkit.cache.DexKitCache;
 
 public class DexFinder {
 
@@ -53,6 +54,12 @@ public class DexFinder {
         return dexKitBridge;
     }
 
+    /**
+     * 清空缓存
+     */
+    public static void clearCache() {
+        DexKitCache.clearCache();
+    }
 
     private static void resetTimer() {
         if (autoCloseTime <= 0) {
