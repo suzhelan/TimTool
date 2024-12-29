@@ -1,10 +1,16 @@
 package top.sacz.timtool.hook.util
 
+import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.Ignore
 import top.sacz.xphelper.reflect.MethodUtils
 import java.lang.reflect.Field
 import java.lang.reflect.Method
+
+/**
+ * 通过描述符获取类
+ */
+fun String.toClass(): Class<*> = ClassUtils.findClass(this)
 
 /**
  * 方法拓展
@@ -21,6 +27,7 @@ fun String.toMethod(clsLoader: ClassLoader): Method = MethodUtils.getMethodByDes
 fun String.toField(): Field = FieldUtils.getFieldByDesc(this)
 
 fun String.toField(clsLoader: ClassLoader): Field = FieldUtils.getFieldByDesc(this, clsLoader)
+
 
 /**
  * 对象拓展 通过对象的方法参数调用

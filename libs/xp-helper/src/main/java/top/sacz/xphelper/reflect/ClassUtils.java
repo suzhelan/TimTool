@@ -98,45 +98,52 @@ public class ClassUtils {
         }
 
         @Override
-        public Class<?> loadClass(String name) throws ClassNotFoundException {
-            Class<?> clazz = CLASS_CACHE.get(name);
+        public Class<?> loadClass(String className) throws ClassNotFoundException {
+            Class<?> clazz = CLASS_CACHE.get(className);
             if (clazz != null) {
                 return clazz;
             }
-            try {
-                //可能是数组类型的
-                if (name.startsWith("[")) {
-                    int index = name.lastIndexOf('[');
-                    //获取原类型
-                    try {
-                        clazz = getBaseTypeClass(name.substring(index + 1));
-                    } catch (Exception e) {
-                        clazz = super.loadClass(name.substring(index + 1));
+            if (className.endsWith(";") || className.contains("/")) {
+                className = className.replace('/', '.');
+                if (className.endsWith(";")) {
+                    if (className.charAt(0) == 'L') {
+                        className = className.substring(1, className.length() - 1);
+                    } else {
+                        className = className.substring(0, className.length() - 1);
                     }
-                    //转换数组类型
-                    for (int i = 0; i < name.length(); i++) {
-                        char ch = name.charAt(i);
-                        if (ch == '[') {
-                            clazz = Array.newInstance(clazz, 0).getClass();
-                        } else {
-                            break;
-                        }
-                    }
-                    CLASS_CACHE.put(name, clazz);
-                    return clazz;
                 }
-                //可能是基础类型
-                try {
-                    clazz = getBaseTypeClass(name);
-                } catch (Exception e) {
-                    //因为默认的ClassLoader.load() 不能加载"int"这种类型
-                    clazz = super.loadClass(name);
-                }
-                CLASS_CACHE.put(name, clazz);
-                return clazz;
-            } catch (Throwable throwable) {
-                throw new ReflectException("没有找到类: " + name);
             }
+            //可能是数组类型的
+            if (className.startsWith("[")) {
+                int index = className.lastIndexOf('[');
+                //获取原类型
+                try {
+                    clazz = getBaseTypeClass(className.substring(index + 1));
+                } catch (Exception e) {
+                    clazz = super.loadClass(className.substring(index + 1));
+                }
+                //转换数组类型
+                for (int i = 0; i < className.length(); i++) {
+                    char ch = className.charAt(i);
+                    if (ch == '[') {
+                        clazz = Array.newInstance(clazz, 0).getClass();
+                    } else {
+                        break;
+                    }
+                }
+                CLASS_CACHE.put(className, clazz);
+                return clazz;
+            }
+            //可能是基础类型
+            try {
+                clazz = getBaseTypeClass(className);
+            } catch (Exception e) {
+                //因为默认的ClassLoader.load() 不能加载"int"这种类型
+                clazz = super.loadClass(className);
+            }
+            CLASS_CACHE.put(className, clazz);
+            return clazz;
+
         }
 
     }

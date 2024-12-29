@@ -14,7 +14,7 @@ abstract class AbstractChooseActivity : BaseActivity() {
     // androidx: Can only use lower 16 bits for requestCode
     val REQUEST_CODE = this.hashCode() and 0x0000ffff
 
-    lateinit var sendCacheDir: File
+    private lateinit var sendCacheDir: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
