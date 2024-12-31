@@ -9,7 +9,7 @@ public interface IMethodFinder {
 
     void find() throws Throwable;
 
-    default MethodFinder.MethodBridge buildMethodFinder() {
+    default MethodFinder buildMethodFinder() {
         return MethodFinder.build();
     }
 
