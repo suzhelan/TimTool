@@ -2,6 +2,9 @@ package top.sacz.buildplugin
 
 import org.gradle.api.JavaVersion
 
+/*＊ 
+ * 构建配置
+ ＊*/
 object BuildVersionConfig {
     const val applicationId = "top.sacz.timtool"
     val javaVersion = JavaVersion.VERSION_17
