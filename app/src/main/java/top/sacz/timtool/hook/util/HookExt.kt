@@ -51,6 +51,26 @@ fun <T> Any.call(
 }
 
 /**
+ * 调用类的静态方法
+ */
+fun <T> Class<*>.callStaticMethod(
+    methodName: String,
+    vararg args: Any?
+): T {
+    val paramTypes = args.map {
+        if (it == null) {
+            return@map Ignore::class.java
+        } else {
+            return@map it.javaClass
+        }
+    }.toTypedArray()
+    return MethodUtils.create(this)
+        .methodName(methodName)
+        .params(*paramTypes)
+        .callFirst(null, *args)
+}
+
+/**
  * 对象拓展
  * 获取字段值
  * 传参 字段名 或者 字段类型

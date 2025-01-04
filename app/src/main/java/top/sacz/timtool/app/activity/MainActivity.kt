@@ -23,6 +23,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * app主界面
+ */
 class MainActivity : AppCompatActivity() {
     private val hideActivityName: String
         get() = "$packageName.app.activity.HideMainActivity"
