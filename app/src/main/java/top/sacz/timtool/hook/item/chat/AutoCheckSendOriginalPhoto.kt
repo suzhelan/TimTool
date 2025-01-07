@@ -7,7 +7,7 @@ import top.sacz.timtool.hook.util.toMethod
 /**
  * 思路 https://github.com/cinit/QAuxiliary -> xyz.nextalone.hook.AutoSendOriginalPhoto
  */
-@HookItem("辅助功能/聊天/自动勾选发送原图")
+@HookItem("辅助功能/图片与表情/自动勾选发送原图")
 class AutoCheckSendOriginalPhoto : BaseSwitchFunctionHookItem() {
     override fun loadHook(loader: ClassLoader) {
         //半屏相册
