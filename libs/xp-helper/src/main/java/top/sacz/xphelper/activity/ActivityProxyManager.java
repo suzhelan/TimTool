@@ -44,7 +44,6 @@ public class ActivityProxyManager {
      */
     public static void initActivityProxyManager(Context hostContext) {
 
-
         HostActivityClassName = ActivityTools.getAllActivity(hostContext)[0].name;
         if (Initialized.getAndSet(true)) return;
         try {

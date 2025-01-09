@@ -1,5 +1,6 @@
 package top.sacz.xphelper.activity.replace;
 
+import android.content.ComponentName;
 import android.content.Intent;
 
 import androidx.core.util.Pair;
@@ -36,20 +37,18 @@ public class IActivityManagerHandler implements InvocationHandler {
                     Pair<Integer, Intent> pair = foundFirstIntentOfArgs(args);
                     if (pair != null) {
                         Intent intent = pair.second;
-                        if (intent.getComponent() != null) {
-                            String packageName = intent.getComponent().getPackageName();
-                            String className = intent.getComponent().getClassName();
-                            if (packageName.equals(XpHelper.context.getPackageName())
-                                    && ActivityProxyManager.isModuleActivity(className)) {
+                        ComponentName component = intent.getComponent();
+                        if (component != null) {
+                            String packageName = component.getPackageName();
+                            String className = component.getClassName();
+                            if (packageName.equals(XpHelper.context.getPackageName()) && ActivityProxyManager.isModuleActivity(className)) {
                                 Intent wrapper = new Intent();
-                                wrapper.setClassName(
-                                        intent.getComponent().getPackageName(),
-                                        ActivityProxyManager.HostActivityClassName
-                                );
-                                wrapper.putExtra(
-                                        ActivityProxyManager.ACTIVITY_PROXY_INTENT,
-                                        pair.second
-                                );
+                                wrapper.setClassName(component.getPackageName(), ActivityProxyManager.HostActivityClassName);
+                                String proxyTargetActivity = intent.getStringExtra("proxy_target_activity");
+                                if (proxyTargetActivity != null) {
+                                    wrapper.setClassName(component.getPackageName(), proxyTargetActivity);
+                                }
+                                wrapper.putExtra(ActivityProxyManager.ACTIVITY_PROXY_INTENT, pair.second);
                                 args[pair.first] = wrapper;
                             }
                         }
