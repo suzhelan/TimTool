@@ -1,6 +1,7 @@
 package top.sacz.timtool.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +15,16 @@ import java.util.Timer
 import kotlin.concurrent.schedule
 
 class ChooseAgentActivity : AbstractChooseActivity() {
+
+    companion object {
+        fun start(context: Context, intent: Intent) {
+            intent.putExtra(
+                "proxy_target_activity",
+                "cooperation.qlink.QlinkStandardDialogActivity"
+            )
+            context.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.NoDisplay)

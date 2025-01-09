@@ -48,7 +48,7 @@ class SystemFileSelector : BaseSwitchFunctionHookItem() {
                 .setTitle("文件选择器")
                 .setMenuList(activityMap.keys.toTypedArray())
                 .setOnMenuItemClickListener { dialog, text, index ->
-                    context.startActivity(activityMap[text])
+                    ChooseAgentActivity.start(context, activityMap[text]!!)
                     false
                 }.show()
             param.result = null
