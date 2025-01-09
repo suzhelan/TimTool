@@ -18,8 +18,8 @@ android {
         applicationId = BuildVersionConfig.applicationId
         minSdk = BuildVersionConfig.minSdk
         targetSdk = BuildVersionConfig.targetSdk
-        versionCode = 21
-        versionName = "2.1"
+        versionCode = 22
+        versionName = "2.2"
 
         ndk {
             //只支持arm64 v8a的lib so库,因为qq只支持arm64 v8a
