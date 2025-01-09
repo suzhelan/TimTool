@@ -27,6 +27,8 @@
     <string name="double_click_repeat">双击复读</string>
     <string name="repeat_icon_size">复读图标大小</string>
 
+    <string name="time_format">时间格式</string>
+    <string name="time_size">大小(dp)</string>
     <string name="view_update_log">历史更新日志</string>
 
     <string name="hide_icon">隐藏桌面图标</string>
