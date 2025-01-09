@@ -23,7 +23,7 @@
     - [LSPosedRepo](https://github.com/Xposed-Modules-Repo/top.sacz.timtool) 每10个版本更新一次
     - [更新API](https://github.com/suzhelan/TimTool/blob/master/.github/devhelp/update-api.md)
 
-## 适配的版本范围 TimNT 4.x.x(目前维护到4.0.97 最新版)
+## 适配的版本范围 TimNT 4.x.x(目前维护到 最新版4.0.98)
 
 ![Module-Img](https://github.com/suzhelan/TimTool/blob/master/.github/img/v2.0.jpg)
 
