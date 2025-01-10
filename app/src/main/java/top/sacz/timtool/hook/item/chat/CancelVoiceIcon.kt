@@ -7,16 +7,14 @@ import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.MethodUtils
 
-
 @HookItem("辅助功能/聊天/移除聊天界面语音图标")
 class CancelVoiceIcon : BaseSwitchFunctionHookItem() {
     override fun loadHook(loader: ClassLoader) {
-        val m2 =
-            MethodUtils.create("com.tencent.tim.aio.inputbar.simpleui.TimAIOInputSimpleUIVBDelegate")
-                .methodName("W")
-                .params(Boolean::class.java)
-                .returnType(Void.TYPE)
-                .first()
+        val m2 = MethodUtils.create("com.tencent.tim.aio.inputbar.simpleui.TimAIOInputSimpleUIVBDelegate")
+            .methodName("W")
+            .params(Boolean::class.java)
+            .returnType(Void.TYPE)
+            .first()
         hookAfter(m2) { param ->
             val targetObj = param.thisObject
             val icon = FieldUtils.create(targetObj)
@@ -34,8 +32,5 @@ class CancelVoiceIcon : BaseSwitchFunctionHookItem() {
             voiceIcon.visibility = View.GONE
             param.result = null
         }*/
-
-
     }
-
 }

@@ -2,7 +2,7 @@ package top.sacz.timtool.hook.item.chat
 
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
-import top.sacz.timtool.hook.util.call
+import top.sacz.timtool.hook.util.callMethod
 import top.sacz.timtool.hook.util.setFieldValue
 import top.sacz.timtool.hook.util.toMethod
 
@@ -18,7 +18,7 @@ class OpenFlashAsPic : BaseSwitchFunctionHookItem() {
     override fun loadHook(loader: ClassLoader) {
         hookAfter("Lcom/tencent/mobileqq/aio/msg/AIOMsgItem;->getMsgRecord()Lcom/tencent/qqnt/kernel/nativeinterface/MsgRecord;".toMethod()) { param ->
             val msgRecord = param.result
-            val subMsgType: Int = msgRecord.call("getSubMsgType")
+            val subMsgType: Int = msgRecord.callMethod("getSubMsgType")
             if ((subMsgType and 8192) != 0) {
                 msgRecord.setFieldValue("subMsgType", subMsgType and 8192.inv())
             }

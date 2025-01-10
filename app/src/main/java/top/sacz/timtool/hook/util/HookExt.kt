@@ -33,7 +33,7 @@ fun String.toField(clsLoader: ClassLoader): Field = FieldUtils.getFieldByDesc(th
  * 对象拓展 通过对象的方法参数调用
  * 不支持静态方法的调用
  */
-fun <T> Any.call(
+fun <T> Any.callMethod(
     methodName: String,
     vararg args: Any?
 ): T {

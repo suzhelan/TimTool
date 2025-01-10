@@ -31,18 +31,18 @@ public class QQCustomMenu extends ApiHookItem {
      */
     private static Class<?> baseMenuItemClass;
 
-    public static Object createMenuItem(Object aioMsgItem, int id, String text, Callable<?> callable) {
+    public static Object createMenuItem(Object aioMsgItem, String text, int id, int icon, Callable<?> callable) {
         File generatedDir = HookEnv.getHostAppContext().getDir("generated", Context.MODE_PRIVATE);
         try (DynamicType.Unloaded<?> make = new ByteBuddy().subclass(baseMenuItemClass)
-                //text
+                //标题
                 .method(ElementMatchers.named("f")).intercept(FixedValue.value(text))
                 //新方法 不知道是啥
                 .method(ElementMatchers.named("e")).intercept(FixedValue.value(text))
-                //id
-                .method(ElementMatchers.named("b")).intercept(FixedValue.value(id))
-                //被点击回调
+                //图标
+                .method(ElementMatchers.named("b")).intercept(FixedValue.value(icon))
+                //点击回调
                 .method(ElementMatchers.returns(void.class)).intercept(MethodCall.call(callable))
-                //res id 也就是图标
+                //id
                 .method(ElementMatchers.named("c")).intercept(FixedValue.value(id))
                 .make()) {
             Class<?> generatedClass = make.load(baseMenuItemClass.getClassLoader(), new AndroidClassLoadingStrategy.Wrapping(generatedDir)).getLoaded();

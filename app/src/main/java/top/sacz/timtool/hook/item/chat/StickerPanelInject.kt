@@ -7,40 +7,40 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.content.res.ResourcesCompat
+import de.robv.android.xposed.XC_MethodHook
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.item.api.QQCustomMenu
+import top.sacz.timtool.hook.item.dispatcher.OnMenuBuilder
 import top.sacz.timtool.hook.item.stickerpanel.dialog.BottomStickerPanelDialog
 import top.sacz.timtool.hook.item.stickerpanel.dialog.SaveStickerDialog
 import top.sacz.timtool.hook.util.PathTool
 import top.sacz.timtool.hook.util.ToastTool
+import top.sacz.timtool.hook.util.callMethod
 import top.sacz.timtool.util.DrawableUtil
-import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.MethodUtils
 import java.io.File
 
 
 @HookItem("辅助功能/图片与表情/表情面板")
-class StickerPanelInject : BaseSwitchFunctionHookItem() {
+class StickerPanelInject : BaseSwitchFunctionHookItem(), OnMenuBuilder {
 
     override fun getTip(): String {
         return "长按聊天界面表情图标出现 全新的表情面板,更加精美和流畅的UI"
     }
+
     @Throws(Exception::class)
     override fun loadHook(loader: ClassLoader) {
-
         // 注入表情面板入口图标
-        val onCreate =
-            MethodUtils.create("com.tencent.tim.aio.inputbar.simpleui.TimAIOInputSimpleUIVBDelegate")
-                .methodName("C")
-                .returnType(Void.TYPE)
-                .first()
+        val onCreate = MethodUtils.create("com.tencent.tim.aio.inputbar.simpleui.TimAIOInputSimpleUIVBDelegate")
+            .methodName("C")
+            .returnType(Void.TYPE)
+            .first()
         hookAfter(onCreate) { param ->
             val targetObj = param.thisObject
-
             val emoBtnView = FieldUtils.create(targetObj)
                 .fieldName("h")
                 .fieldType(ImageButton::class.java)
@@ -51,33 +51,16 @@ class StickerPanelInject : BaseSwitchFunctionHookItem() {
                 return@setOnLongClickListener true
             }
         }
-        hookLongClickMsgMenu()
     }
 
+    override val targetTypes = arrayOf("com.tencent.mobileqq.aio.msglist.holder.component.pic.AIOPicContentComponent")
 
-    /**
-     * hook长按消息菜单
-     */
-    @Suppress("UNCHECKED_CAST")
-    private fun hookLongClickMsgMenu() {
-        val getPicMenuMethod =
-            MethodUtils.create("com.tencent.mobileqq.aio.msglist.holder.component.pic.AIOPicContentComponent")
-                .returnType(List::class.java)
-                .paramCount(0)
-                .first()
-        hookAfter(getPicMenuMethod) { param ->
-            val result = param.result as MutableList<Any>
-            val aioMsgItem = MethodUtils.create(param.thisObject)
-                .returnType(ClassUtils.findClass("com.tencent.mobileqq.aio.msg.AIOMsgItem"))
-                .callFirst<Any>(param.thisObject)
-            val saveMenu =
-                QQCustomMenu.createMenuItem(aioMsgItem, R.mipmap.ic_launcher_round, "保存") {
-                    val msgRecord: Any = MethodUtils.create(aioMsgItem).methodName("getMsgRecord")
-                        .callFirst(aioMsgItem)
-                    showSaveStickerDialog(msgRecord)
-                }
-            result.add(0, saveMenu)
+    override fun onGetMenu(aioMsgItem: Any, targetType: String, param: XC_MethodHook.MethodHookParam) {
+        val item = QQCustomMenu.createMenuItem(aioMsgItem, "保存", R.id.item_save, R.mipmap.ic_launcher_round) {
+            val msgRecord = aioMsgItem.callMethod<Any>("getMsgRecord")
+            showSaveStickerDialog(msgRecord)
         }
+        param.result = listOf(item) + param.result as List<*>
     }
 
     private fun showSaveStickerDialog(msgRecord: Any) {

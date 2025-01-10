@@ -65,6 +65,7 @@ class ShowMessageTime : BaseSwitchFunctionHookItem() {
     }
 
     private val timeTextViewId = 0x190f01e6
+
     override fun loadHook(loader: ClassLoader) {
         //责任链设计模式 让每一个有关msg view update 的类都能低耦合嵌入
         QQMessageViewListener.addMessageViewUpdateListener(
@@ -119,5 +120,4 @@ class ShowMessageTime : BaseSwitchFunctionHookItem() {
                 }
             })
     }
-
 }

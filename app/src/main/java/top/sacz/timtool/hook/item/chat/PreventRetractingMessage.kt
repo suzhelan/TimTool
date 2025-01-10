@@ -26,15 +26,14 @@ class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
     override fun loadHook(loader: ClassLoader) {
         readData()
 
-        val onMSFPushMethod =
-            MethodUtils.create("com.tencent.qqnt.kernel.nativeinterface.IQQNTWrapperSession\$CppProxy")
-                .params(
-                    String::class.java,
-                    ByteArray::class.java,
-                    ClassUtils.findClass("com.tencent.qqnt.kernel.nativeinterface.PushExtraInfo")
-                )
-                .methodName("onMsfPush")
-                .first()
+        val onMSFPushMethod = MethodUtils.create("com.tencent.qqnt.kernel.nativeinterface.IQQNTWrapperSession\$CppProxy")
+            .params(
+                String::class.java,
+                ByteArray::class.java,
+                ClassUtils.findClass("com.tencent.qqnt.kernel.nativeinterface.PushExtraInfo")
+            )
+            .methodName("onMsfPush")
+            .first()
 
         hookBefore(onMSFPushMethod) { param ->
             val cmd = param.args[0] as String

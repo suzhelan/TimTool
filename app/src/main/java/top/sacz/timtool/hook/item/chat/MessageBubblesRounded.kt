@@ -18,7 +18,7 @@ import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.util.ToastTool
-import top.sacz.timtool.hook.util.call
+import top.sacz.timtool.hook.util.callMethod
 import top.sacz.timtool.util.KvHelper
 import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.XpHelper.context
@@ -92,6 +92,7 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
             false
         }
     }
+
     @SuppressLint("SetTextI18n")
     override fun getOnClickListener(): View.OnClickListener? {
         return View.OnClickListener { view ->
@@ -144,7 +145,6 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
         }
     }
 
-
     override fun loadHook(loader: ClassLoader) {
 
         //生成背景的方法
@@ -166,8 +166,8 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                 HookEnv.getHostAppContext(),
                 false,
                 radii,
-                thisObject.call("c", timBubbleStyle),
-                thisObject.call("a", timBubbleStyle)
+                thisObject.callMethod("c", timBubbleStyle),
+                thisObject.callMethod("a", timBubbleStyle)
             )
         }
 
@@ -181,8 +181,8 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
                 HookEnv.getHostAppContext(),
                 true,
                 radii,
-                thisObject.call("c", timBubbleStyle),
-                thisObject.call("a", timBubbleStyle)
+                thisObject.callMethod("c", timBubbleStyle),
+                thisObject.callMethod("a", timBubbleStyle)
             )
         }
     }

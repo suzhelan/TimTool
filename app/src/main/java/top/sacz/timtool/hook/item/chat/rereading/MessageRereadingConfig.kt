@@ -17,6 +17,14 @@ object MessageRereadingConfig {
         config.put("isDoubleClickMode", isDoubleClickMode)
     }
 
+    fun isShowInMenu(): Boolean {
+        return config.getBoolean("isShowInMenu", false)
+    }
+
+    fun setShowInMenu(isShowInMenu: Boolean) {
+        config.put("isShowInMenu", isShowInMenu)
+    }
+
     fun getSize(): Float {
         return config.getFloat("size", 24f)
     }

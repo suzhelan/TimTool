@@ -4,7 +4,6 @@ import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.xphelper.reflect.MethodUtils
 
-
 @HookItem("辅助功能/图片与表情/禁用表情下载限制")
 class DownloadEmotion : BaseSwitchFunctionHookItem() {
     override fun getTip(): String {
@@ -26,5 +25,4 @@ class DownloadEmotion : BaseSwitchFunctionHookItem() {
             }
         }
     }
-
 }

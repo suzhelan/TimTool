@@ -25,6 +25,7 @@
     <string name="message_bubbles_rounded_title">修改消息气泡圆角度</string>
     <string name="message_bubbles_rounded_text">许你一个美好的明天，愿世间的每一个角落都洒满璀璨的星光</string>
     <string name="double_click_repeat">双击复读</string>
+    <string name="show_in_menu">显示在长按菜单</string>
     <string name="repeat_icon_size">复读图标大小</string>
 
     <string name="time_format">时间格式</string>
