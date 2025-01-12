@@ -31,6 +31,9 @@ class HookItemLoader {
      * 加载并判断哪些需要加载
      */
     fun loadHookItem() {
+        //加载前进行一次api分配
+        ApiProcessor.processor()
+        //开始判断哪些需要加载
         val allHookItems = HookItemFactory.getAllItemList()
         allHookItems.forEach { hookItem ->
             if (hookItem is BaseSwitchFunctionHookItem && hookItem.isEnabled) {

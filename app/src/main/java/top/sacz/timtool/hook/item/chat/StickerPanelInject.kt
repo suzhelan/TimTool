@@ -12,8 +12,8 @@ import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
+import top.sacz.timtool.hook.item.api.OnMenuBuilder
 import top.sacz.timtool.hook.item.api.QQCustomMenu
-import top.sacz.timtool.hook.item.dispatcher.OnMenuBuilder
 import top.sacz.timtool.hook.item.stickerpanel.dialog.BottomStickerPanelDialog
 import top.sacz.timtool.hook.item.stickerpanel.dialog.SaveStickerDialog
 import top.sacz.timtool.hook.util.PathTool
@@ -34,6 +34,7 @@ class StickerPanelInject : BaseSwitchFunctionHookItem(), OnMenuBuilder {
 
     @Throws(Exception::class)
     override fun loadHook(loader: ClassLoader) {
+
         // 注入表情面板入口图标
         val onCreate = MethodUtils.create("com.tencent.tim.aio.inputbar.simpleui.TimAIOInputSimpleUIVBDelegate")
             .methodName("C")

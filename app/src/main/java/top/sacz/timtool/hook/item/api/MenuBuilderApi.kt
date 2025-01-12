@@ -1,19 +1,29 @@
-package top.sacz.timtool.hook.item.dispatcher
+package top.sacz.timtool.hook.item.api
 
 import de.robv.android.xposed.XC_MethodHook
-import top.sacz.timtool.hook.base.BaseHookItem
+import top.sacz.timtool.hook.base.ApiHookItem
+import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
-import top.sacz.timtool.hook.item.chat.MessageRereading
-import top.sacz.timtool.hook.item.chat.StickerPanelInject
 import java.lang.reflect.Modifier
 
+/**
+ * 参考类 {@link top.sacz.timtool.hook.item.chat.MessageMenuAddRereading}
+ */
 @HookItem("对应类型消息菜单构建时回调接口")
-class MenuBuilderHook : BaseHookItem() {
-    // 对应类型消息菜单构建时回调
-    private val decorators: Array<OnMenuBuilder> = arrayOf(
-        StickerPanelInject(),
-        MessageRereading(),
-    )
+class MenuBuilderApi : ApiHookItem() {
+
+    companion object {
+        // 对应类型消息菜单构建时回调
+        private val decorators = mutableListOf<OnMenuBuilder>()
+
+        /**
+         * 注册item菜单 请勿手动调用此方法 而是采用hookItem实现OnMenuBuilder的方式自动注册
+         */
+        @JvmStatic
+        fun register(hookItem: OnMenuBuilder) {
+            decorators.add(hookItem)
+        }
+    }
 
     override fun loadHook(classLoader: ClassLoader) {
         val baseClass = classLoader.loadClass("com.tencent.mobileqq.aio.msglist.holder.component.BaseContentComponent")
@@ -28,6 +38,12 @@ class MenuBuilderHook : BaseHookItem() {
                 val getMsgMethod = baseClass.getDeclaredMethod(getMsgMethodName).apply { isAccessible = true }
                 val aioMsgItem = getMsgMethod.invoke(param.thisObject)!!
                 for (decorator in decorators) {
+                    //未开启功能的话略过
+                    if (decorator is BaseSwitchFunctionHookItem) {
+                        if (!decorator.isEnabled) {
+                            continue
+                        }
+                    }
                     if (target in decorator.targetTypes) {
                         decorator.onGetMenu(aioMsgItem, target, param)
                     }
@@ -37,6 +53,11 @@ class MenuBuilderHook : BaseHookItem() {
     }
 }
 
+/**
+ * 需要对消息长按菜单添加菜单项时继承此接口
+ * @targetTypes 要处理的消息类型
+ * @onGetMenu 添加菜单项的动作
+ */
 interface OnMenuBuilder {
     val targetTypes: Array<String>
         get() = arrayOf(

@@ -11,7 +11,6 @@ import android.widget.ImageView
 import androidx.core.content.res.ResourcesCompat
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.interfaces.OnBindView
-import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
 import top.sacz.timtool.R
@@ -19,17 +18,14 @@ import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.core.factory.ExceptionFactory
-import top.sacz.timtool.hook.item.api.QQCustomMenu
 import top.sacz.timtool.hook.item.api.QQMessageViewListener
 import top.sacz.timtool.hook.item.api.QQMsgViewAdapter
 import top.sacz.timtool.hook.item.chat.rereading.MessageRereadingConfig
 import top.sacz.timtool.hook.item.chat.rereading.RereadingMessageClickListener
-import top.sacz.timtool.hook.item.dispatcher.OnMenuBuilder
 import top.sacz.timtool.hook.qqapi.ContactUtils
 import top.sacz.timtool.hook.qqapi.QQEnvTool
 import top.sacz.timtool.hook.util.PathTool
 import top.sacz.timtool.hook.util.ToastTool
-import top.sacz.timtool.hook.util.callMethod
 import top.sacz.timtool.util.DrawableUtil
 import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.reflect.ClassUtils
@@ -42,7 +38,7 @@ import java.lang.reflect.Method
 
 @SuppressLint("UseCompatLoadingForDrawables")
 @HookItem("辅助功能/聊天/复读")
-class MessageRereading : BaseSwitchFunctionHookItem(), OnMenuBuilder {
+class MessageRereading : BaseSwitchFunctionHookItem() {
 
     override fun getTip(): String {
         return "点击可以设置一些参数"
@@ -52,7 +48,6 @@ class MessageRereading : BaseSwitchFunctionHookItem(), OnMenuBuilder {
         return View.OnClickListener {
             lateinit var editSize: EditText
             lateinit var cbDoubleClick: CheckBox
-            lateinit var cbShowInMenu: CheckBox
             MessageDialog.build()
                 .setCustomView(object :
                     OnBindView<MessageDialog>(R.layout.layout_rereading_setting) {
@@ -62,31 +57,18 @@ class MessageRereading : BaseSwitchFunctionHookItem(), OnMenuBuilder {
                     ) {
                         editSize = v.findViewById(R.id.edit_repeat_icon_size)
                         cbDoubleClick = v.findViewById(R.id.cb_double_click_repeat)
-                        cbShowInMenu = v.findViewById(R.id.cb_show_in_menu)
                         editSize.setText("${MessageRereadingConfig.getSize()}")
                         cbDoubleClick.isChecked = MessageRereadingConfig.isDoubleClickMode()
-                        cbShowInMenu.isChecked = MessageRereadingConfig.isShowInMenu()
                     }
                 })
                 .setOkButton("保存") { _, _ ->
                     MessageRereadingConfig.setSize(editSize.text.toString().toFloat())
                     MessageRereadingConfig.setDoubleClickMode(cbDoubleClick.isChecked)
-                    MessageRereadingConfig.setShowInMenu(cbShowInMenu.isChecked)
                     false
                 }
                 .show()
 
         }
-    }
-
-    override fun onGetMenu(aioMsgItem: Any, targetType: String, param: XC_MethodHook.MethodHookParam) {
-        if (!MessageRereadingConfig.isShowInMenu()) return
-        val item = QQCustomMenu.createMenuItem(aioMsgItem, "复读", R.id.item_repeat, R.drawable.repeat) {
-            val msgRecord = aioMsgItem.callMethod<Any>("getMsgRecord")
-            val listener = RereadingMessageClickListener(msgRecord, ContactUtils.getCurrentContact())
-            listener.rereading()
-        }
-        param.result = listOf(item) + param.result as List<*>
     }
 
 

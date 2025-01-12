@@ -17,16 +17,15 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
             android:text="@string/repeat_icon_size"
             android:textSize="20sp" />
 
         <EditText
             android:id="@+id/edit_repeat_icon_size"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:autofillHints=""
             android:ems="5"
             android:gravity="center"
@@ -35,6 +34,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -48,14 +48,6 @@
             android:text="@string/double_click_repeat"
             android:textSize="18sp" />
 
-        <CheckBox
-            android:id="@+id/cb_show_in_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="@string/show_in_menu"
-            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>
