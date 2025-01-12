@@ -51,3 +51,34 @@ Object targetContact = ContactUtils.getContact(int type, String uin, String guil
             }
         });
 ```
+
+### 在消息长按菜单中注册自己的选项
+
+1.让自己的HookItem类实现 OnMenuBuilder 接口 重写提示的方法
+
+```kotlin
+
+@HookItem("辅助功能/聊天/消息长按菜单添加复读")
+class MessageMenuAddRereading : BaseSwitchFunctionHookItem(), OnMenuBuilder {
+    override fun loadHook(classLoader: ClassLoader) {
+        //什么都不用写
+    }
+
+    override fun onGetMenu(
+        aioMsgItem: Any,
+        targetType: String,
+        param: XC_MethodHook.MethodHookParam
+    ) {
+        val item =
+            QQCustomMenu.createMenuItem(aioMsgItem, "复读", R.id.item_repeat, R.drawable.repeat) {
+                val msgRecord = aioMsgItem.callMethod<Any>("getMsgRecord")
+                //调用复读方法
+                val listener =
+                    RereadingMessageClickListener(msgRecord, ContactUtils.getCurrentContact())
+                listener.rereading()
+            }
+        param.result = listOf(item) + param.result as List<*>
+    }
+
+}
+```
