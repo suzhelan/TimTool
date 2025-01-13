@@ -7,7 +7,6 @@
 <a href="https://t.me/timtool"><img alt="Telegram Channel" src="https://img.shields.io/badge/Telegram-频道-blue.svg?logo=telegram"></a>
 
 <p>对Tim,QQ进行的扩展优化的Xposed模块</p>
-<p>永久免费模块，请勿上当受骗</p>
 </div>  
 
 ---  
