@@ -1,6 +1,6 @@
 # 欢迎加入此项目的贡献
 
-### 此项目的环境配置比较简单 你只需要先fork到自己的仓库下 然后开始clone自己仓库的源代码 最后开始完成pr到此即可
+### 此项目的环境配置比较简单(JDK要求17及以上) 你只需要先fork到自己的仓库下 然后开始clone自己仓库的源代码 最后开始完成pr到此即可
 
 此项目包含的QQ API https://github.com/suzhelan/TimTool/blob/master/.github/devhelp/api.md
 ### 开始最常用的开发

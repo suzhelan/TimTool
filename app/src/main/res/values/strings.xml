@@ -39,4 +39,11 @@
     <string name="target_daytime_bubble">对方-常规模式</string>
     <string name="target_dark_bubble">对方-深色模式</string>
 
+    <string name="preface">感谢使用此模块</string>
+    <string name="sponsor">
+        赞助20\n
+        您可为此项目赞助 以获得此模块的最新功能以及完整功能\n
+        确保当前登录QQ是预期更新权限的账号(不赞助也可以正常使用，你的支持是此模块维护的动力）\n
+        赞助后此弹窗将不会出现
+    </string>
 </resources>

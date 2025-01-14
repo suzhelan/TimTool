@@ -18,9 +18,6 @@ import top.sacz.timtool.util.SystemUtil
 
 class NewLoginTask {
 
-    init {
-
-    }
 
     /**
      * 检查当前用户是否和token一致

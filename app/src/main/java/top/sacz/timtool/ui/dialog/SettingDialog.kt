@@ -37,11 +37,8 @@ class SettingDialog {
                 return
             }
         }
-
-
         val messageText = activity.getString(R.string.setting_message)
             .format(BuildConfig.VERSION_NAME, HookEnv.getAppName(), HookEnv.getVersionName())
-
         dialog = MessageDialog.build()
             .setTitleIcon(R.drawable.ic_github)
             .setTitle(R.string.app_name)
@@ -55,18 +52,15 @@ class SettingDialog {
             })
             .setMessage(messageText)
             .show()
-
         dialog.dialogImpl.apply {
-
             txtDialogTitle.setOnClickListener {
                 onGithubClick(it)
             }
-
             txtDialogTip.setOnClickListener {
                 onTelegramClick(it)
             }
         }
-
+        PayDialog().showFirstDialog()
     }
 
     private fun onTelegramClick(view: View) {
