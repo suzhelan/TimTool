@@ -9,11 +9,11 @@ import top.sacz.timtool.hook.TimVersion
 import top.sacz.timtool.hook.base.BaseHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.util.ToastTool
-import top.sacz.timtool.util.KvHelper
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.Ignore
 import top.sacz.xphelper.reflect.MethodUtils
+import top.sacz.xphelper.util.KvHelper
 
 @HookItem("适配QQMsg内容ViewID")
 class QQMsgViewAdapter : BaseHookItem() {

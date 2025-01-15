@@ -12,25 +12,26 @@ import io.fastkv.interfaces.FastCipher
  * 完整构造方法 默认会生成无密码文件名为default的数据库
  * 如果需要加密传入密码
  */
-class KvHelper(val id: String = "default", password: String? = null) {
+class KvHelper(val id: String = "default", password: String = globalPassword) {
 
     /**
      * 默认构造方法 会生成无密码文件名为default的数据库
      */
-    constructor() : this("default", null)
+    constructor() : this("default")
 
     /**
      * 构造方法 传入数据库名称
      */
-    constructor(key: String) : this(key, null)
+    constructor(key: String) : this(key, globalPassword)
 
     private var kv: FastKV
+
 
     init {
         if (storePath.isEmpty()) {
             throw RuntimeException("storePath is empty(请使用KvHelper.initialize(String path)初始化")
         }
-        kv = if (password == null) {
+        kv = if (globalPassword.isEmpty()) {
             FastKV.Builder(storePath, id)
                 .build()
         } else {
@@ -44,6 +45,7 @@ class KvHelper(val id: String = "default", password: String? = null) {
     companion object {
         private var storePath = ""
 
+        private var globalPassword = ""
         /**
          * 初始化 传入文件夹路径
          */
@@ -52,6 +54,10 @@ class KvHelper(val id: String = "default", password: String? = null) {
             storePath = path
         }
 
+        @JvmStatic
+        fun setGlobalPassword(password: String) {
+            globalPassword = password
+        }
         @JvmStatic
         fun initialize(context: Context) {
             storePath = context.filesDir.absolutePath + "/KvConfig"

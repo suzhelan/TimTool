@@ -15,8 +15,8 @@ import top.sacz.timtool.hook.base.IMethodFinder
 import top.sacz.timtool.hook.core.factory.ExceptionFactory
 import top.sacz.timtool.hook.core.factory.HookItemFactory
 import top.sacz.timtool.hook.util.ToastTool.show
-import top.sacz.timtool.util.KvHelper
 import top.sacz.xphelper.dexkit.DexFinder
+import top.sacz.xphelper.util.KvHelper
 
 class HookItemMethodFindProcessor {
     private val flag = "FLAG"

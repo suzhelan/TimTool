@@ -12,7 +12,6 @@ import top.sacz.timtool.hook.core.HookItemMethodFindProcessor
 import top.sacz.timtool.hook.util.PathTool
 import top.sacz.timtool.net.NewLoginTask
 import top.sacz.timtool.net.UpdateService
-import top.sacz.timtool.util.KvHelper
 import top.sacz.xphelper.XpHelper
 
 class HookSteps {
@@ -42,7 +41,8 @@ class HookSteps {
         XpHelper.initContext(context)
         XpHelper.injectResourcesToContext(context)
         val dataDir = PathTool.getModuleDataPath() + "/data"
-        KvHelper.initialize(dataDir)
+        XpHelper.setConfigPath(dataDir)
+        XpHelper.setConfigPassword("TimToolConfigEncryptKey")
         initDialogX(context)
     }
 

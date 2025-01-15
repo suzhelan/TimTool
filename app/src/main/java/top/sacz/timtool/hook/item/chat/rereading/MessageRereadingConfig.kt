@@ -1,6 +1,6 @@
 package top.sacz.timtool.hook.item.chat.rereading
 
-import top.sacz.timtool.util.KvHelper
+import top.sacz.xphelper.util.KvHelper
 
 object MessageRereadingConfig {
     // 两次点击按钮之间的点击间隔不能少于500毫秒

@@ -29,6 +29,16 @@ public class XpHelper {
     }
 
     /**
+     * 设置配置存储路径
+     */
+    public static void setConfigPath(String pathDir) {
+        KvHelper.initialize(pathDir);
+    }
+
+    public static void setConfigPassword(String password) {
+        KvHelper.setGlobalPassword(password);
+    }
+    /**
      * 注入模块的Res资源到上下文中
      *
      * @param context 要注入的上下文

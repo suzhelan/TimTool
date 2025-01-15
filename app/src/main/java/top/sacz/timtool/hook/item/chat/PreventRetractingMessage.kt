@@ -12,11 +12,11 @@ import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.item.api.QQMessageViewListener
 import top.sacz.timtool.hook.item.api.QQMsgViewAdapter
 import top.sacz.timtool.hook.item.chat.retracting.PreventRetractingMessageCore
-import top.sacz.timtool.util.KvHelper
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.ConstructorUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.MethodUtils
+import top.sacz.xphelper.util.KvHelper
 
 @HookItem("辅助功能/聊天/消息防撤回")
 class PreventRetractingMessage : BaseSwitchFunctionHookItem() {

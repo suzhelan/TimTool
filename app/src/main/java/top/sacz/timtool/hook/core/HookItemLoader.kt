@@ -3,7 +3,7 @@ package top.sacz.timtool.hook.core
 import com.alibaba.fastjson2.TypeReference
 import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.factory.HookItemFactory
-import top.sacz.timtool.util.KvHelper
+import top.sacz.xphelper.util.KvHelper
 
 class HookItemLoader {
 

@@ -5,7 +5,8 @@ import android.app.Application;
 import com.kongzue.dialogx.DialogX;
 import com.kongzue.dialogxmaterialyou.style.MaterialYouStyle;
 
-import top.sacz.timtool.util.KvHelper;
+import top.sacz.xphelper.util.KvHelper;
+
 
 public class FixApplication extends Application {
     @Override
