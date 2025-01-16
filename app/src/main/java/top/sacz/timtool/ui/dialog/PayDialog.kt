@@ -24,11 +24,12 @@ import top.sacz.xphelper.util.ActivityTools
 /**
  * 很高兴您参阅此项目的源码部分 也希望您对此项目做出贡献
  */
-class PayDialog {
+class PayDialog(val settingDialog: SettingDialog) {
 
     private val payApi = HttpClient.getPayApi()
 
     private val uin = QQEnvTool.getCurrentUin()
+
     fun showFirstDialog() {
         if (UserCenter.getUserInfo().identity >= 1) {
             return
@@ -66,6 +67,12 @@ class PayDialog {
             .setOkButton("赞助完成后点我~") { _, _ ->
                 queryOrderResult()
                 false
+            }.setCancelButton("主动跳转到浏览器") { _, _ ->
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                intent.setData(Uri.parse(payUrl))
+                ActivityTools.getTopActivity().startActivity(intent)
+                true
             }
         GlobalScope.launch {
             delay(2000)
@@ -78,32 +85,20 @@ class PayDialog {
 
     @OptIn(DelicateCoroutinesApi::class)
     private fun queryOrderResult() = GlobalScope.launch(Dispatchers.IO) {
-        var ok = false
         WaitDialog.show("正在查询订单结果...")
         //循环10次
-        for (i in 0..10) {
-            if (ok) {
-                break
+        for (i in 0..5) {
+            val result = payApi.queryOrderResult(uin).execute().body() ?: return@launch
+            if (result.isSuccess) {
+                ToastTool.show(result.msg)
+                doPaySuccess()
+                return@launch
             }
-            payApi.queryOrderResult(uin).enqueue(object : retrofit2.Callback<QSResult<String>> {
-                override fun onResponse(p0: Call<QSResult<String>>, p1: Response<QSResult<String>>) {
-                    val result = p1.body()!!
-                    if (result.isSuccess) {
-                        ToastTool.show(result.msg)
-                        doPaySuccess()
-                        ok = true
-                    }
-                    if (i >= 10) {
-                        ToastTool.show(result.msg)
-                    }
-                }
-
-                override fun onFailure(p0: Call<QSResult<String>>, p1: Throwable) {
-                }
-            })
             delay(1000)
         }
         WaitDialog.dismiss()
+        val result = payApi.queryOrderResult(uin).execute().body() ?: return@launch
+        ToastTool.show(result.msg)
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -111,5 +106,6 @@ class PayDialog {
         WaitDialog.show("赞助成功 正在为您刷新用户信息")
         NewLoginTask().awaitLogin()
         TipDialog.show("用户信息更新成功", WaitDialog.TYPE.SUCCESS)
+        settingDialog.refresh()
     }
 }

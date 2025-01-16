@@ -7,6 +7,7 @@ import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kongzue.dialogx.dialogs.MessageDialog
@@ -16,6 +17,7 @@ import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.net.UpdateService
+import top.sacz.timtool.net.UserCenter
 import top.sacz.timtool.ui.adapter.CategoryAdapter
 import top.sacz.timtool.ui.adapter.SettingUIItemManger
 import top.sacz.timtool.ui.bean.Category
@@ -24,7 +26,10 @@ import top.sacz.timtool.ui.bean.ParentCategory
 class SettingDialog {
     private lateinit var dialog: MessageDialog
 
+    private lateinit var rootView: ViewGroup
+
     private var isCategory = true
+
 
     @SuppressLint("InflateParams")
     fun show(activity: Context) {
@@ -47,7 +52,9 @@ class SettingDialog {
                     p0: MessageDialog,
                     p1: View
                 ) {
-                    onBindView(p1 as ViewGroup, p0)
+                    rootView = p1 as ViewGroup
+                    dialog = p0
+                    onBindView()
                 }
             })
             .setMessage(messageText)
@@ -60,7 +67,7 @@ class SettingDialog {
                 onTelegramClick(it)
             }
         }
-        PayDialog().showFirstDialog()
+        PayDialog(this).showFirstDialog()
     }
 
     private fun onTelegramClick(view: View) {
@@ -81,8 +88,14 @@ class SettingDialog {
         view.context.startActivity(intent)
     }
 
+    fun refresh() {
+        dialog.refreshUI()
+    }
+
     @SuppressLint("InflateParams")
-    private fun onBindView(rootView: View, dialog: MessageDialog) {
+    private fun onBindView() {
+        val userInfo = UserCenter.getUserInfo()
+
         val context = rootView.context
         val ibViewAllUpdateLog = rootView.findViewById<View>(R.id.ib_update_log)
         ibViewAllUpdateLog.setOnClickListener {
@@ -92,6 +105,10 @@ class SettingDialog {
         ibTelegram.setOnClickListener {
             onTelegramClick(it)
         }
+        val tvIdentityName = rootView.findViewById<TextView>(R.id.tv_user_identity_name)
+        val tvLabel = rootView.findViewById<TextView>(R.id.tv_user_label)
+        tvIdentityName.text = userInfo.identityName
+        tvLabel.text = "标签: ${userInfo.label ?: "无"}"
         //提交初始的分类
         val boxView = rootView.findViewById<FrameLayout>(R.id.box_list)
         val categoryRv = FixContextUtil.getFixInflater(context)
