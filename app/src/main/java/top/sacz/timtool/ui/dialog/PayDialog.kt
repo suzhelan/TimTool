@@ -86,19 +86,20 @@ class PayDialog(val settingDialog: SettingDialog) {
     @OptIn(DelicateCoroutinesApi::class)
     private fun queryOrderResult() = GlobalScope.launch(Dispatchers.IO) {
         WaitDialog.show("正在查询订单结果...")
-        //循环10次
+        //循环5次
         for (i in 0..5) {
             val result = payApi.queryOrderResult(uin).execute().body() ?: return@launch
             if (result.isSuccess) {
                 ToastTool.show(result.msg)
                 doPaySuccess()
                 return@launch
+            } else if (i == 5) {
+                WaitDialog.dismiss()
+                ToastTool.show(result.msg)
+                return@launch
             }
             delay(1000)
         }
-        WaitDialog.dismiss()
-        val result = payApi.queryOrderResult(uin).execute().body() ?: return@launch
-        ToastTool.show(result.msg)
     }
 
     @OptIn(DelicateCoroutinesApi::class)

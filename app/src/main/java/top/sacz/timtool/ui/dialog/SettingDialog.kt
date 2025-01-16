@@ -89,7 +89,7 @@ class SettingDialog {
     }
 
     fun refresh() {
-        dialog.refreshUI()
+        onBindView()
     }
 
     @SuppressLint("InflateParams")
