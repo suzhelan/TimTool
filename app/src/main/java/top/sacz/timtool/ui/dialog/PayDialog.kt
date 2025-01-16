@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Response
 import top.sacz.timtool.R
@@ -107,6 +108,8 @@ class PayDialog(val settingDialog: SettingDialog) {
         WaitDialog.show("赞助成功 正在为您刷新用户信息")
         NewLoginTask().awaitLogin()
         TipDialog.show("用户信息更新成功", WaitDialog.TYPE.SUCCESS)
-        settingDialog.refresh()
+        withContext(Dispatchers.Main) {
+            settingDialog.refresh()
+        }
     }
 }
