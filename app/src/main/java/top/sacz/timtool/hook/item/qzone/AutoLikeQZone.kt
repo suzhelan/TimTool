@@ -34,7 +34,7 @@ class AutoLikeQZone : BaseSwitchFunctionHookItem() {
         //发布点赞任务
         thread {
             //最多执行五次 大多数情况点赞成功会直接终止
-            repeat(5) {
+            repeat(10) {
                 Thread.sleep(500)
                 val feedData = obj.getFieldValue<Any>(ClassUtils.findClass("com.qzone.proxy.feedcomponent.model.BusinessFeedData"))
                 OutputHookStack.OutputObjectField(feedData)
