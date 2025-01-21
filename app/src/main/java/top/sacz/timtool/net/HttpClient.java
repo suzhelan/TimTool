@@ -20,7 +20,6 @@ import top.sacz.timtool.net.httpconfig.TokenInfo;
  * 技术栈 Retrofit + Okhttp
  */
 public class HttpClient {
-//    public static final String BASE_URL = "http://localhost:8083";
 
     public static final String BASE_URL = "https://timtool.sacz.top";
 
