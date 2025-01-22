@@ -1,5 +1,6 @@
 package top.sacz.timtool.app.activity
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private val showActivityName: String
         get() = javaClass.name
 
+    //特性 方法get and set拓展
     @set:UiThread
     @get:UiThread
     var isHideActivity: Boolean
@@ -137,6 +139,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+@SuppressLint("QueryPermissionsNeeded")
 fun ComponentName.getEnable(ctx: Context): Boolean {
     val packageManager: PackageManager = ctx.packageManager
     val list = packageManager.queryIntentActivities(
