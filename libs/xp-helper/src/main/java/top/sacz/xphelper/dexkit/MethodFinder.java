@@ -155,7 +155,7 @@ public class MethodFinder {
         return methodMatcher;
     }
 
-    public List<Method> find() throws Exception {
+    public List<Method> find() throws NoSuchMethodException {
         //先查缓存
         List<Method> cache = DexKitCache.getMethodList(toString());
         if (!cache.isEmpty()) {
@@ -177,12 +177,16 @@ public class MethodFinder {
         return methods;
     }
 
-    public Method firstOrNull() throws Exception {
-        List<Method> methods = find();
-        if (methods.isEmpty()) {
+    public Method firstOrNull() {
+        try {
+            List<Method> methods = find();
+            if (methods.isEmpty()) {
+                return null;
+            }
+            return methods.get(0);
+        } catch (NoSuchMethodException e) {
             return null;
         }
-        return methods.get(0);
     }
 
     public Method first() throws Exception {
