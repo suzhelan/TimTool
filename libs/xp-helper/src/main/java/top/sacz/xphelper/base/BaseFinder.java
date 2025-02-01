@@ -12,6 +12,9 @@ import java.util.Map;
 import de.robv.android.xposed.XposedHelpers;
 import top.sacz.xphelper.exception.ReflectException;
 
+/**
+ * 超精妙设计
+ */
 public abstract class BaseFinder<T extends Member> {
     private static final Map<String, List<Field>> FIELD_CACHE = new HashMap<>();
     private static final Map<String, List<Method>> METHOD_CACHE = new HashMap<>();
