@@ -57,7 +57,7 @@ class StickerPanelInject : BaseSwitchFunctionHookItem(), OnMenuBuilder {
     override val targetTypes = arrayOf("com.tencent.mobileqq.aio.msglist.holder.component.pic.AIOPicContentComponent")
 
     override fun onGetMenu(aioMsgItem: Any, targetType: String, param: XC_MethodHook.MethodHookParam) {
-        val item = QQCustomMenu.createMenuItem(aioMsgItem, "保存", R.id.item_save, R.mipmap.ic_launcher_round) {
+        val item = QQCustomMenu.createMenuItem(aioMsgItem, "保存", R.id.item_sticker_save, R.mipmap.ic_launcher_round) {
             val msgRecord = aioMsgItem.callMethod<Any>("getMsgRecord")
             showSaveStickerDialog(msgRecord)
         }

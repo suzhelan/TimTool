@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="item_repeat" type="id" />
-    <item name="item_save" type="id" />
+    <item name="item_msg_repeat" type="id" />
+    <item name="item_sticker_save" type="id" />
+    <item name="item_ptt_forward" type="id" />
 </resources>

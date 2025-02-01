@@ -72,7 +72,7 @@ class MessageMenuAddRereading : BaseSwitchFunctionHookItem(), OnMenuBuilder {
         param: XC_MethodHook.MethodHookParam
     ) {
         val item =
-            QQCustomMenu.createMenuItem(aioMsgItem, "复读", R.id.item_repeat, R.drawable.repeat) {
+            QQCustomMenu.createMenuItem(aioMsgItem, "复读", R.id.item_msg_repeat, R.drawable.repeat) {
                 val msgRecord = aioMsgItem.callMethod<Any>("getMsgRecord")
                 //调用复读方法
                 val listener =
