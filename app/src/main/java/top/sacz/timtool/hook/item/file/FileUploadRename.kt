@@ -32,7 +32,7 @@ class FileUploadRename : BaseSwitchFunctionHookItem() {
                     String::class.java
                 )
                 .first()
-        hookAfter(friendMethod, { param ->
+        hookAfter(friendMethod, 25) { param ->
             val fileManagerEntity = param.args[0]
             val fileName: String =
                 FieldUtils.getField(fileManagerEntity, "fileName", String::class.java)
@@ -46,16 +46,16 @@ class FileUploadRename : BaseSwitchFunctionHookItem() {
                     getFormattedFileNameByPath(localFile)
                 )
             }
-        }, 25)
+        }
         //第二次挂钩 将.apk替换成.APK
-        hookAfter(friendMethod, { param ->
+        hookAfter(friendMethod, 20) { param ->
             val fileManagerEntity = param.args[0]
             val fileName: String =
                 FieldUtils.getField(fileManagerEntity, "fileName", String::class.java)
             if (fileName.endsWith(".apk")) {
                 FieldUtils.setField(fileManagerEntity, "fileName", fileName.replace(".apk", ".APK"))
             }
-        }, 20)
+        }
 
         //群组
         val troopMethod: Method =
@@ -66,7 +66,7 @@ class FileUploadRename : BaseSwitchFunctionHookItem() {
                     loader.loadClass("com.tencent.mobileqq.troop.utils.TroopFileTransferManager\$Item")
                 )
                 .first()
-        hookBefore(troopMethod, { param ->
+        hookBefore(troopMethod, 25) { param ->
             val item = param.args[1]
             val fileName: String = FieldUtils.getField(item, "FileName", String::class.java)
             val localFile: String? = FieldUtils.getField(item, "LocalFile", String::class.java)
@@ -75,14 +75,14 @@ class FileUploadRename : BaseSwitchFunctionHookItem() {
                     FieldUtils.setField(item, "FileName", getFormattedFileNameByPath(file))
                 }
             }
-        }, 25)
-        hookBefore(troopMethod, { param ->
+        }
+        hookBefore(troopMethod, 20) { param ->
             val item = param.args[1]
             val fileName: String = FieldUtils.getField(item, "FileName", String::class.java)
             if (fileName.endsWith(".apk")) {
                 FieldUtils.setField(item, "FileName", fileName.replace(".apk", ".APK"))
             }
-        }, 20)
+        }
     }
 
     /**

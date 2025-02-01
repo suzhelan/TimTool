@@ -30,11 +30,11 @@ public class SplashActivityInject extends BaseHookItem {
                 .returnType(boolean.class)
                 .params(Bundle.class)
                 .first();
-        hookAfter(onCreateMethod, param -> {
+        hookAfter(onCreateMethod, 1000, param -> {
             Activity activity = (Activity) param.thisObject;
             chatActivity = activity;
             XpHelper.injectResourcesToContext(activity);
-        }, 1000);
+        });
     }
 
 }

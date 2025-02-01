@@ -94,6 +94,7 @@ public class QQSettingInject extends BaseHookItem {
             }
         }
     }
+
     /**
      * 直接照搬qs
      */
@@ -102,7 +103,7 @@ public class QQSettingInject extends BaseHookItem {
                 .returnType(List.class)
                 .params(Context.class)
                 .first();
-        hookAfter(onCreate, this::onCreate, 500);
+        hookAfter(onCreate, 500, this::onCreate);
 
     }
 
@@ -112,7 +113,7 @@ public class QQSettingInject extends BaseHookItem {
                 .returnType(List.class)
                 .params(Context.class)
                 .first();
-        hookAfter(getItemProcessListNew, this::onCreate, 500);
+        hookAfter(getItemProcessListNew, 500, this::onCreate);
     }
 
     @Override

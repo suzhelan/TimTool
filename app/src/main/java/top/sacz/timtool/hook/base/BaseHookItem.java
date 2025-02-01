@@ -104,7 +104,7 @@ public abstract class BaseHookItem {
      *
      * @param priority 越高 执行优先级越高 默认50
      */
-    protected XC_MethodHook.Unhook hookAfter(Member method, HookAction action, int priority) {
+    protected XC_MethodHook.Unhook hookAfter(Member method, int priority, HookAction action) {
         return XposedBridge.hookMethod(method, new XC_MethodHook(priority) {
             @Override
             protected void afterHookedMethod(MethodHookParam param) {
@@ -116,7 +116,7 @@ public abstract class BaseHookItem {
     /**
      * 跟上面那个一样
      */
-    protected XC_MethodHook.Unhook hookBefore(Member method, HookAction action, int priority) {
+    protected XC_MethodHook.Unhook hookBefore(Member method, int priority, HookAction action) {
         return XposedBridge.hookMethod(method, new XC_MethodHook(priority) {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) {
