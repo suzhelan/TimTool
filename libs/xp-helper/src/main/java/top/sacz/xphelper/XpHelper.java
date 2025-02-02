@@ -7,7 +7,7 @@ import de.robv.android.xposed.IXposedHookZygoteInit;
 import top.sacz.xphelper.activity.ActivityProxyManager;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.util.ActivityTools;
-import top.sacz.xphelper.util.ConfigHelper;
+import top.sacz.xphelper.util.ConfigUtils;
 
 public class XpHelper {
     @SuppressLint("StaticFieldLeak")
@@ -20,7 +20,7 @@ public class XpHelper {
         context = application;
         classLoader = application.getClassLoader();
         ClassUtils.intiClassLoader(classLoader);
-        ConfigHelper.initialize(application);
+        ConfigUtils.initialize(application);
         ActivityProxyManager.initActivityProxyManager(application);
     }
 
@@ -32,11 +32,11 @@ public class XpHelper {
      * 设置配置存储路径
      */
     public static void setConfigPath(String pathDir) {
-        ConfigHelper.initialize(pathDir);
+        ConfigUtils.initialize(pathDir);
     }
 
     public static void setConfigPassword(String password) {
-        ConfigHelper.setGlobalPassword(password);
+        ConfigUtils.setGlobalPassword(password);
     }
     /**
      * 注入模块的Res资源到上下文中

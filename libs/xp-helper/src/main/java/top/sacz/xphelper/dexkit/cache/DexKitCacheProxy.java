@@ -15,18 +15,18 @@ import java.util.Set;
 
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.reflect.MethodUtils;
-import top.sacz.xphelper.util.ConfigHelper;
+import top.sacz.xphelper.util.ConfigUtils;
 
 public class DexKitCacheProxy {
 
-    ConfigHelper configHelper = new ConfigHelper("DexKitCache");
+    ConfigUtils configUtils = new ConfigUtils("DexKitCache");
 
     public Set<String> keys() {
-        return configHelper.getAllKeys();
+        return configUtils.getAllKeys();
     }
 
     public void clearCache() {
-        configHelper.clearAll();
+        configUtils.clearAll();
     }
 
     public void putMethodList(String key, List<Method> methodList) {
@@ -34,12 +34,12 @@ public class DexKitCacheProxy {
         for (Method method : methodList) {
             infoList.add(getMethodInfoJSON(method));
         }
-        configHelper.put(key, infoList);
+        configUtils.put(key, infoList);
     }
 
     public List<Method> getMethodList(String key) {
         ArrayList<Method> result = new ArrayList<>();
-        ArrayList<String> methodInfoList = configHelper.getObject(key, new TypeReference<>() {
+        ArrayList<String> methodInfoList = configUtils.getObject(key, new TypeReference<>() {
         });
         Log.d("Cache", "getMethodList: " + key);
         if (methodInfoList != null) {

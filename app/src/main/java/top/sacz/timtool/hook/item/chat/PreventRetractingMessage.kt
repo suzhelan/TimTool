@@ -16,7 +16,7 @@ import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.ConstructorUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.MethodUtils
-import top.sacz.xphelper.util.ConfigHelper
+import top.sacz.xphelper.util.ConfigUtils
 
 @HookItem("辅助功能/聊天/消息防撤回")
 class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
@@ -47,8 +47,8 @@ class PreventRetractingMessage : BaseSwitchFunctionHookItem() {
         hookAIOMsgUpdate()
     }
 
-    private fun getConfigUtils(): ConfigHelper {
-        return ConfigHelper("防撤回数据库")
+    private fun getConfigUtils(): ConfigUtils {
+        return ConfigUtils("防撤回数据库")
     }
 
     private fun hookAIOMsgUpdate() {

@@ -6,7 +6,7 @@ import java.util.List;
 
 import top.sacz.timtool.hook.util.PathTool;
 import top.sacz.timtool.hook.util.ToastTool;
-import top.sacz.xphelper.util.ConfigHelper;
+import top.sacz.xphelper.util.ConfigUtils;
 
 
 /**
@@ -14,7 +14,7 @@ import top.sacz.xphelper.util.ConfigHelper;
  */
 public class StickerDataProvider {
 
-    private final static ConfigHelper CONFIG_HELPER = new ConfigHelper("表情面板");
+    private final static ConfigUtils CONFIG_HELPER = new ConfigUtils("表情面板");
 
     public static String getStickerStorageDirectory() {
         return PathTool.getModuleDataPath() + "/表情";

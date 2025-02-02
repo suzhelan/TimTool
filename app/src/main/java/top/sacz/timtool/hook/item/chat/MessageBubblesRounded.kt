@@ -22,7 +22,7 @@ import top.sacz.timtool.hook.util.callMethod
 import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.XpHelper.context
 import top.sacz.xphelper.reflect.MethodUtils
-import top.sacz.xphelper.util.ConfigHelper
+import top.sacz.xphelper.util.ConfigUtils
 
 @HookItem("辅助功能/聊天/消息气泡圆度优化")
 class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
@@ -31,8 +31,8 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
         return "点击修改(别忘了开启此功能)"
     }
 
-    private fun getConfig(): ConfigHelper {
-        return ConfigHelper("修改气泡圆角")
+    private fun getConfig(): ConfigUtils {
+        return ConfigUtils("修改气泡圆角")
     }
 
     private fun getRadiiDp(): Int {
@@ -192,8 +192,8 @@ class MessageBubblesRounded : BaseSwitchFunctionHookItem() {
      */
     internal class GenerateBubbleDrawable {
 
-        private fun getConfig(): ConfigHelper {
-            return ConfigHelper("修改气泡圆角")
+        private fun getConfig(): ConfigUtils {
+            return ConfigUtils("修改气泡圆角")
         }
 
         fun setConfigColor(tag: String, colorHex: String): Boolean {

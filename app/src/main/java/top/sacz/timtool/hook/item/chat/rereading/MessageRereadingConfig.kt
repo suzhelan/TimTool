@@ -1,13 +1,13 @@
 package top.sacz.timtool.hook.item.chat.rereading
 
-import top.sacz.xphelper.util.ConfigHelper
+import top.sacz.xphelper.util.ConfigUtils
 
 object MessageRereadingConfig {
     // 两次点击按钮之间的点击间隔不能少于500毫秒
     private const val MIN_CLICK_DELAY_TIME: Int = 500
     private var lastClickTime: Long = 0
 
-    private val config: ConfigHelper by lazy { ConfigHelper("消息复读") }
+    private val config: ConfigUtils by lazy { ConfigUtils("消息复读") }
 
     fun isDoubleClickMode(): Boolean {
         return config.getBoolean("isDoubleClickMode", false)

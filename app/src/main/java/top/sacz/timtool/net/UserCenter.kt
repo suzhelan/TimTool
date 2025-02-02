@@ -2,7 +2,7 @@ package top.sacz.timtool.net
 
 import top.sacz.timtool.net.entity.User
 import top.sacz.timtool.net.httpconfig.TokenInfo
-import top.sacz.xphelper.util.ConfigHelper
+import top.sacz.xphelper.util.ConfigUtils
 
 
 object UserCenter {
@@ -32,6 +32,6 @@ object UserCenter {
         return getConfig().getObject("token", TokenInfo::class.java)
     }
 
-    private fun getConfig() = ConfigHelper("user")
+    private fun getConfig() = ConfigUtils("user")
 
 }

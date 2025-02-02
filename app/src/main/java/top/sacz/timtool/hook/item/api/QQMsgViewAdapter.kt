@@ -13,7 +13,7 @@ import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.FieldUtils
 import top.sacz.xphelper.reflect.Ignore
 import top.sacz.xphelper.reflect.MethodUtils
-import top.sacz.xphelper.util.ConfigHelper
+import top.sacz.xphelper.util.ConfigUtils
 
 @HookItem("适配QQMsg内容ViewID")
 class QQMsgViewAdapter : BaseHookItem() {
@@ -41,14 +41,14 @@ class QQMsgViewAdapter : BaseHookItem() {
     private var unhook: XC_MethodHook.Unhook? = null
 
     private fun findContentViewId(): Int {
-        return ConfigHelper(javaClass.simpleName).getInt(
+        return ConfigUtils(javaClass.simpleName).getInt(
             "contentViewId${TimVersion.getVersionName()}:${BuildConfig.VERSION_NAME}",
             -1
         )
     }
 
     private fun putContentViewId(id: Int) {
-        val kv = ConfigHelper(javaClass.simpleName)
+        val kv = ConfigUtils(javaClass.simpleName)
         kv.clearAll()
         kv.put(
             "contentViewId${TimVersion.getVersionName()}:${BuildConfig.VERSION_NAME}",
