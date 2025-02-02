@@ -36,21 +36,42 @@ public class MethodFinder {
         return new MethodFinder();
     }
 
+    /**
+     * 所在类
+     *
+     * @param declaredClass
+     * @return
+     */
     public MethodFinder declaredClass(Class<?> declaredClass) {
         this.declaredClass = declaredClass;
         return this;
     }
 
+    /**
+     * 方法参数
+     * @param parameters
+     * @return
+     */
     public MethodFinder parameters(Class<?>... parameters) {
         this.parameters = parameters;
         return this;
     }
 
+    /**
+     * 方法名
+     * @param name
+     * @return
+     */
     public MethodFinder methodName(String name) {
         methodName = name;
         return this;
     }
 
+    /**
+     * 返回值类型
+     * @param returnTypeClass
+     * @return
+     */
     public MethodFinder returnType(Class<?> returnTypeClass) {
         returnType = returnTypeClass;
         return this;

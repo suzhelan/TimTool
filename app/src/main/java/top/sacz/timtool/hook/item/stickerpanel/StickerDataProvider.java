@@ -6,7 +6,7 @@ import java.util.List;
 
 import top.sacz.timtool.hook.util.PathTool;
 import top.sacz.timtool.hook.util.ToastTool;
-import top.sacz.xphelper.util.KvHelper;
+import top.sacz.xphelper.util.ConfigHelper;
 
 
 /**
@@ -14,18 +14,18 @@ import top.sacz.xphelper.util.KvHelper;
  */
 public class StickerDataProvider {
 
-    private final static KvHelper kvHelper = new KvHelper("表情面板");
+    private final static ConfigHelper CONFIG_HELPER = new ConfigHelper("表情面板");
 
     public static String getStickerStorageDirectory() {
         return PathTool.getModuleDataPath() + "/表情";
     }
 
     public static String getCurrentSelectionDir() {
-        return kvHelper.getString("currentSelection", "");
+        return CONFIG_HELPER.getString("currentSelection", "");
     }
 
     public static void setCurrentSelectionDir(String currentSelection) {
-        kvHelper.put("currentSelection", currentSelection);
+        CONFIG_HELPER.put("currentSelection", currentSelection);
     }
 
     public static String getCacheDir() {

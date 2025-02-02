@@ -41,8 +41,8 @@ class HookSteps {
         XpHelper.initContext(context)
         XpHelper.injectResourcesToContext(context)
         val dataDir = PathTool.getModuleDataPath() + "/data"
-        XpHelper.setConfigPath(dataDir)
-        XpHelper.setConfigPassword("TimToolConfigEncryptKey")
+        XpHelper.setConfigPath(dataDir)//设置存储路径
+        XpHelper.setConfigPassword("TimToolConfigEncryptKey")//设置加密密码
         initDialogX(context)
     }
 

@@ -15,7 +15,7 @@ import top.sacz.timtool.util.ScreenParamUtils
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.ConstructorUtils
 import top.sacz.xphelper.reflect.FieldUtils
-import top.sacz.xphelper.util.KvHelper
+import top.sacz.xphelper.util.ConfigHelper
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -28,17 +28,17 @@ class ShowMessageTime : BaseSwitchFunctionHookItem() {
 
     private var size: Int
         get() {
-            return KvHelper("消息显示时间").getInt("size", 9)
+            return ConfigHelper("消息显示时间").getInt("size", 9)
         }
         set(value) {
-            KvHelper("消息显示时间").put("size", value)
+            ConfigHelper("消息显示时间").put("size", value)
         }
     private var format: String
         get() {
-            return KvHelper("消息显示时间").getString("format", "HH:mm:ss")
+            return ConfigHelper("消息显示时间").getString("format", "HH:mm:ss")
         }
         set(value) {
-            KvHelper("消息显示时间").put("format", value)
+            ConfigHelper("消息显示时间").put("format", value)
         }
 
     override fun getOnClickListener(): View.OnClickListener {

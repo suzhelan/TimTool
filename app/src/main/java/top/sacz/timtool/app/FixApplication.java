@@ -5,7 +5,7 @@ import android.app.Application;
 import com.kongzue.dialogx.DialogX;
 import com.kongzue.dialogxmaterialyou.style.MaterialYouStyle;
 
-import top.sacz.xphelper.util.KvHelper;
+import top.sacz.xphelper.util.ConfigHelper;
 
 
 public class FixApplication extends Application {
@@ -13,7 +13,7 @@ public class FixApplication extends Application {
     public void onCreate() {
         super.onCreate();
         //初始化dialogx
-        KvHelper.initialize(this);
+        ConfigHelper.initialize(this);
         DialogX.init(this);
         DialogX.globalTheme = DialogX.THEME.AUTO;
         DialogX.globalStyle = new MaterialYouStyle();

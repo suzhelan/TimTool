@@ -12,7 +12,7 @@ import io.fastkv.interfaces.FastCipher
  * 完整构造方法 默认会生成无密码文件名为default的数据库
  * 如果需要加密传入密码
  */
-class KvHelper(val id: String = "default", password: String = globalPassword) {
+class ConfigHelper(val id: String = "default", password: String = globalPassword) {
 
     /**
      * 默认构造方法 会生成无密码文件名为default的数据库
@@ -60,7 +60,7 @@ class KvHelper(val id: String = "default", password: String = globalPassword) {
         }
         @JvmStatic
         fun initialize(context: Context) {
-            storePath = context.filesDir.absolutePath + "/KvConfig"
+            storePath = context.filesDir.absolutePath + "/XpHelper"
         }
     }
 

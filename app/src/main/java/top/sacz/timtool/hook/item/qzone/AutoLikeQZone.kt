@@ -10,14 +10,14 @@ import top.sacz.timtool.hook.util.getFieldValue
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.reflect.MethodUtils
 import top.sacz.xphelper.util.ActivityTools
-import top.sacz.xphelper.util.KvHelper
+import top.sacz.xphelper.util.ConfigHelper
 import kotlin.concurrent.thread
 
 
 @HookItem("辅助功能/QQ空间/在空间时自动点赞QQ空间")
 class AutoLikeQZone : BaseSwitchFunctionHookItem() {
 
-    private val noLikeConfig by lazy { KvHelper("AutoLikeQZone") }
+    private val noLikeConfig by lazy { ConfigHelper("AutoLikeQZone") }
 
     override fun getTip(): String {
         return "所见即点赞"

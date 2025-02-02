@@ -16,14 +16,14 @@ import top.sacz.timtool.hook.core.factory.ExceptionFactory
 import top.sacz.timtool.hook.core.factory.HookItemFactory
 import top.sacz.timtool.hook.util.ToastTool.show
 import top.sacz.xphelper.dexkit.DexFinder
-import top.sacz.xphelper.util.KvHelper
+import top.sacz.xphelper.util.ConfigHelper
 
 class HookItemMethodFindProcessor {
     private val flag = "FLAG"
     fun isDataExpire(): Boolean {
         val key = TimVersion.getVersionName() + "_" + BuildConfig.VERSION_NAME
-        val kvHelper = KvHelper("MethodFindProcessor")
-        return key != kvHelper.getString(flag, "")
+        val configHelper = ConfigHelper("MethodFindProcessor")
+        return key != configHelper.getString(flag, "")
     }
 
     fun startFindAsync(callback: Runnable) {
@@ -56,8 +56,8 @@ class HookItemMethodFindProcessor {
             }
             DexFinder.close()
             val key = TimVersion.getVersionName() + "_" + BuildConfig.VERSION_NAME
-            val kvHelper = KvHelper("MethodFindProcessor")
-            kvHelper.put(flag, key)
+            val configHelper = ConfigHelper("MethodFindProcessor")
+            configHelper.put(flag, key)
             show("查找方法完成")
             callback.run()
         }

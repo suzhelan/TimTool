@@ -18,10 +18,7 @@ class ChooseAgentActivity : AbstractChooseActivity() {
 
     companion object {
         fun start(context: Context, intent: Intent) {
-            intent.putExtra(
-                "proxy_target_activity",
-                "cooperation.qlink.QlinkStandardDialogActivity"
-            )
+            intent.putExtra("proxy_target_activity", "cooperation.qlink.QlinkStandardDialogActivity")
             context.startActivity(intent)
         }
     }
