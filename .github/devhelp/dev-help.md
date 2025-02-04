@@ -5,6 +5,7 @@
 此项目包含的QQ API https://github.com/suzhelan/TimTool/blob/master/.github/devhelp/api.md
 ### 开始最常用的开发
 
+### 可以简单过一遍 [XPHelper](https://github.com/suzhelan/XPHelper) 的文档
 在此项目进行开发 需要保持良好的代码规范 保持低耦合的设计
 
 如果你是Kotlin开发者，可以参考如下代码
