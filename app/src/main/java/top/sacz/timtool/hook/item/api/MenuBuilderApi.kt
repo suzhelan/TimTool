@@ -7,7 +7,8 @@ import top.sacz.timtool.hook.core.annotation.HookItem
 import java.lang.reflect.Modifier
 
 /**
- * 参考类 {@link top.sacz.timtool.hook.item.chat.MessageMenuAddRereading}
+ * 参考类
+ * @see top.sacz.timtool.hook.item.chat.MessageMenuAddRereading
  */
 @HookItem("对应类型消息菜单构建时回调接口")
 class MenuBuilderApi : ApiHookItem() {
