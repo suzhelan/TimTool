@@ -28,6 +28,7 @@ class PttForward : BaseSwitchFunctionHookItem(), OnMenuBuilder {
         hookBefore("Lcom/tencent/mobileqq/forward/ForwardBaseOption;->buildConfirmDialog()V".toMethod(), 51) { param ->
             val activity = param.thisObject.getFieldValue<Activity>("mActivity")
             val extraData = param.thisObject.getFieldValue<Bundle>("mExtraData")
+            if (!extraData.containsKey("ptt_forward_path")) return@hookBefore
             val pttFilePath = extraData.getString("ptt_forward_path")
             if (pttFilePath != null && File(pttFilePath).exists()) {
                 MessageDialog.build().apply {
