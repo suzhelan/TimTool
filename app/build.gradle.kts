@@ -19,7 +19,7 @@ android {
         minSdk = BuildVersionConfig.minSdk
         targetSdk = BuildVersionConfig.targetSdk
         versionCode = 25
-        versionName = "2.5"
+        versionName = "2.5fix"
 
         ndk {
             //只支持arm64 v8a的lib so库,因为qq只支持arm64 v8a
@@ -117,7 +117,7 @@ dependencies {
     ksp(project(":annotation-scanner"))
 
     //自己写的小工具 包含一些常用功能 反射工具 注入act res等 dexkit等
-    implementation("com.github.suzhelan:XpHelper:v1.3")
+    implementation("com.github.suzhelan:XpHelper:v1.4")
 
 
     implementation(libs.byte.buddy.android)
