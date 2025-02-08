@@ -15,6 +15,7 @@ import top.sacz.timtool.hook.util.ToastTool
 import top.sacz.timtool.hook.util.callMethod
 import top.sacz.timtool.hook.util.getFieldValue
 import top.sacz.timtool.hook.util.toMethod
+import top.sacz.timtool.util.Log
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.util.ActivityTools
 import java.io.File
@@ -31,10 +32,14 @@ class PttForward : BaseSwitchFunctionHookItem(), OnMenuBuilder {
             if (!extraData.containsKey("ptt_forward_path")) return@hookBefore
             val pttFilePath = extraData.getString("ptt_forward_path")
             if (pttFilePath != null && File(pttFilePath).exists()) {
+                val nick = extraData.getString("uinname")
+                val uin = extraData.getString("uin")
+                val uinType = extraData.getInt("uintype", -1)
                 MessageDialog.build().apply {
-                    setTitle("发送给 测试群")
+                    setTitle("发送给 $nick")
                     setMessage("[语音转发] $pttFilePath")
                     setOkButton("发送") { _, _ ->
+                        Log.d("PttForward nick: $nick, uin: $uin, uinType: $uinType")
                         sendPttFile(pttFilePath)
                         activity.finish()
                         true
