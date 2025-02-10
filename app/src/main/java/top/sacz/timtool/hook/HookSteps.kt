@@ -28,8 +28,8 @@ class HookSteps {
 
     fun initContext(application: Application) {
         val context = application.baseContext
-        val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         val packageManager = context.packageManager
+        val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
         val appName = packageManager.getApplicationLabel(context.applicationInfo).toString()
         HookEnv.setHostAppContext(context)
         HookEnv.setApplication(application)
