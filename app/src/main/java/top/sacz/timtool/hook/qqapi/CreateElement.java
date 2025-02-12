@@ -1,15 +1,22 @@
 package top.sacz.timtool.hook.qqapi;
 
 import android.media.MediaMetadataRetriever;
+import android.os.Environment;
 import android.text.TextUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import de.robv.android.xposed.XposedHelpers;
 import top.sacz.timtool.hook.util.PathTool;
 import top.sacz.timtool.hook.util.ToastTool;
 import top.sacz.timtool.net.DownloadManager;
+import top.sacz.timtool.util.FileUtils;
 import top.sacz.timtool.util.Log;
 import top.sacz.xphelper.reflect.ClassUtils;
 import top.sacz.xphelper.reflect.ConstructorUtils;
@@ -62,6 +69,31 @@ public class CreateElement {
     public static Object createFileElement(String path) {
         Object o = QQEnvTool.getQRouteApi(ClassUtils.findClass("com.tencent.qqnt.msg.api.IMsgUtilApi"));
         return XposedHelpers.callMethod(o, "createFileElement", new Class[]{String.class}, path);
+    }
+
+    public static Object createPttElement(String url) {
+        String path = url;
+        Object o = QQEnvTool.getQRouteApi(ClassUtils.findClass("com.tencent.qqnt.msg.api.IMsgUtilApi"));
+        ArrayList<Byte> myList = new ArrayList<>(Arrays.asList(new Byte[]{28, 26, 43, 29, 31, 61, 34, 49, 51, 56, 52, 74, 41, 62, 66, 46, 25, 57, 51, 70, 33, 45, 39, 27, 68, 58, 46, 59, 59, 63}));
+        return XposedHelpers.callMethod(o, "createPttElement", new Class[]{String.class, int.class, ArrayList.class}, path, (int) getDuration(path), myList);
+    }
+
+    public static String cachePttPath(String url) {
+        String copyTo = Environment.getExternalStorageDirectory() + "/Android/data/com.tencent.mobileqq/Tencent/MobileQQ/" + QQEnvTool.getCurrentUin() + "/ptt/";
+        //url
+        if (url.toLowerCase().startsWith("http:") || url.toLowerCase().startsWith("https:")) {
+            String mRandomPathName = (String.valueOf(Math.random())).substring(2);
+            DownloadManager.download(url, copyTo + mRandomPathName + ".aac");
+            copyTo += mRandomPathName + ".aac";
+        } else {
+            copyTo += new File(url).getName();
+            try {
+                FileUtils.copyFile(url, copyTo);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return copyTo;
     }
 
     public static Object createVideoElement(String path) {

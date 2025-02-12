@@ -11,11 +11,13 @@ import top.sacz.timtool.hook.base.BaseSwitchFunctionHookItem
 import top.sacz.timtool.hook.core.annotation.HookItem
 import top.sacz.timtool.hook.item.api.OnMenuBuilder
 import top.sacz.timtool.hook.item.api.QQCustomMenu
+import top.sacz.timtool.hook.qqapi.ContactUtils
+import top.sacz.timtool.hook.qqapi.CreateElement
+import top.sacz.timtool.hook.qqapi.QQSendMsgTool
 import top.sacz.timtool.hook.util.ToastTool
 import top.sacz.timtool.hook.util.callMethod
 import top.sacz.timtool.hook.util.getFieldValue
 import top.sacz.timtool.hook.util.toMethod
-import top.sacz.timtool.util.Log
 import top.sacz.xphelper.reflect.ClassUtils
 import top.sacz.xphelper.util.ActivityTools
 import java.io.File
@@ -39,24 +41,24 @@ class PttForward : BaseSwitchFunctionHookItem(), OnMenuBuilder {
                     setTitle("发送给 $nick")
                     setMessage("[语音转发] $pttFilePath")
                     setOkButton("发送") { _, _ ->
-                        Log.d("PttForward nick: $nick, uin: $uin, uinType: $uinType")
-                        sendPttFile(pttFilePath)
+                        sendPttFile(uinType + 1, uin.toString(), pttFilePath)
                         activity.finish()
                         true
                     }
                     setCancelButton("取消")
                     setCancelable(false)
                 }.show(activity)
+                param.result = null
             } else {
                 ToastTool.show("语音文件不存在")
             }
         }
     }
 
-    // TODO send ptt file
-    private fun sendPttFile(pttFilePath: String) {
-        // val msgElement = CreateElement.createPttElement(pttFilePath)
-        // QQSendMsgTool.sendMsg(ContactUtils.getCurrentContact(), arrayListOf(msgElement))
+    private fun sendPttFile(chatType: Int, uin: String, pttFilePath: String) {
+        val contact = ContactUtils.getContact(chatType, uin)
+        val msgElement = CreateElement.createPttElement(pttFilePath)
+        QQSendMsgTool.sendMsg(contact, arrayListOf(msgElement))
     }
 
     private fun startForwardIntent(context: Context, filePath: String) {
