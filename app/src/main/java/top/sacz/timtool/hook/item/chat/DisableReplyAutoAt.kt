@@ -15,7 +15,7 @@ class DisableReplyAutoAt : BaseSwitchFunctionHookItem(), IMethodFinder {
     override fun find() {
         method = buildMethodFinder()
             .searchPackages("com.tencent.mobileqq.aio.input.reply")
-            .useString("msgItem.msgRecord.senderUid")
+            .usedString("msgItem.msgRecord.senderUid")
             .first()
     }
 

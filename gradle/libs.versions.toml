@@ -29,6 +29,7 @@ dialogx = "0.0.50.beta32"
 
 protobuf-java = "4.29.3"
 kotlinx-serialization-protobuf = "1.8.0"
+xphelper = "2.4"
 
 [libraries]
 
@@ -64,6 +65,7 @@ kotlinx-serialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-seria
 protobuf-java = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf-java" }
 
 #xposed api
+xphelper = { module = "com.github.suzhelan:XpHelper", version.ref = "xphelper" }
 xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
 dexkit = { module = "org.luckypray:dexkit", version = "2.0.2" }
 

@@ -16,17 +16,17 @@ fun String.toClass(): Class<*> = ClassUtils.findClass(this)
  * 方法拓展
  * 通过方法签名获取方法
  */
-fun String.toMethod(): Method = MethodUtils.getMethodByDesc(this)
+fun String.toMethod(): Method = MethodUtils.getMethodByDescriptor(this)
 
-fun String.toMethod(clsLoader: ClassLoader): Method = MethodUtils.getMethodByDesc(this, clsLoader)
+fun String.toMethod(clsLoader: ClassLoader): Method = MethodUtils.getMethodByDescriptor(this, clsLoader)
 
 /**
  * 变量拓展
  * 通过变量签名获取变量
  */
-fun String.toField(): Field = FieldUtils.getFieldByDesc(this)
+fun String.toField(): Field = FieldUtils.getFieldByDescriptor(this)
 
-fun String.toField(clsLoader: ClassLoader): Field = FieldUtils.getFieldByDesc(this, clsLoader)
+fun String.toField(clsLoader: ClassLoader): Field = FieldUtils.getFieldByDescriptor(this, clsLoader)
 
 
 /**
