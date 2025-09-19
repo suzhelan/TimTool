@@ -1,12 +1,10 @@
 
-import com.google.protobuf.gradle.proto
+
 import top.sacz.buildplugin.BuildVersionConfig
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -57,15 +55,7 @@ android {
         targetCompatibility = BuildVersionConfig.javaVersion
     }
 
-    android.applicationVariants.all {
-        outputs.all {
-            if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
-                val config = project.android.defaultConfig
-                val versionName = config.versionName
-                outputFileName = "${rootProject.name}_${this.name}_${versionName}.apk"
-            }
-        }
-    }
+
 
     androidResources {
         additionalParameters += arrayOf(
@@ -73,11 +63,7 @@ android {
             "--package-id", "0x42"
         )
     }
-
-    kotlinOptions {
-        jvmTarget = BuildVersionConfig.kotlin
-    }
-
+    
     buildFeatures {
         viewBinding = true
     }
@@ -86,13 +72,9 @@ android {
         buildConfig = true
     }
 
-    sourceSets {
-        named("main") {
-            proto {
-                srcDirs("src/main/proto")
-            }
-        }
-    }
+}
+
+androidComponents {
 
 }
 
@@ -143,18 +125,3 @@ dependencies {
 //    implementation(project(":DialogXMaterialYou"))
 }
 
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.25.3"
-    }
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                create("java") {
-                    option("lite")
-                }
-            }
-        }
-    }
-}
