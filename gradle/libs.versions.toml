@@ -1,34 +1,34 @@
 [versions]
 # plugins
-agp = "9.0.0-alpha05"
+agp = "9.0.0-alpha08"
 kotlin = "2.2.20"
 ksp = "2.2.20-2.0.3"
 protobuf = "0.9.5"
 
 # kotlin
-coreKtx = "1.15.0"
-coroutine = "1.10.1"
-activityKtx = "1.10.0"
-fragmentKtx = "1.8.5"
-lifecycleViewmodelKtx = "2.8.7"
-lifecycleLivedataKtx = "2.8.7"
+coreKtx = "1.17.0"
+coroutine = "1.10.2"
+activityKtx = "1.11.0"
+fragmentKtx = "1.8.9"
+lifecycleViewmodelKtx = "2.9.4"
+lifecycleLivedataKtx = "2.9.4"
 
 #必备
-appcompat = "1.7.0"
-material = "1.12.0"
+appcompat = "1.7.1"
+material = "1.13.0"
 #常用库
-okhttp = "5.0.0-alpha.14"
+okhttp = "5.1.0"
 
-retrofit2 = "2.11.0"
-fastkv = "2.6.0"
-fastjson2 = "2.0.54"
-glide = "4.16.0"
-base-recyclerview-helper = "4.1.6"
+retrofit2 = "3.0.0"
+fastkv = "3.0.1"
+fastjson2 = "2.0.59"
+glide = "5.0.5"
+base-recyclerview-helper = "4.2.3"
 
 dialogx = "0.0.50.beta32"
 
-protobuf-java = "4.29.3"
-kotlinx-serialization = "1.8.0"
+protobuf-java = "4.32.1"
+kotlinx-serialization = "1.9.0"
 xphelper = "2.4"
 
 [libraries]

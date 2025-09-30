@@ -1,10 +1,12 @@
 
 
 import top.sacz.buildplugin.BuildVersionConfig
+import com.google.protobuf.gradle.proto
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -72,10 +74,14 @@ android {
         buildConfig = true
     }
 
-}
+    sourceSets {
+        getByName("main") {
 
-androidComponents {
-
+            proto {
+                srcDirs("src/main/proto")
+            }
+        }
+    }
 }
 
 fun getGitVersion(): String {
@@ -124,4 +130,28 @@ dependencies {
 //    implementation(project(":DialogX"))
 //    implementation(project(":DialogXMaterialYou"))
 }
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.3"
+    }
 
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+afterEvaluate {
+    tasks.forEach { task ->
+        if (task.name.contains("kspDebugKotlin")) {
+            task.dependsOn("generateDebugProto")
+        }
+        if (task.name.contains("kspReleaseKotlin")) {
+            task.dependsOn("generateReleaseProto")
+        }
+    }
+}
