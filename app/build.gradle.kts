@@ -5,6 +5,7 @@ import com.google.protobuf.gradle.proto
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.protobuf)
 }
@@ -56,8 +57,9 @@ android {
         sourceCompatibility = BuildVersionConfig.javaVersion
         targetCompatibility = BuildVersionConfig.javaVersion
     }
-
-
+    kotlin {
+        jvmToolchain(BuildVersionConfig.kotlin.toInt())
+    }
 
     androidResources {
         additionalParameters += arrayOf(
@@ -142,16 +144,6 @@ protobuf {
                     option("lite")
                 }
             }
-        }
-    }
-}
-afterEvaluate {
-    tasks.forEach { task ->
-        if (task.name.contains("kspDebugKotlin")) {
-            task.dependsOn("generateDebugProto")
-        }
-        if (task.name.contains("kspReleaseKotlin")) {
-            task.dependsOn("generateReleaseProto")
         }
     }
 }

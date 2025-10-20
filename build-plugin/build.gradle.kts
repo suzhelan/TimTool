@@ -20,5 +20,4 @@ java {
 }
 
 tasks.withType<KotlinCompile> {
-
 }
