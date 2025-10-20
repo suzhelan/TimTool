@@ -1,0 +1,50 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    #在什么系统运行
+    runs-on: ubuntu-latest
+
+    steps:
+      #签出代码
+      - uses: actions/checkout@v5
+      #配置jdk
+      - name: Setup Java JDK
+        uses: actions/setup-java@v5.0.0
+        with:
+          java-version: 17
+          distribution: temurin
+      #配置gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      #授权
+      - name: Grant execute permission to gradlew
+        run: chmod +x ./gradlew
+
+      #解码签名到工作环境,生成在./下,生成命令:certutil -encode .\keystore.jks encoded.txt
+      # - name: Decode keystore
+        # run: echo "${{ secrets.SIGN_KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
+
+      #构建apk 不带签名 带签名的话需配置一下环境变量
+      - name: Build APK
+        run: |
+          ./gradlew :app:assembleDebug
+        # env:
+          # KEYSTORE_PATH: "../keystore.jks"
+          # KEYSTORE_PASSWORD: ${{ secrets.SIGN_KEYSTORE_PASSWORD }}
+          # KEY_ALIAS: ${{ secrets.SIGN_ALIAS }}
+          # KEY_PASSWORD: ${{ secrets.SIGN_KEY_PASSWORD }}
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: TimTool-unsign.apk
+          path: ./app/build/outputs/apk/release/*.apk
+          retention-days: 3
