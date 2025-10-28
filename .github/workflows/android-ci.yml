@@ -36,15 +36,21 @@ jobs:
       - name: Build APK
         run: |
           ./gradlew :app:assembleDebug
+          ./gradlew :app:assembleRelease
         # env:
           # KEYSTORE_PATH: "../keystore.jks"
           # KEYSTORE_PASSWORD: ${{ secrets.SIGN_KEYSTORE_PASSWORD }}
           # KEY_ALIAS: ${{ secrets.SIGN_ALIAS }}
           # KEY_PASSWORD: ${{ secrets.SIGN_KEY_PASSWORD }}
 
-      - name: Upload APK
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: TimTool-unsign.apk
+          name: app-debug.apk
+          path: ./app/build/outputs/apk/debug/*.apk
+          
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: app-release.apk
           path: ./app/build/outputs/apk/release/*.apk
-          retention-days: 3
