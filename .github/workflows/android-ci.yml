@@ -35,7 +35,7 @@ jobs:
       #构建apk 不带签名 带签名的话需配置一下环境变量
       - name: Build APK
         run: |
-          ./gradlew :app:assembleDebug
+          ./gradlew :app:assembleRelease
         # env:
           # KEYSTORE_PATH: "../keystore.jks"
           # KEYSTORE_PASSWORD: ${{ secrets.SIGN_KEYSTORE_PASSWORD }}
