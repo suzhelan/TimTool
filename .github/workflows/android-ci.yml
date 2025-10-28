@@ -44,13 +44,13 @@ jobs:
           # KEY_PASSWORD: ${{ secrets.SIGN_KEY_PASSWORD }}
 
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v5
         with:
           name: app-debug.apk
           path: ./app/build/outputs/apk/debug/*.apk
           
       - name: Upload Release APK
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v5
         with:
           name: app-release.apk
           path: ./app/build/outputs/apk/release/*.apk
