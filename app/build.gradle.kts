@@ -17,8 +17,8 @@ android {
         applicationId = BuildVersionConfig.applicationId
         minSdk = BuildVersionConfig.minSdk
         targetSdk = BuildVersionConfig.targetSdk
-        versionCode = 26
-        versionName = "2.6"
+        versionCode = 27
+        versionName = "2.7"
 
         ndk {
             //只支持arm64 v8a的lib so库,因为qq只支持arm64 v8a
@@ -80,6 +80,21 @@ android {
             proto {
                 srcDirs("src/main/proto")
             }
+        }
+    }
+}
+
+/**
+ * 自定义构建好的文件名
+ */
+androidComponents {
+    onVariants { variant ->
+        variant.outputs.forEach {
+            val output = it as? com.android.build.api.variant.impl.VariantOutputImpl
+            if (output == null) {
+                return@forEach
+            }
+            output.outputFileName.set("Tim小助手_${output.versionName.get()}-${variant.buildType}.apk")
         }
     }
 }

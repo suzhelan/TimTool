@@ -4,7 +4,6 @@ package top.sacz.timtool.net;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import top.sacz.timtool.net.api.UpdateApi;
 import top.sacz.timtool.net.api.UserApi;
 import top.sacz.timtool.net.httpconfig.AesEncryptInterceptor;
