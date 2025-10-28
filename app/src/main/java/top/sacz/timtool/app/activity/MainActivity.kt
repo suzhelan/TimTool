@@ -63,13 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         initBuildInfo()
-        val updateService = UpdateService()
-
-        updateService.requestUpdateAsync { hasUpdate ->
-            if (hasUpdate) {
-                updateService.showUpdateDialog()
-            }
-        }
         //隐藏图标
         val cbHideIcon = bind.cbHideIcon
         cbHideIcon.isChecked = isHideActivity
@@ -112,12 +105,6 @@ class MainActivity : AppCompatActivity() {
         intent.action = Intent.ACTION_VIEW
         intent.data = Uri.parse(url)
         startActivity(intent)
-    }
-
-    fun onClickShowUpdateLogDialog(view: View) {
-        //展示更新dialog
-        val updateLogDialog = UpdateLogDialog()
-        updateLogDialog.show()
     }
 
     private fun initBuildInfo() {

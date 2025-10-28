@@ -15,7 +15,6 @@ import com.kongzue.dialogx.util.FixContextUtil
 import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
-import top.sacz.timtool.net.UpdateService
 import top.sacz.timtool.ui.adapter.CategoryAdapter
 import top.sacz.timtool.ui.adapter.SettingUIItemManger
 import top.sacz.timtool.ui.bean.Category
@@ -28,17 +27,6 @@ class SettingDialog {
 
     @SuppressLint("InflateParams")
     fun show(activity: Context) {
-        val updateService = UpdateService()
-        //尝试直接获取更新
-        if (updateService.hasUpdate()) {
-            updateService.showUpdateDialog()
-
-            if (updateService.isForceUpdate()) {
-                return
-            }
-        }
-
-
         val messageText = activity.getString(R.string.setting_message)
             .format(BuildConfig.VERSION_NAME, HookEnv.getAppName(), HookEnv.getVersionName())
 
@@ -57,29 +45,13 @@ class SettingDialog {
             .show()
 
         dialog.dialogImpl.apply {
-
             txtDialogTitle.setOnClickListener {
                 onGithubClick(it)
             }
-
-            txtDialogTip.setOnClickListener {
-                onTelegramClick(it)
-            }
         }
-
-    }
-
-    private fun onTelegramClick(view: View) {
-        //跳转到浏览器
-        val url = "https://t.me/timtool"
-        val intent = Intent()
-        intent.action = Intent.ACTION_VIEW
-        intent.data = Uri.parse(url)
-        view.context.startActivity(intent)
     }
 
     private fun onGithubClick(view: View) {
-        //跳转到浏览器
         val url = "https://github.com/suzhelan/TimTool"
         val intent = Intent()
         intent.action = Intent.ACTION_VIEW
@@ -90,15 +62,7 @@ class SettingDialog {
     @SuppressLint("InflateParams")
     private fun onBindView(rootView: View, dialog: MessageDialog) {
         val context = rootView.context
-        val ibViewAllUpdateLog = rootView.findViewById<View>(R.id.ib_update_log)
-        ibViewAllUpdateLog.setOnClickListener {
-            UpdateLogDialog().show()
-        }
-        val ibTelegram = rootView.findViewById<View>(R.id.ib_telegram)
-        ibTelegram.setOnClickListener {
-            onTelegramClick(it)
-        }
-        //提交初始的分类
+        
         val boxView = rootView.findViewById<FrameLayout>(R.id.box_list)
         val categoryRv = FixContextUtil.getFixInflater(context)
             .inflate(R.layout.layout_setting_category_list, null, false) as RecyclerView
@@ -106,7 +70,6 @@ class SettingDialog {
         rvAdapter.setOnItemClickListener { adapter, view, position ->
             val category = adapter.getItem(position)
             if (category is Category) {
-                //隐藏分类view
                 isCategory = false
                 boxView.getChildAt(0).visibility = View.GONE
                 val newItemViewRv = FixContextUtil.getFixInflater(context)
@@ -123,7 +86,7 @@ class SettingDialog {
         categoryRv.layoutManager = LinearLayoutManager(context)
         categoryRv.adapter = rvAdapter
         boxView.addView(categoryRv)
-        //设置返回处理
+        
         dialog.setOnBackPressedListener {
             onBack(boxView)
         }
@@ -152,5 +115,4 @@ class SettingDialog {
         }
         return result
     }
-
 }

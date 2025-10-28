@@ -13,9 +13,9 @@
 
         <ImageButton
             android:id="@+id/ib_update_log"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="0dp"
             android:background="@color/transparent"
             android:contentDescription="@string/view_update_log"
             android:scaleType="centerCrop"
@@ -23,8 +23,8 @@
 
         <ImageButton
             android:id="@+id/ib_telegram"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@color/transparent"
             android:contentDescription="@string/view_update_log"
             android:scaleType="centerCrop"
@@ -33,7 +33,7 @@
 
     <FrameLayout
         android:id="@+id/box_list"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:animateLayoutChanges="true" />
