@@ -43,7 +43,7 @@ jobs:
           # KEY_PASSWORD: ${{ secrets.SIGN_KEY_PASSWORD }}
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v5
         with:
           name: TimTool-unsign.apk
           path: ./app/build/outputs/apk/release/*.apk

@@ -1,11 +1,9 @@
 package top.sacz.timtool.net;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import top.sacz.timtool.net.api.PayApi;
 import top.sacz.timtool.net.api.UpdateApi;
 import top.sacz.timtool.net.api.UserApi;
@@ -21,7 +19,7 @@ import top.sacz.timtool.net.httpconfig.TokenInfo;
  */
 public class HttpClient {
 
-    public static final String BASE_URL = "https://timtool.sacz.top";
+    public static final String BASE_URL = "https://timtool.suzhelan.top";
 
 
     public static String createKey() {
@@ -68,11 +66,10 @@ public class HttpClient {
     }
 
     public static UpdateApi getUpdateApi() {
-        Gson gson = new GsonBuilder().setLenient().create();
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(buildClient(false))
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(new FastJsonConverterFactory())
                 .build()
                 .create(UpdateApi.class);
     }

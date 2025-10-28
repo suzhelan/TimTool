@@ -1,7 +1,5 @@
-
-
-import top.sacz.buildplugin.BuildVersionConfig
 import com.google.protobuf.gradle.proto
+import top.sacz.buildplugin.BuildVersionConfig
 
 plugins {
     alias(libs.plugins.android.application)
@@ -67,7 +65,7 @@ android {
             "--package-id", "0x42"
         )
     }
-    
+
     buildFeatures {
         viewBinding = true
     }
@@ -114,10 +112,12 @@ dependencies {
     //常用
     implementation(libs.okhttp3)
     implementation(libs.retrofit2)
-    implementation(libs.squareup.retrofit.converter.gson)
     implementation(libs.glide)
     implementation(libs.fastkv)
     implementation(libs.fastjson2)
+    implementation(libs.fastjson2.kotlin)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
     implementation(libs.base.recyclerview.helper)
 
     //dialogx

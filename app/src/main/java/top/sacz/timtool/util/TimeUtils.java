@@ -1,6 +1,9 @@
 package top.sacz.timtool.util;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
@@ -28,5 +31,28 @@ public class TimeUtils {
     public static String formatTime(long time, String pattern) {
         SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.getDefault());
         return format.format(time);
+    }
+    
+    /**
+     * 格式化LocalDateTime时间
+     */
+    public static String formatTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss");
+        return dateTime.format(formatter);
+    }
+    
+    /**
+     * 格式化LocalDateTime时间
+     */
+    public static String formatTime(LocalDateTime dateTime, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return dateTime.format(formatter);
+    }
+    
+    /**
+     * 将LocalDateTime转换为时间戳
+     */
+    public static long toTimestamp(LocalDateTime dateTime) {
+        return dateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }
 }
