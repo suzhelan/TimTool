@@ -12,7 +12,7 @@ import top.sacz.timtool.hook.common.CommonMethod
  * 模块入口
  */
 private val TIM_PACKAGE = HookEnv.TIM_PACKAGE
-private val QQ_PACKAGE = HookEnv.QQ_PACKAGE
+
 private const val TAG = "[Tim助手]"
 
 class InjectHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
@@ -22,7 +22,7 @@ class InjectHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
      * 标准注入入口
      */
     override fun handleLoadPackage(lpparam: LoadPackageParam) {
-        if ((lpparam.packageName == TIM_PACKAGE || lpparam.packageName == QQ_PACKAGE) && lpparam.isFirstApplication) {
+        if (lpparam.packageName == TARGET_PACKAGE && lpparam.isFirstApplication) {
             // Init hook
             hookSteps.initHandleLoadPackage(lpparam)
             initHook(lpparam)

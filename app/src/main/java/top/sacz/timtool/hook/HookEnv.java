@@ -9,7 +9,6 @@ import android.content.Context;
 public class HookEnv {
 
     public static String TIM_PACKAGE = "com.tencent.tim";
-    public static String QQ_PACKAGE = "com.tencent.mobileqq";
 
     /**
      * 当前宿主包名
