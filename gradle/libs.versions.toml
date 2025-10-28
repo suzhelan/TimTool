@@ -17,19 +17,19 @@ lifecycleLivedataKtx = "2.9.4"
 appcompat = "1.7.1"
 material = "1.13.0"
 #常用库
-okhttp = "5.1.0"
+okhttp = "5.2.1"
 
 retrofit2 = "3.0.0"
 fastkv = "3.0.1"
-fastjson2 = "2.0.59"
+fastjson2 = "2.0.60"
 glide = "5.0.5"
-base-recyclerview-helper = "4.2.3"
+base-recyclerview-helper = "4.3.2"
 
-dialogx = "0.0.50.beta32"
+dialogx = "0.0.50"
 
-protobuf-java = "4.32.1"
+protobuf-java = "4.33.0"
 kotlinx-serialization = "1.9.0"
-xphelper = "2.4"
+xphelper = "2.8"
 
 [libraries]
 
@@ -73,7 +73,7 @@ dexkit = { module = "org.luckypray:dexkit", version = "2.0.2" }
 ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 kotlinpoet-ksp = { module = "com.squareup:kotlinpoet-ksp", version = "2.2.0" }
 
-byte-buddy-android = { module = "net.bytebuddy:byte-buddy-android", version = "1.15.10" }
+byte-buddy-android = { module = "net.bytebuddy:byte-buddy-android", version = "1.17.8" }
 
 #自定义gradle插件
 android-tools = { module = "com.android.tools.build:gradle", version.ref = "agp" }
