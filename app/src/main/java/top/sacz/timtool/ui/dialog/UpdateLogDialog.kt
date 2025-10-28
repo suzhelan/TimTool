@@ -5,10 +5,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import top.sacz.timtool.R
+import top.sacz.timtool.hook.util.LogUtils
 import top.sacz.timtool.hook.util.ToastTool
 import top.sacz.timtool.net.HttpClient
 import top.sacz.timtool.net.entity.QSResult
 import top.sacz.timtool.net.entity.UpdateInfo
+import top.sacz.timtool.util.Log
 import top.sacz.timtool.util.TimeUtils
 import top.sacz.xphelper.util.ActivityTools
 
@@ -54,6 +56,7 @@ class UpdateLogDialog {
                 p0: Call<QSResult<List<UpdateInfo>>?>,
                 p1: Throwable
             ) {
+                Log.e("update-log-dialog", p1)
                 ToastTool.show(p1.message!!)
             }
         })

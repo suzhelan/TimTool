@@ -35,25 +35,67 @@ class HookItemScanner(
     val logger: KSPLogger
 ) : SymbolProcessor {
 
+    companion object {
+        /**
+         * 不动
+         */
+        private const val RETURN_TYPE_PACKAGE = "kotlin.collections"
+
+        /**
+         * 不动
+         */
+        private const val RETURN_TYPE_NAME = "List"
+
+        /**
+         * Base类包名
+         */
+        private const val BASE_CLASS_PACKAGE = "top.sacz.timtool.hook.base"
+
+        /**
+         * Base类名
+         */
+        private const val BASE_CLASS_NAME = "BaseHookItem"
+
+        /**
+         * 生成的包名
+         */
+        private const val GENERATED_PACKAGE = "top.sacz.timtool.hook.gen"
+
+        /**
+         * 要扫描的字段
+         */
+        private const val TARGET_ANNOTATION = "top.sacz.timtool.hook.core.annotation.HookItem"
+
+        /**
+         * 生成的类名称
+         * */
+        private const val GENERATED_CLASS_NAME = "HookItemEntryList"
+
+        /**
+         * 生成的方法名称
+         */
+        private const val GENERATED_FUNCTION_NAME = "getAllHookItems"
+    }
+
     @OptIn(KspExperimental::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
         //获取被注解标记的类列表
         val symbols =
-            resolver.getSymbolsWithAnnotation("top.sacz.timtool.hook.core.annotation.HookItem")
+            resolver.getSymbolsWithAnnotation(TARGET_ANNOTATION)
                 .filterIsInstance<KSClassDeclaration>()
                 .toList()
         if (symbols.isEmpty()) return emptyList()
         //返回类型
-        val returnType = ClassName("kotlin.collections", "List")
-        //基😮类
-        val genericsType = ClassName("top.sacz.timtool.hook.base", "BaseHookItem")
+        val returnType = ClassName(RETURN_TYPE_PACKAGE, RETURN_TYPE_NAME)
+        //基类
+        val genericsType = ClassName(BASE_CLASS_PACKAGE, BASE_CLASS_NAME)
         //方法构建
-        val methodBuilder = FunSpec.builder("getAllHookItems")
+        val methodBuilder = FunSpec.builder(GENERATED_FUNCTION_NAME)
         methodBuilder.returns(returnType.parameterizedBy(genericsType))//泛型返回
         methodBuilder.addAnnotation(JvmStatic::class)//jvm静态方法
         methodBuilder.addCode(
             CodeBlock.Builder().apply {
-                addStatement("val list = mutableListOf<BaseHookItem>()")
+                addStatement("val list = mutableListOf<%T>()", genericsType)
                 for (symbol in symbols) {
                     val typeName = symbol.toClassName()
                     //获取 hook item 注解
@@ -72,14 +114,14 @@ class HookItemScanner(
         )
 
         //class
-        val classSpec = TypeSpec.objectBuilder("HookItemEntryList")
+        val classSpec = TypeSpec.objectBuilder(GENERATED_CLASS_NAME)
             .addFunction(methodBuilder.build())
             .build()
         val dependencies = Dependencies(true, *Array(symbols.size) {
             symbols[it].containingFile!!
         })
         //文件
-        FileSpec.builder("top.sacz.timtool.hook.gen", "HookItemEntryList")
+        FileSpec.builder(GENERATED_PACKAGE, GENERATED_CLASS_NAME)
             .addType(classSpec)
             .build()
             .writeTo(codeGenerator, dependencies)

@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import com.alibaba.fastjson2.JSON;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class User implements Serializable {
 
@@ -19,9 +19,11 @@ public class User implements Serializable {
 
     private String label;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
+
+    public LocalDateTime sponsorEndDate;
 
     /**
      * QQ
@@ -96,29 +98,37 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
     /**
      * 创建时间
      */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
     /**
      * 更新时间
      */
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
     /**
      * 更新时间
      */
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public LocalDateTime getSponsorEndDate() {
+        return sponsorEndDate;
+    }
+
+    public void setSponsorEndDate(LocalDateTime sponsorEndDate) {
+        this.sponsorEndDate = sponsorEndDate;
     }
 
     @NonNull
