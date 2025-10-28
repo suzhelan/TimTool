@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import top.sacz.timtool.net.api.PayApi;
 import top.sacz.timtool.net.api.UpdateApi;
 import top.sacz.timtool.net.api.UserApi;
 import top.sacz.timtool.net.httpconfig.AesEncryptInterceptor;
@@ -56,15 +55,6 @@ public class HttpClient {
                 .addConverterFactory(new FastJsonConverterFactory())
                 .build()
                 .create(UserApi.class);
-    }
-
-    public static PayApi getPayApi() {
-        return new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(buildClient(false))
-                .addConverterFactory(new FastJsonConverterFactory())
-                .build()
-                .create(PayApi.class);
     }
 
     public static UpdateApi getUpdateApi() {

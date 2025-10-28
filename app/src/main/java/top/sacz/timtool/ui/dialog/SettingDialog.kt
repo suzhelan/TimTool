@@ -7,7 +7,6 @@ import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kongzue.dialogx.dialogs.MessageDialog
@@ -17,7 +16,6 @@ import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.net.UpdateService
-import top.sacz.timtool.net.UserCenter
 import top.sacz.timtool.ui.adapter.CategoryAdapter
 import top.sacz.timtool.ui.adapter.SettingUIItemManger
 import top.sacz.timtool.ui.bean.Category
@@ -26,10 +24,7 @@ import top.sacz.timtool.ui.bean.ParentCategory
 class SettingDialog {
     private lateinit var dialog: MessageDialog
 
-    private lateinit var rootView: ViewGroup
-
     private var isCategory = true
-
 
     @SuppressLint("InflateParams")
     fun show(activity: Context) {
@@ -42,8 +37,11 @@ class SettingDialog {
                 return
             }
         }
+
+
         val messageText = activity.getString(R.string.setting_message)
             .format(BuildConfig.VERSION_NAME, HookEnv.getAppName(), HookEnv.getVersionName())
+
         dialog = MessageDialog.build()
             .setTitleIcon(R.drawable.ic_github)
             .setTitle(R.string.app_name)
@@ -52,22 +50,23 @@ class SettingDialog {
                     p0: MessageDialog,
                     p1: View
                 ) {
-                    rootView = p1 as ViewGroup
-                    dialog = p0
-                    onBindView()
+                    onBindView(p1 as ViewGroup, p0)
                 }
             })
             .setMessage(messageText)
             .show()
+
         dialog.dialogImpl.apply {
+
             txtDialogTitle.setOnClickListener {
                 onGithubClick(it)
             }
+
             txtDialogTip.setOnClickListener {
                 onTelegramClick(it)
             }
         }
-        PayDialog(this).showFirstDialog()
+
     }
 
     private fun onTelegramClick(view: View) {
@@ -88,14 +87,8 @@ class SettingDialog {
         view.context.startActivity(intent)
     }
 
-    fun refresh() {
-        onBindView()
-    }
-
     @SuppressLint("InflateParams")
-    private fun onBindView() {
-        val userInfo = UserCenter.getUserInfo()
-
+    private fun onBindView(rootView: View, dialog: MessageDialog) {
         val context = rootView.context
         val ibViewAllUpdateLog = rootView.findViewById<View>(R.id.ib_update_log)
         ibViewAllUpdateLog.setOnClickListener {
@@ -105,10 +98,6 @@ class SettingDialog {
         ibTelegram.setOnClickListener {
             onTelegramClick(it)
         }
-        val tvIdentityName = rootView.findViewById<TextView>(R.id.tv_user_identity_name)
-        val tvLabel = rootView.findViewById<TextView>(R.id.tv_user_label)
-        tvIdentityName.text = userInfo.identityName
-        tvLabel.text = "标签: ${userInfo.label ?: "无"}"
         //提交初始的分类
         val boxView = rootView.findViewById<FrameLayout>(R.id.box_list)
         val categoryRv = FixContextUtil.getFixInflater(context)
