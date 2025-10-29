@@ -2,6 +2,5 @@
 <resources>
     <array name="xposed_scope">
         <item>com.tencent.tim</item>
-        <item>com.tencent.mobileqq</item>
     </array>
 </resources>
