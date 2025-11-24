@@ -18,23 +18,49 @@ object PreventRetractingMessageCore {
 
     fun handleInfoSyncPush(buffer: ByteArray, param: XC_MethodHook.MethodHookParam) {
         val infoSyncPush = InfoSyncPushOuterClass.InfoSyncPush.parseFrom(buffer)
-        infoSyncPush.syncRecallContent.syncInfoBodyList.forEach { syncInfoBody ->
-            syncInfoBody.msgList.forEach { qqMessage ->
-                val msgType = qqMessage.messageContentInfo.msgType
-                val msgSubType = qqMessage.messageContentInfo.msgSubType
-                if ((msgType == 732 && msgSubType == 17) || (msgType == 528 && msgSubType == 138)) {
-                    val newInfoSyncPush = infoSyncPush.toBuilder().apply {
-                        syncRecallContent = syncRecallContent.toBuilder().apply {
-                            for (i in 0 until syncInfoBodyCount) {
-                                setSyncInfoBody(
-                                    i, getSyncInfoBody(i).toBuilder().clearMsg().build()
-                                )
-                            }
-                        }.build()
-                    }.build()
-                    param.args[1] = newInfoSyncPush.toByteArray()
+        val recallMsgSeqList = mutableListOf<Pair<String, Int>>()
+        //新代码 构建新的InfoSyncPush
+        val newInfoSyncPush = infoSyncPush.toBuilder().apply {
+            syncRecallContent = syncRecallContent.toBuilder().apply {
+                syncInfoBodyList.forEachIndexed { index, syncInfoBody ->
+                    val newMsgList = syncInfoBody.msgList.filter { qqMessage ->
+                        val msgType = qqMessage.messageContentInfo.msgType
+                        val msgSubType = qqMessage.messageContentInfo.msgSubType
+                        val isRecall =
+                            (msgType == 732 && msgSubType == 17) || (msgType == 528 && msgSubType == 138)
+                        //是私聊消息
+                        if (msgType == 528 && msgSubType == 138) {
+                            val opInfo = qqMessage.messageBody.operationInfo
+                            val c2cRecall = C2CRecallOperationInfo
+                                .parseFrom(opInfo)
+                            val msgSeq = c2cRecall.info.msgSeq
+                            val senderUid = qqMessage.messageHead.senderUid
+                            recallMsgSeqList.add(senderUid to msgSeq)
+                        } else if (msgType == 732 && msgSubType == 17) {
+                            //群聊消息
+                            val opInfo = qqMessage.messageBody.operationInfo
+                            val groupRecall =
+                                QQMessageOuterClass.QQMessage.MessageBody.GroupRecallOperationInfo
+                                    .parseFrom(opInfo)
+                            //groupUin
+                            val groupPeerId = groupRecall.peerId.toString()
+                            //msg seq
+                            val recallMsgSeq = groupRecall.info.msgInfo.msgSeq
+                            recallMsgSeqList.add(groupPeerId to recallMsgSeq)
+                        }
+                        !isRecall
+                    }
+                    setSyncInfoBody(
+                        index,
+                        syncInfoBody.toBuilder().clearMsg().addAllMsg(newMsgList).build()
+                    )
                 }
-            }
+            }.build()
+        }.build()
+        param.args[1] = newInfoSyncPush.toByteArray()
+        val retracting = HookItemFactory.getItem(PreventRetractingMessage::class.java)
+        recallMsgSeqList.forEach { (peerId, msgSeq) ->
+            retracting.writeAndRefresh(peerId, msgSeq)
         }
     }
 

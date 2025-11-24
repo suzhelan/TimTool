@@ -17,8 +17,8 @@ android {
         applicationId = BuildVersionConfig.applicationId
         minSdk = BuildVersionConfig.minSdk
         targetSdk = BuildVersionConfig.targetSdk
-        versionCode = 27
-        versionName = "2.7"
+        versionCode = 28
+        versionName = "2.8"
 
         ndk {
             //只支持arm64 v8a的lib so库,因为qq只支持arm64 v8a
@@ -144,8 +144,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.protobuf)
     implementation(libs.protobuf.java)
 
-//    implementation(project(":DialogX"))
-//    implementation(project(":DialogXMaterialYou"))
 }
 protobuf {
     protoc {
