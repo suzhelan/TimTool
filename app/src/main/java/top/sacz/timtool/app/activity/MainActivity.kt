@@ -120,6 +120,15 @@ class MainActivity : AppCompatActivity() {
         updateLogDialog.show()
     }
 
+    fun onClickHelp(view: View) {
+        //跳转到浏览器
+        val url = "https://deeply-raptor-37d.notion.site/Root-2c0ef1ecbe4a80939e39c3e53cd20525"
+        val intent = Intent()
+        intent.action = Intent.ACTION_VIEW
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
+
     private fun initBuildInfo() {
         val dateFormat = SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss", Locale.getDefault())
         val buildTime = dateFormat.format(Date(BuildConfig.BUILD_TIMESTAMP))
