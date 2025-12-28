@@ -1,16 +1,16 @@
 [versions]
 # plugins
-agp = "8.13.0"
-kotlin = "2.2.21"
+agp = "8.13.2"
+kotlin = "2.3.0"
 ksp = "2.2.20-2.0.4"
-protobuf = "0.9.5"
+protobuf = "0.9.6"
 
 
 #必备
 appcompat = "1.7.1"
 material = "1.13.0"
 #常用库
-okhttp = "5.2.1"
+okhttp = "5.3.2"
 
 retrofit2 = "3.0.0"
 fastkv = "3.0.1"
@@ -20,9 +20,9 @@ base-recyclerview-helper = "4.3.2"
 
 dialogx = "0.0.50"
 
-protobuf-java = "4.33.0"
+protobuf-java = "4.33.2"
 kotlinx-serialization = "1.9.0"
-xphelper = "2.8"
+xphelper = "2.9"
 
 [libraries]
 
@@ -59,7 +59,7 @@ xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
 ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 kotlinpoet-ksp = { module = "com.squareup:kotlinpoet-ksp", version = "2.2.0" }
 
-byte-buddy-android = { module = "net.bytebuddy:byte-buddy-android", version = "1.17.8" }
+byte-buddy-android = { module = "net.bytebuddy:byte-buddy-android", version = "1.18.3" }
 
 #自定义gradle插件
 android-tools = { module = "com.android.tools.build:gradle", version.ref = "agp" }
