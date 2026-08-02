@@ -43,6 +43,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -93,6 +94,7 @@ dependencies {
     // MiuiX
     implementation(libs.miuix.android)
     implementation(libs.miuix.icons.android)
+    implementation(libs.miuix.preference.android)
 
     // FastJson
     implementation(libs.fastjson2)

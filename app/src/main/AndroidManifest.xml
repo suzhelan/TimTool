@@ -17,13 +17,18 @@
 
         <activity
             android:name=".app.activity.NewMainActivity"
-            android:exported="true">
+            android:exported="true" />
+
+        <activity-alias
+            android:name=".app.activity.HideMainActivity"
+            android:exported="true"
+            android:enabled="true"
+            android:targetActivity=".app.activity.NewMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <meta-data
             android:name="xposedmodule"
