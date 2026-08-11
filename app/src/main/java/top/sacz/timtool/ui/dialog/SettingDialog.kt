@@ -7,18 +7,15 @@ import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kongzue.dialogx.dialogs.MessageDialog
-import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.interfaces.OnBindView
 import com.kongzue.dialogx.util.FixContextUtil
 import top.sacz.timtool.BuildConfig
 import top.sacz.timtool.R
 import top.sacz.timtool.hook.HookEnv
 import top.sacz.timtool.net.UpdateService
-import top.sacz.timtool.net.UserCenter
 import top.sacz.timtool.ui.adapter.CategoryAdapter
 import top.sacz.timtool.ui.adapter.SettingUIItemManger
 import top.sacz.timtool.ui.bean.Category
@@ -68,7 +65,7 @@ class SettingDialog {
                 onTelegramClick(it)
             }
         }
-        PayDialog(this).showFirstDialog()
+
     }
 
     private fun onTelegramClick(view: View) {
@@ -95,13 +92,6 @@ class SettingDialog {
 
     @SuppressLint("InflateParams")
     private fun onBindView() {
-        val userInfo = try {
-            UserCenter.getUserInfo()
-        } catch (e: Exception) {
-            PopTip.show("读取用户信息失败")
-            return
-        }
-
         val context = rootView.context
         val ibViewAllUpdateLog = rootView.findViewById<View>(R.id.ib_update_log)
         ibViewAllUpdateLog.setOnClickListener {
@@ -111,10 +101,6 @@ class SettingDialog {
         ibTelegram.setOnClickListener {
             onTelegramClick(it)
         }
-        val tvIdentityName = rootView.findViewById<TextView>(R.id.tv_user_identity_name)
-        val tvLabel = rootView.findViewById<TextView>(R.id.tv_user_label)
-        tvIdentityName.text = userInfo.identityName
-        tvLabel.text = "标签: ${userInfo.label ?: "无"}"
         //提交初始的分类
         val boxView = rootView.findViewById<FrameLayout>(R.id.box_list)
         val categoryRv = FixContextUtil.getFixInflater(context)

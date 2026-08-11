@@ -6,7 +6,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import top.sacz.timtool.net.UserCenter.getTokenInfo
-import top.sacz.timtool.net.api.PayApi
 import top.sacz.timtool.net.api.UpdateApi
 import top.sacz.timtool.net.api.UserApi
 import top.sacz.timtool.net.entity.TokenInfo
@@ -69,19 +68,6 @@ object HttpClient {
             )
             .build()
             .create(UserApi::class.java)
-
-    @JvmStatic
-    val payApi: PayApi
-        get() = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(buildClient(false))
-            .addConverterFactory(
-                HTTP_JSON_ENCODER.asConverterFactory(
-                    "application/json; charset=utf-8".toMediaType()
-                )
-            )
-            .build()
-            .create(PayApi::class.java)
 
     @JvmStatic
     val updateApi: UpdateApi

@@ -12,7 +12,7 @@ object UserCenter {
     }
 
     fun getUserInfo(): User {
-        val defaultUser = User(uin = "0", nickname = "未同步", identityName = "未同步")
+        val defaultUser = User(uin = "0", nickname = "未同步")
         return try {
             getConfig().getObject("user_info", User::class.java) ?: defaultUser
         } catch (e: Exception) {
