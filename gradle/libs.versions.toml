@@ -1,16 +1,16 @@
 [versions]
-agp = "9.4.0"
-kotlin = "2.4.10"
-ksp = "2.3.9"
-protobuf = "0.10.0"
-lifecycle = "2.11.0"
+agp = "8.13.2"
+kotlin = "2.3.20"
+ksp = "2.3.6"
+protobuf = "0.9.6"
+lifecycle = "2.10.0"
 activityCompose = "1.13.0"
-composeBom = "2026.08.00"
+composeBom = "2026.03.01"
 
 
 [libraries]
-material = { group = "com.google.android.material", name = "material", version = "1.14.0" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.8.0" }
+material = { group = "com.google.android.material", name = "material", version = "1.13.0" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.1" }
 
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
@@ -23,31 +23,31 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 
-miuix-android = { module = "top.yukonga.miuix.kmp:miuix-ui-android", version = "0.9.4" }
-miuix-icons-android = { module = "top.yukonga.miuix.kmp:miuix-icons-android", version = "0.9.4" }
-miuix-preference-android = { module = "top.yukonga.miuix.kmp:miuix-preference-android", version = "0.9.4" }
+miuix-android = { module = "top.yukonga.miuix.kmp:miuix-ui-android", version = "0.9.3" }
+miuix-icons-android = { module = "top.yukonga.miuix.kmp:miuix-icons-android", version = "0.9.3" }
+miuix-preference-android = { module = "top.yukonga.miuix.kmp:miuix-preference-android", version = "0.9.3" }
 
 fastjson2 = { module = "com.alibaba.fastjson2:fastjson2", version = "2.0.60" }
 fastjson2-kotlin = { module = "com.alibaba.fastjson2:fastjson2-kotlin", version = "2.0.60" }
 
-glide = { module = "com.github.bumptech.glide:glide", version = "5.0.7" }
+glide = { module = "com.github.bumptech.glide:glide", version = "5.0.5" }
 fastkv = { group = 'io.github.billywei01', name = 'fastkv', version = "3.0.1" }
-byte-buddy-android = { module = "net.bytebuddy:byte-buddy-android", version = "1.18.13" }
+byte-buddy-android = { module = "net.bytebuddy:byte-buddy-android", version = "1.18.8" }
 
-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = "5.5.0" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = "5.3.2" }
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version = "3.0.0" }
 retrofit2-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version = "3.0.0" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version = "2.4.0" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 
-base-recyclerview-helper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version = "4.4.1" }
+base-recyclerview-helper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version = "4.3.4" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.11.0" }
 kotlinx-serialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf", version = "1.11.0" }
-protobuf-java = { module = "com.google.protobuf:protobuf-java", version = "4.36.1" }
+protobuf-java = { module = "com.google.protobuf:protobuf-java", version = "4.34.1" }
 
-xphelper = { module = "com.github.suzhelan:XpHelper", version = "3.5" }
+xphelper = { module = "com.github.suzhelan:XpHelper", version = "3.4" }
 
 suzhelan-dialogx = { module = "com.github.suzhelan.DialogX:DialogX", version = "0.0.50" }
 suzhelan-dialogx-materialstyle = { module = "com.github.suzhelan.DialogX:DialogXMaterialYou", version = "0.0.50" }
